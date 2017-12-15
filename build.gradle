@@ -1,0 +1,35 @@
+project.ext.violetGroup = "jonamato"
+project.ext.violetVersion = "0.0.1"
+
+project.ext.nitriteVersion = "2.1.0"
+project.ext.testngVersion = "6.10"
+
+
+group = project.ext.violetGroup
+version = project.ext.violetVersion
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets.main.java.srcDirs = ["src"]
+sourceSets.main.resources.srcDirs = ["res"]
+sourceSets.test.java.srcDirs = ["tst"]
+sourceSets.test.resources.srcDirs = ["res"]
+
+repositories {
+
+    mavenCentral()
+    jcenter()
+
+}
+
+dependencies {
+
+    compile "org.dizitart:nitrite:${nitriteVersion}"
+    testCompile "org.testng:testng:${testngVersion}"
+
+}
