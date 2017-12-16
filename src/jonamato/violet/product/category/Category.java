@@ -1,15 +1,15 @@
-package jonamato.violet.product.brand;
+package jonamato.violet.product.category;
 
 import org.dizitart.no2.objects.Id;
 
-public class Brand {
+public class Category {
 
     @Id
     private String name;
 
     public String getName() { return name; }
 
-    public Brand setName(String name) { this.name = name; return this; }
+    public Category setName(String name) { this.name = name; return this; }
 
     @Override
     public String toString() { return name; }

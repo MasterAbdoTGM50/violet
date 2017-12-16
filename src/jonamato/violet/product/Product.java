@@ -51,4 +51,7 @@ public class Product implements IProduct {
     @Override
     public void order(int orders) { this.orders += orders; }
 
+    @Override
+    public String toString() { return name; }
+
 }

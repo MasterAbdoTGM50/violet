@@ -32,12 +32,17 @@ public class RegisterWindow extends AppWindow {
 
         Button register = new Button("Register", () -> {
 
-            User user = (typesBox.getCheckedItem().equals(Owner.class.getSimpleName())) ? new Owner() : new Buyer();
+            if(userBox.getText().isEmpty()) { return; }
+            if(emailBox.getText().isEmpty()) { return; }
+            if(passBox.getText().isEmpty()) { return; }
 
-            Registry.instance().register(
-                    user.setUsername(userBox.getText()).setEmail(emailBox.getText()),
-                    passBox.getText()
-            );
+            User user =
+                    ((typesBox.getCheckedItem().equals(Owner.class.getSimpleName())) ? new Owner() : new Buyer())
+                    .setUsername(userBox.getText())
+                    .setEmail(emailBox.getText());
+
+            if(!Registry.instance().register(user, passBox.getText())) { return; }
+
             app.pop();
 
         });

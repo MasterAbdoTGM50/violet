@@ -1,7 +1,7 @@
 package jonamato.violet.view;
 
 import com.googlecode.lanterna.gui2.*;
-import jonamato.violet.account.Buyer;
+import jonamato.violet.Lib;
 import jonamato.violet.account.Registry;
 import jonamato.violet.account.User;
 
@@ -22,10 +22,10 @@ public class LoginWindow extends AppWindow {
 
         Button login = new Button("Login", () -> {
 
-            User user = Registry.instance().login(userBox.getText(), passBox.getText());
-            if(user != null) {
+            Lib.Platform.user = Registry.instance().login(userBox.getText(), passBox.getText());
+            if(Lib.Platform.user != null) {
 
-                app.push(new ActionWindow(app, user));
+                app.push(new ActionWindow(app));
 
             } else { app.pop(); }
 
