@@ -2,8 +2,9 @@ project.ext.violetGroup = "jonamato"
 project.ext.violetVersion = "0.0.1"
 
 project.ext.nitriteVersion = "2.1.0"
+project.ext.xxHashVersion = "0.8"
+project.ext.lanternaVersion = "3.0.0"
 project.ext.testngVersion = "6.10"
-
 
 group = project.ext.violetGroup
 version = project.ext.violetVersion
@@ -30,6 +31,8 @@ repositories {
 dependencies {
 
     compile "org.dizitart:nitrite:${nitriteVersion}"
+    compile "net.openhft:zero-allocation-hashing:${xxHashVersion}"
+    compile "com.googlecode.lanterna:lanterna:${lanternaVersion}"
     testCompile "org.testng:testng:${testngVersion}"
 
 }
