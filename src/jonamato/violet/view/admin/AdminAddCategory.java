@@ -10,7 +10,7 @@ import jonamato.violet.view.AppWindow;
 
 public class AdminAddCategory extends AppWindow {
 
-    public AdminAddCategory(App app) { super(app, "Add Category"); }
+    public AdminAddCategory(App app) { super(app, "Add Category", null); }
 
     @Override
     protected void init(Panel panel) {

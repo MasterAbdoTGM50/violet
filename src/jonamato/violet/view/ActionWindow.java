@@ -2,10 +2,10 @@ package jonamato.violet.view;
 
 import com.googlecode.lanterna.gui2.ActionListBox;
 import com.googlecode.lanterna.gui2.Panel;
-import jonamato.violet.Lib;
 import jonamato.violet.account.Admin;
 import jonamato.violet.account.Buyer;
 import jonamato.violet.account.Owner;
+import jonamato.violet.account.User;
 import jonamato.violet.view.admin.*;
 import jonamato.violet.view.owner.OwnerAddStore;
 import jonamato.violet.view.suggest.RejectBrand;
@@ -15,12 +15,14 @@ import jonamato.violet.view.suggest.SuggestProduct;
 
 public class ActionWindow extends AppWindow {
 
-    public ActionWindow(App app) {
+    public ActionWindow(App app, User user) {
 
-        super(app, ((Lib.Platform.user == null)
+        super(app,
+                (user == null)
                 ? "Unregistered:"
-                : (Lib.Platform.user.getClass().getSimpleName() + ": " + (Lib.Platform.user.getUsername())))
-                + " Actions");
+                : (user.getClass().getSimpleName() + ": " + (user.getUsername()))
+                + " Actions",
+                user);
 
     }
 
@@ -29,43 +31,43 @@ public class ActionWindow extends AppWindow {
 
         ActionListBox actions = new ActionListBox();
 
-        if(Lib.Platform.user == null) {
+        if(user == null) {
 
-            actions.addItem("Login", () -> app.push(new LoginWindow(app)));
-            actions.addItem("Register", () -> app.push(new RegisterWindow(app)));
-
-        }
-
-        if(Lib.Platform.user instanceof Owner) {
-
-            actions.addItem("Add Store", () -> app.push(new OwnerAddStore(app)));
+            actions.addItem("Login", () -> app.push(new LoginWindow(app).init()));
+            actions.addItem("Register", () -> app.push(new RegisterWindow(app).init()));
 
         }
 
-        if(Lib.Platform.user instanceof Admin) {
+        if(user instanceof Owner) {
 
-            actions.addItem("Add Brand", () -> app.push(new AdminAddBrand(app)));
-            actions.addItem("Remove Brand", () -> app.push(new AdminRemoveBrand(app)));
-            actions.addItem("Add Category", () -> app.push(new AdminAddCategory(app)));
-            actions.addItem("Remove Category", () -> app.push(new AdminRemoveCategory(app)));
-            actions.addItem("Add Product", () -> app.push(new AdminAddProduct(app)));
-            actions.addItem("Remove Product", () -> app.push(new AdminRemoveProduct(app)));
-            actions.addItem("Suggested Brands", () -> app.push(new RejectBrand(app)));
-            actions.addItem("Suggested Products", () -> app.push(new RejectProduct(app)));
-            actions.addItem("Provide Voucher", () -> app.push(new AdminAddVoucher(app)));
+            actions.addItem("Add Store", () -> app.push(new OwnerAddStore(app, user).init()));
 
         }
 
-        if(Lib.Platform.user instanceof Buyer || Lib.Platform.user instanceof Owner) {
+        if(user instanceof Admin) {
 
-            actions.addItem("Suggest Brand", () -> app.push(new SuggestBrand(app)));
-            actions.addItem("Suggest Product", () -> app.push(new SuggestProduct(app)));
+            actions.addItem("Add Brand", () -> app.push(new AdminAddBrand(app).init()));
+            actions.addItem("Remove Brand", () -> app.push(new AdminRemoveBrand(app).init()));
+            actions.addItem("Add Category", () -> app.push(new AdminAddCategory(app).init()));
+            actions.addItem("Remove Category", () -> app.push(new AdminRemoveCategory(app).init()));
+            actions.addItem("Add Product", () -> app.push(new AdminAddProduct(app).init()));
+            actions.addItem("Remove Product", () -> app.push(new AdminRemoveProduct(app).init()));
+            actions.addItem("Suggested Brands", () -> app.push(new RejectBrand(app).init()));
+            actions.addItem("Suggested Products", () -> app.push(new RejectProduct(app).init()));
+            actions.addItem("Provide Voucher", () -> app.push(new AdminAddVoucher(app).init()));
 
         }
 
-        if(Lib.Platform.user != null) {
+        if(user instanceof Buyer || user instanceof Owner) {
 
-            actions.addItem("Logout", () -> { Lib.Platform.user = null; app.push(new ActionWindow(app));} );
+            actions.addItem("Suggest Brand", () -> app.push(new SuggestBrand(app).init()));
+            actions.addItem("Suggest Product", () -> app.push(new SuggestProduct(app).init()));
+
+        }
+
+        if(user != null) {
+
+            actions.addItem("Logout", app::pop);
 
         }
 

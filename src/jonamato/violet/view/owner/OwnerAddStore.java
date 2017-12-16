@@ -1,8 +1,8 @@
 package jonamato.violet.view.owner;
 
 import com.googlecode.lanterna.gui2.*;
-import jonamato.violet.Lib;
 import jonamato.violet.account.Owner;
+import jonamato.violet.account.User;
 import jonamato.violet.store.OnlineStore;
 import jonamato.violet.store.OnsiteStore;
 import jonamato.violet.store.Store;
@@ -13,7 +13,7 @@ import jonamato.violet.view.AppWindow;
 
 public class OwnerAddStore extends AppWindow {
 
-    public OwnerAddStore(App app) { super(app, "Add Store"); }
+    public OwnerAddStore(App app, User user) { super(app, "Add Store", user); }
 
     @Override
     protected void init(Panel panel) {
@@ -81,7 +81,7 @@ public class OwnerAddStore extends AppWindow {
 
             }
 
-            if(!Stores.instance().add((Owner) Lib.Platform.user, store)) { return; }
+            if(!Stores.instance().add((Owner)user, store)) { return; }
 
             app.pop();
 

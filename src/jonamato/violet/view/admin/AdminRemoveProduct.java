@@ -11,7 +11,7 @@ import jonamato.violet.view.AppWindow;
 
 public class AdminRemoveProduct extends AppWindow {
 
-    public AdminRemoveProduct(App app) { super(app, "Remove Product"); }
+    public AdminRemoveProduct(App app) { super(app, "Remove Product", null); }
 
     @Override
     protected void init(Panel panel) {

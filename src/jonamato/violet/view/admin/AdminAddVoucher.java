@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class AdminAddVoucher extends AppWindow {
 
 
-    public AdminAddVoucher(App app) { super(app, "Add Voucher"); }
+    public AdminAddVoucher(App app) { super(app, "Add Voucher", null); }
 
     @Override
     protected void init(Panel panel) {

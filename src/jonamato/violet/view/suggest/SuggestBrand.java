@@ -10,7 +10,7 @@ import jonamato.violet.view.AppWindow;
 
 public class SuggestBrand extends AppWindow {
 
-    public SuggestBrand(App app) { super(app, "Suggest Brand"); }
+    public SuggestBrand(App app) { super(app, "Suggest Brand", null); }
 
     @Override
     protected void init(Panel panel) {

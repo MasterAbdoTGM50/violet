@@ -2,18 +2,18 @@ package jonamato.violet.view.suggest;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
-import jonamato.violet.suggestion.ProductSuggestion;
-import jonamato.violet.suggestion.SuggestedProducts;
 import jonamato.violet.product.brand.Brand;
 import jonamato.violet.product.brand.Brands;
 import jonamato.violet.product.category.Categories;
 import jonamato.violet.product.category.Category;
+import jonamato.violet.suggestion.ProductSuggestion;
+import jonamato.violet.suggestion.SuggestedProducts;
 import jonamato.violet.view.App;
 import jonamato.violet.view.AppWindow;
 
 public class SuggestProduct extends AppWindow {
 
-    public SuggestProduct(App app) { super(app, "Suggest Product"); }
+    public SuggestProduct(App app) { super(app, "Suggest Product", null); }
 
     @Override
     protected void init(Panel panel) {

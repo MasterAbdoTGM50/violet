@@ -11,7 +11,7 @@ import jonamato.violet.view.AppWindow;
 
 public class RejectBrand extends AppWindow {
 
-    public RejectBrand(App app) { super(app, "Suggested Brands"); }
+    public RejectBrand(App app) { super(app, "Suggested Brands", null); }
 
     @Override
     protected void init(Panel panel) {

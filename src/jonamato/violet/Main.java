@@ -26,7 +26,7 @@ public class Main {
         Products.instance().add(new Product().setID("p1").setName("name").setCategory("Lap").setBrand("Temsah"));
 
         App app = new App();
-        app.start(new ActionWindow(app));
+        app.start(new ActionWindow(app, null).init());
 
     }
 

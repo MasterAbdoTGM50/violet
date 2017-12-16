@@ -8,7 +8,7 @@ import jonamato.violet.account.User;
 
 public class RegisterWindow extends AppWindow {
 
-    public RegisterWindow(App app) { super(app, "Register"); }
+    public RegisterWindow(App app) { super(app, "Register", null); }
 
     @Override
     protected void init(Panel panel) {
@@ -47,6 +47,8 @@ public class RegisterWindow extends AppWindow {
 
         });
 
+        Button cancel = new Button("Cancel", app::pop);
+
         panel.addComponent(userLabel);
         panel.addComponent(userBox);
         panel.addComponent(emailLabel);
@@ -57,6 +59,8 @@ public class RegisterWindow extends AppWindow {
         panel.addComponent(typesBox);
         panel.addComponent(new EmptySpace());
         panel.addComponent(register);
+        panel.addComponent(new EmptySpace());
+        panel.addComponent(cancel);
 
     }
 

@@ -6,6 +6,8 @@ import jonamato.violet.product.ProductStack;
 import jonamato.violet.util.ITrackable;
 import org.dizitart.no2.objects.Id;
 
+import java.util.Date;
+
 public class Store implements ITrackable {
 
     private final String type = this.getClass().getName();
@@ -30,6 +32,7 @@ public class Store implements ITrackable {
     public void add(ProductStack stack) {
 
         stack.setStoreID(this.getName());
+        stack.setDate(new Date());
         this.inventory.add(stack);
 
     }

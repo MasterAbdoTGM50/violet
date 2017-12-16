@@ -13,7 +13,7 @@ import jonamato.violet.view.AppWindow;
 
 public class AdminAddProduct extends AppWindow {
 
-    public AdminAddProduct(App app) { super(app, "Add Product"); }
+    public AdminAddProduct(App app) { super(app, "Add Product", null); }
 
     @Override
     protected void init(Panel panel) {

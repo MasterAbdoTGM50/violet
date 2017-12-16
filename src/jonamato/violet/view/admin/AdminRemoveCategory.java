@@ -11,7 +11,7 @@ import jonamato.violet.view.AppWindow;
 
 public class AdminRemoveCategory extends AppWindow {
 
-    public AdminRemoveCategory(App app) { super(app, "Remove Category"); }
+    public AdminRemoveCategory(App app) { super(app, "Remove Category", null); }
 
     @Override
     protected void init(Panel panel) {

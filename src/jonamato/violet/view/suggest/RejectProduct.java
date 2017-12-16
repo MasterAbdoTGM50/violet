@@ -11,7 +11,7 @@ import jonamato.violet.view.AppWindow;
 
 public class RejectProduct extends AppWindow {
 
-    public RejectProduct(App app) { super(app, "Suggested Products"); }
+    public RejectProduct(App app) { super(app, "Suggested Products", null); }
 
     @Override
     protected void init(Panel panel) {
