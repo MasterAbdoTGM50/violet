@@ -27,6 +27,8 @@ public class AdminAddVoucher extends AppWindow {
         Label usesLabel = new Label("Uses");
         TextBox usesBox = new TextBox().setValidationPattern(Pattern.compile("^([1-9][0-9]*)$"));
 
+        Button cancel = new Button("Cancel", app::pop);
+
         Button add = new Button("Add", () -> {
 
             if(codeBox.getText().isEmpty()) { return; }
@@ -51,7 +53,9 @@ public class AdminAddVoucher extends AppWindow {
         panel.addComponent(discBox);
         panel.addComponent(usesLabel);
         panel.addComponent(usesBox);
+        panel.addComponent(cancel);
         panel.addComponent(add);
+
 
     }
 

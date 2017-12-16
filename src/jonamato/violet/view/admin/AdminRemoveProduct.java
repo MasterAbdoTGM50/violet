@@ -26,8 +26,11 @@ public class AdminRemoveProduct extends AppWindow {
 
         });
 
+        Button cancel = new Button("Cancel", app::pop);
+
         panel.addComponent(checkBox);
         panel.addComponent(button);
+        panel.addComponent(cancel);
 
     }
 

@@ -5,7 +5,7 @@ import org.dizitart.no2.objects.Id;
 public class Brand {
 
     @Id
-    private String name;
+    protected String name;
 
     public String getName() { return name; }
 

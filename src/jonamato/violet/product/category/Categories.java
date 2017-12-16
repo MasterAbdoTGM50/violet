@@ -1,6 +1,5 @@
 package jonamato.violet.product.category;
 
-import jonamato.violet.product.brand.Brand;
 import jonamato.violet.util.helper.NitriteHelper;
 
 import java.util.List;

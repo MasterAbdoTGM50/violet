@@ -3,7 +3,6 @@ package jonamato.violet.view;
 import com.googlecode.lanterna.gui2.*;
 import jonamato.violet.Lib;
 import jonamato.violet.account.Registry;
-import jonamato.violet.account.User;
 
 public class LoginWindow extends AppWindow {
 

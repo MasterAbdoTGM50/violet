@@ -1,6 +1,8 @@
 package jonamato.violet.view;
 
-import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.BasicWindow;
+import com.googlecode.lanterna.gui2.Panel;
+import com.googlecode.lanterna.gui2.Window;
 
 import java.util.Arrays;
 

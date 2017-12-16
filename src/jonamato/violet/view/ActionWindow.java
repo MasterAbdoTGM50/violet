@@ -9,7 +9,9 @@ import jonamato.violet.account.Owner;
 import jonamato.violet.view.admin.*;
 import jonamato.violet.view.owner.OwnerAddStore;
 import jonamato.violet.view.suggest.RejectBrand;
+import jonamato.violet.view.suggest.RejectProduct;
 import jonamato.violet.view.suggest.SuggestBrand;
+import jonamato.violet.view.suggest.SuggestProduct;
 
 public class ActionWindow extends AppWindow {
 
@@ -49,6 +51,7 @@ public class ActionWindow extends AppWindow {
             actions.addItem("Add Product", () -> app.push(new AdminAddProduct(app)));
             actions.addItem("Remove Product", () -> app.push(new AdminRemoveProduct(app)));
             actions.addItem("Suggested Brands", () -> app.push(new RejectBrand(app)));
+            actions.addItem("Suggested Products", () -> app.push(new RejectProduct(app)));
             actions.addItem("Provide Voucher", () -> app.push(new AdminAddVoucher(app)));
 
         }
@@ -56,6 +59,13 @@ public class ActionWindow extends AppWindow {
         if(Lib.Platform.user instanceof Buyer || Lib.Platform.user instanceof Owner) {
 
             actions.addItem("Suggest Brand", () -> app.push(new SuggestBrand(app)));
+            actions.addItem("Suggest Product", () -> app.push(new SuggestProduct(app)));
+
+        }
+
+        if(Lib.Platform.user != null) {
+
+            actions.addItem("Logout", () -> { Lib.Platform.user = null; app.push(new ActionWindow(app));} );
 
         }
 

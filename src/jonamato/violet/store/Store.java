@@ -1,9 +1,9 @@
 package jonamato.violet.store;
 
-import jonamato.violet.util.ITrackable;
 import jonamato.violet.product.Cart;
 import jonamato.violet.product.IProduct;
 import jonamato.violet.product.ProductStack;
+import jonamato.violet.util.ITrackable;
 import org.dizitart.no2.objects.Id;
 
 public class Store implements ITrackable {

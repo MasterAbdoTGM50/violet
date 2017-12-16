@@ -87,7 +87,7 @@ public class OwnerAddStore extends AppWindow {
 
         }).setLayoutData(GridLayout.createLayoutData(GridLayout.Alignment.END, GridLayout.Alignment.BEGINNING));
 
-        Button cancel = new Button("Cancel", app::exit);
+        Button cancel = new Button("Cancel", app::pop);
 
         panel.addComponent(nameLabel);
         panel.addComponent(nameBox);
@@ -99,9 +99,8 @@ public class OwnerAddStore extends AppWindow {
         panel.addComponent(streetBox);
         panel.addComponent(typesLabel);
         panel.addComponent(typesBox);
-        panel.addComponent(new EmptySpace());
-        panel.addComponent(add);
         panel.addComponent(cancel);
+        panel.addComponent(add);
 
     }
 

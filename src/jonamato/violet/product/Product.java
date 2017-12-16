@@ -17,7 +17,7 @@ public class Product implements IProduct {
     @Override
     public String getID() { return id; }
 
-    public Product setId(String id) { this.id = id; return this; }
+    public Product setID(String id) { this.id = id; return this; }
 
     @Override
     public String getName() { return name; }

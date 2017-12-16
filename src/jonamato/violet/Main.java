@@ -23,7 +23,7 @@ public class Main {
 
         Brands.instance().add(new Brand().setName("Temsah"));
         Categories.instance().add(new Category().setName("Lap"));
-        Products.instance().add(new Product().setId("p1").setName("name").setCategory("Lap").setBrand("Temsah"));
+        Products.instance().add(new Product().setID("p1").setName("name").setCategory("Lap").setBrand("Temsah"));
 
         App app = new App();
         app.start(new ActionWindow(app));

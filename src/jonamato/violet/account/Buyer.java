@@ -1,7 +1,7 @@
 package jonamato.violet.account;
 
-import jonamato.violet.util.Address;
 import jonamato.violet.product.Cart;
+import jonamato.violet.util.Address;
 import jonamato.violet.wallet.IWalletOwner;
 import jonamato.violet.wallet.Wallet;
 

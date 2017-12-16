@@ -9,8 +9,6 @@ import jonamato.violet.product.brand.Brands;
 import jonamato.violet.view.App;
 import jonamato.violet.view.AppWindow;
 
-import java.util.List;
-
 public class AdminRemoveBrand extends AppWindow {
 
     public AdminRemoveBrand(App app) { super(app, "Remove Brand"); }
@@ -21,15 +19,18 @@ public class AdminRemoveBrand extends AppWindow {
         CheckBoxList<Brand> checkBox = new CheckBoxList<>(new TerminalSize(20, 10));
         Brands.instance().all().forEach(checkBox::addItem);
 
-        Button button = new Button("Reject", () -> {
+        Button button = new Button("Remove", () -> {
 
             checkBox.getCheckedItems().forEach(Brands.instance()::remove);
             app.pop();
 
         });
 
+        Button cancel = new Button("Cancel", app::pop);
+
         panel.addComponent(checkBox);
         panel.addComponent(button);
+        panel.addComponent(cancel);
 
     }
 
