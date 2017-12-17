@@ -5,7 +5,7 @@ import com.googlecode.lanterna.gui2.Button;
 import com.googlecode.lanterna.gui2.CheckBoxList;
 import com.googlecode.lanterna.gui2.Panel;
 import jonamato.violet.suggestion.ProductSuggestion;
-import jonamato.violet.suggestion.SuggestedProducts;
+import jonamato.violet.suggestion.ProductSuggestions;
 import jonamato.violet.view.App;
 import jonamato.violet.view.AppWindow;
 
@@ -17,11 +17,11 @@ public class RejectProduct extends AppWindow {
     protected void init(Panel panel) {
 
         CheckBoxList<ProductSuggestion> checkBox = new CheckBoxList<>(new TerminalSize(40, 10));
-        SuggestedProducts.instance().all().forEach(checkBox::addItem);
+        ProductSuggestions.instance().all().forEach(checkBox::addItem);
 
         Button button = new Button("Reject", () -> {
 
-            checkBox.getCheckedItems().forEach(SuggestedProducts.instance()::remove);
+            checkBox.getCheckedItems().forEach(ProductSuggestions.instance()::remove);
             app.pop();
 
         });

@@ -7,7 +7,7 @@ import jonamato.violet.product.brand.Brands;
 import jonamato.violet.product.category.Categories;
 import jonamato.violet.product.category.Category;
 import jonamato.violet.suggestion.ProductSuggestion;
-import jonamato.violet.suggestion.SuggestedProducts;
+import jonamato.violet.suggestion.ProductSuggestions;
 import jonamato.violet.view.App;
 import jonamato.violet.view.AppWindow;
 
@@ -47,7 +47,7 @@ public class SuggestProduct extends AppWindow {
                             .setCategory(categoryRadio.getCheckedItem().getName())
                             .genID();
 
-            if(!SuggestedProducts.instance().suggest(product)) { return; }
+            if(!ProductSuggestions.instance().suggest(product)) { return; }
 
             app.pop();
 
