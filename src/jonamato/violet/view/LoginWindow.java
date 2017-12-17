@@ -24,13 +24,13 @@ public class LoginWindow extends AppWindow {
             User user = Registry.instance().login(userBox.getText(), passBox.getText());
             if(user != null) {
 
-                app.push(new ActionWindow(app, user).init());
+                app.push(new ActionWindow(app, user).build());
 
             } else { app.pop(); }
 
         });
 
-        Button cancel = new Button("Cancel", app::exit);
+        Button cancel = new Button("Cancel", app::pop);
 
         panel.addComponent(userLabel);
         panel.addComponent(userBox);

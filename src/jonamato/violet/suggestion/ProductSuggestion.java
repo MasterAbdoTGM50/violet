@@ -10,7 +10,7 @@ public class ProductSuggestion {
     private String category;
     private String brand;
 
-    public ProductSuggestion genID() { return setID(getBrand() + "/" + getCategory() + "/" + getName()); }
+    public ProductSuggestion genID() { return setID(getBrand() + "\t" + getCategory() + "\t" + getName()); }
 
     public ProductSuggestion setID(String id) { this.id = id; return this; }
 

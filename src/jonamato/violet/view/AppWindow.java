@@ -19,15 +19,15 @@ public abstract class AppWindow extends BasicWindow {
         this.app = app;
         this.user = user;
 
-        this.panel = new Panel();
         setHints(Arrays.asList(Window.Hint.CENTERED));
 
     }
 
     protected abstract void init(Panel panel);
 
-    public AppWindow init() {
+    public AppWindow build() {
 
+        panel = new Panel();
         init(panel);
         setComponent(panel);
         return this;

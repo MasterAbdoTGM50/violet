@@ -7,6 +7,7 @@ import java.util.Date;
 public class ProductStack implements ITrackable {
 
     private String productID;
+    private String productName;
     private double price;
     private int quantity;
     private String storeID;
@@ -18,6 +19,15 @@ public class ProductStack implements ITrackable {
     public String getProductID() { return productID; }
 
     public ProductStack setProductID(String productID) { this.productID = productID; return this; }
+
+    public String getProductName() { return productName; }
+
+    public ProductStack setProductName(String productName) {
+
+        this.productName = productName;
+        return this;
+
+    }
 
     public double getPrice() { return price; }
 
@@ -48,5 +58,8 @@ public class ProductStack implements ITrackable {
     public void order(int orders) { this.orders += orders; quantity -= orders; }
 
     public double getTotalPrice() { return getQuantity() * getPrice(); }
+
+    @Override
+    public String toString() { return getProductName() + "\t" + getQuantity() + "\t" + getPrice() + "$"; }
 
 }

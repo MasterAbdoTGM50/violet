@@ -12,6 +12,7 @@ public class Owner extends User implements IWalletOwner {
 
     private Wallet wallet = new Wallet();
     private List<String> stores = new ArrayList<>();
+    private boolean premium = false;
 
     @Override
     public Owner setUsername(String username) { return (Owner)super.setUsername(username); }
@@ -27,6 +28,10 @@ public class Owner extends User implements IWalletOwner {
 
     @Override
     public Owner setAddress(Address address) { return (Owner)super.setAddress(address); }
+
+    public boolean isPremium() { return premium; }
+
+    public Owner setPremium(boolean premium) { this.premium = premium; return this; }
 
     @Override
     public Wallet getWallet() { return wallet; }

@@ -19,6 +19,8 @@ public class Cart {
 
     }
 
+    public void remove(ProductStack stack) { this.products.remove(stack); }
+
     public void remove(IProduct product) {
 
         products.stream()

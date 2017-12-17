@@ -35,6 +35,13 @@ public class Stores {
 
     }
 
+    public boolean view(Store store, ProductStack stack, int views) {
+
+        stack.view(views);
+        return update(store);
+
+    }
+
     public boolean update(Store store) { return NitriteHelper.update(store, Store.class); }
 
     public boolean remove(Store store) {

@@ -50,6 +50,7 @@ public class OwnerAddProduct extends AppWindow {
             ProductStack stack =
                     new ProductStack()
                     .setProductID(productsRadio.getCheckedItem().getID())
+                    .setProductName(productsRadio.getCheckedItem().getName())
                     .setQuantity(Integer.parseInt(qtyBox.getText()))
                     .setPrice(Double.parseDouble(priceBox.getText()));
 

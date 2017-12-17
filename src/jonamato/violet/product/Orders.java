@@ -16,15 +16,56 @@ public class Orders {
 
     public static Orders instance() { return instance; }
 
-    public void buy(Buyer buyer, Store store, ProductStack stack, int quantity) {
+    public boolean order(Buyer buyer, Store store, ProductStack stack, int quantity) {
 
-        if(quantity > stack.getQuantity()) return;
+        if(quantity > stack.getQuantity()) return false;
 
         stack.order(quantity);
-        buyer.getCart().add(new ProductStack().setProductID(stack.getProductID()).setQuantity(quantity).setDate(new Date()));
+        buyer.getCart().add(
+                new ProductStack()
+                .setProductID(stack.getProductID())
+                .setProductName(stack.getProductName())
+                .setStoreID(stack.getStoreID())
+                .setQuantity(quantity)
+                .setPrice(stack.getPrice())
+                .setDate(new Date())
+        );
 
         Registry.instance().update(buyer);
         Stores.instance().update(store);
+
+        return true;
+
+    }
+
+    public boolean unorder(Buyer buyer, ProductStack stack) {
+
+        Store store = Stores.instance().all().stream()
+                .filter(s -> s.getName().equals(stack.getStoreID()))
+                .findFirst()
+                .orElse(null);
+
+        if (store != null) {
+
+            ProductStack product = store.getInventory().get().stream()
+                    .filter(p -> p.getProductID().equals(stack.getProductID()))
+                    .findFirst()
+                    .orElse(null);
+
+            if (product != null) {
+
+                product.setQuantity(product.getQuantity() + stack.getQuantity());
+                buyer.getCart().remove(stack);
+
+                Registry.instance().update(buyer);
+                Stores.instance().update(store);
+
+            }
+
+        }
+
+
+        return true;
 
     }
 

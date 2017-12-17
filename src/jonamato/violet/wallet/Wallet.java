@@ -2,7 +2,7 @@ package jonamato.violet.wallet;
 
 public class Wallet {
 
-    private int balance = 0;
+    private int balance = 300;
 
     public double get() { return balance; }
 

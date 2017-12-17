@@ -45,7 +45,7 @@ public class App {
     public void pop() {
 
         gui.getActiveWindow().close();
-        gui.addWindowAndWait(windows.pop());
+        gui.addWindowAndWait(windows.pop().build());
 
     }
 
