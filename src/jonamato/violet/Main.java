@@ -22,41 +22,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Admin admin = new Admin().setUsername("admin1").setEmail("admin1@violet.org");
-        Owner owner1 = new Owner().setUsername("owner1").setEmail("owner1@violet.org").setPremium(true);
-        Owner owner2 = new Owner().setUsername("owner2").setEmail("owner1@violet.org");
-        Buyer buyer1 = new Buyer().setUsername("buyer1").setEmail("buyer1@violet.org");
-
-        OnlineStore store = new OnlineStore().setName("Mega Store");
-
-        Product product = new Product()
-                .setID("p1")
-                .setName("A Testy Prooduct")
-                .setDescription("A nice description\nAnd a new line!")
-                .setBrand("Temsah")
-                .setCategory("Tofi");
-
-        ProductStack stack = new ProductStack()
-                .setProductID(product.getID())
-                .setProductName(product.getName())
-                .setPrice(40)
-                .setQuantity(10);
-
-        Registry.instance().register(admin, "jonamato");
-        Registry.instance().register(owner1, "jonamato");
-        Registry.instance().register(owner2, "jonamato");
-        Registry.instance().register(buyer1, "jonamato");
-
-        Products.instance().add(product);
-
-        Stores.instance().add(owner1, store);
-        Stores.instance().add(store, stack);
-
-        Brands.instance().add(new Brand().setName("Temsah"));
-        Categories.instance().add(new Category().setName("Tofi"));
+        Lib.Platform.persist();
 
         App app = new App();
         app.start(new ActionWindow(app, null).build());
+
+        Lib.Platform.commit();
 
     }
 
