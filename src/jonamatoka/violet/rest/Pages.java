@@ -2,6 +2,7 @@ package jonamatoka.violet.rest;
 
 import jonamatoka.violet.Platform;
 import jonamatoka.violet.account.User;
+import jonamatoka.violet.util.NitriteHelper;
 import jonamatoka.violet.util.StringContainer;
 import net.openhft.hashing.LongHashFunction;
 import org.springframework.security.core.Authentication;
@@ -41,8 +42,7 @@ public class Pages {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerSubmit(@ModelAttribute("user") User user, @RequestParam("pass") String pass) {
 
-        Platform.get().db.getRepository(User.class)
-                .insert(user.setHash(LongHashFunction.xx().hashChars(pass)).setPriviliges(0));
+        NitriteHelper.insert(user.setHash(LongHashFunction.xx().hashChars(pass)).setPriviliges(6), User.class);
         return "redirect:/login";
 
     }
