@@ -5,11 +5,11 @@
     <title>violet2.0</title>
 </head>
 <body>
-<form th:action="@{/register}" method="post" th:object="${user}" >
-    <div><label>User Name: <input type="text" name="username" th:field="*{username}" /></label></div>
-    <div><label>Password: <input type="password" name="pass" /></label></div>
-    <div><label>Email: <input type="text" name="email" th:field="*{email}" /></label></div>
-    <div><input type="submit" value="Sign Up" /></div>
-</form>
+    <form th:action="@{/register}" method="post" th:object="${user}" >
+        <div><label>User Name: <input type="text" name="username" th:field="*{username}" /></label></div>
+        <div><label>Password: <input type="password" name="pass" /></label></div>
+        <div><label>Email: <input type="text" name="email" th:field="*{email}" /></label></div>
+        <div><input type="submit" value="Sign Up" /></div>
+    </form>
 </body>
 </html>

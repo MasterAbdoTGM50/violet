@@ -19,6 +19,14 @@ public class App {
                 , User.class
         );
 
+        NitriteHelper.insert(
+                new User().setUsername("Jasmin")
+                        .setEmail("jasmin@ymail.com")
+                        .setHash(LongHashFunction.xx().hashChars("Shehab"))
+                        .setPriviliges(0)
+                , User.class
+        );
+
         SpringApplication.run(App.class, args);
 
     }

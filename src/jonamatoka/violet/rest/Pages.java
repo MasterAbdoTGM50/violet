@@ -1,9 +1,8 @@
 package jonamatoka.violet.rest;
 
-import jonamatoka.violet.Platform;
 import jonamatoka.violet.account.User;
+import jonamatoka.violet.product.Product;
 import jonamatoka.violet.util.NitriteHelper;
-import jonamatoka.violet.util.StringContainer;
 import net.openhft.hashing.LongHashFunction;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +31,7 @@ public class Pages {
     public String login() { return "login"; }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(Model model) {
+    public String getRegister(Model model) {
 
         model.addAttribute("user", new User());
         return "register";
@@ -40,13 +39,29 @@ public class Pages {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerSubmit(@ModelAttribute("user") User user, @RequestParam("pass") String pass) {
+    public String postRegister(@ModelAttribute("user") User user, @RequestParam("pass") String pass) {
 
         NitriteHelper.insert(user.setHash(LongHashFunction.xx().hashChars(pass)).setPriviliges(6), User.class);
         return "redirect:/login";
 
     }
 
+    @RequestMapping(value = "/apts", method = RequestMethod.GET)
+    public String getAddProductToSystem(Model model) {
 
+        model.addAttribute("product", new Product());
+        return "apts";
+
+    }
+
+    @RequestMapping(value = "/apts", method = RequestMethod.POST)
+    public String postAddProductToSystem(@ModelAttribute("product") Product product) {
+
+        NitriteHelper.insert(product, Product.class);
+        NitriteHelper.all(Product.class).forEach(System.out::println);
+
+        return "redirect:/";
+
+    }
 
 }

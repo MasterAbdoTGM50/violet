@@ -15,6 +15,7 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
 
         http.authorizeRequests()
             .antMatchers("/register").permitAll()
+            .antMatchers("/apts").hasAuthority("0")
             .anyRequest().authenticated()
         .and().formLogin()
             .loginPage("/login").permitAll()
