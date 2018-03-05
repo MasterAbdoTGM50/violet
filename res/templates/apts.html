@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>violet2.0</title>
-</head>
-<body>
-    <form th:action="@{/apts}" method="post" th:object="${product}">
-        <div><label>ID: <input type="text" name="id" th:field="*{id}" /></label></div>
-        <div><label>Name: <input type="text" name="password" th:field="*{name}" /></label></div>
-        <div><label>Category: <input type="text" name="category" th:field="*{category}" /></label></div>
-        <div><label>Brand: <input type="text" name="brand" th:field="*{brand}" /></label></div>
-        <div><label>Description: <input type="text" name="description" th:field="*{description}" /></label></div>
-        <div><input type="submit" value="Add" /></div>
-    </form>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>violet2.0</title>
+        <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div class = "header">
+            <p>violet2.0</p>
+        </div>
+
+        <form th:action="@{/apts}" method="post" th:object="${product}">
+            <h1> Add Product </h1>
+            <div><label>ID: </label><input type="text" name="id" th:field="*{id}" /></div>
+            <div><label>Name: </label><input type="text" name="password" th:field="*{name}" /></div>
+            <div><label>Category: </label><input type="text" name="category" th:field="*{category}" /></div>
+            <div><label>Brand: </label><input type="text" name="brand" th:field="*{brand}" /></div>
+            <div><label>Description: </label><input type="text" name="description" th:field="*{description} " /></div>
+            <div><input type="submit" value="Add" /></div>
+        </form>
+    </body>
 </html>

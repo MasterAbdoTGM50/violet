@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>violet2.0</title>
-</head>
-<body>
-    <p th:text="'Hello, ' + ${name} + '!'" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>violet2.0</title>
+        <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div class = "header">
+            <p>violet2.0</p>
+        </div>
 
-
-
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-</body>
+        <form th:action="@{/logout}" method="post">
+            <h1 th:text="'Hello, ' + ${name} + '!'" />
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
 </html>
