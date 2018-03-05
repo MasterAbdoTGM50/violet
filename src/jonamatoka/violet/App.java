@@ -20,10 +20,18 @@ public class App {
         );
 
         NitriteHelper.insert(
+                new User().setUsername("Mourad")
+                        .setEmail("sherieymourad1997@gmail.com")
+                        .setHash(LongHashFunction.xx().hashChars("Sheriey"))
+                        .setPriviliges(3)
+                , User.class
+        );
+
+        NitriteHelper.insert(
                 new User().setUsername("Jasmin")
                         .setEmail("jasmin@ymail.com")
                         .setHash(LongHashFunction.xx().hashChars("Shehab"))
-                        .setPriviliges(0)
+                        .setPriviliges(6)
                 , User.class
         );
 

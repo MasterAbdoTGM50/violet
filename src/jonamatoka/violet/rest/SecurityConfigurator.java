@@ -17,6 +17,7 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
             .antMatchers("/css/*").permitAll()
             .antMatchers("/register").permitAll()
             .antMatchers("/apts").hasAuthority("0")
+            .antMatchers("/asts").hasAuthority("3")
             .anyRequest().authenticated()
         .and().formLogin()
             .loginPage("/login").permitAll()

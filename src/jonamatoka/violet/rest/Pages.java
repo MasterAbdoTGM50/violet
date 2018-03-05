@@ -2,6 +2,7 @@ package jonamatoka.violet.rest;
 
 import jonamatoka.violet.account.User;
 import jonamatoka.violet.product.Product;
+import jonamatoka.violet.store.Store;
 import jonamatoka.violet.util.NitriteHelper;
 import net.openhft.hashing.LongHashFunction;
 import org.springframework.security.core.Authentication;
@@ -59,6 +60,28 @@ public class Pages {
 
         NitriteHelper.insert(product, Product.class);
         NitriteHelper.all(Product.class).forEach(System.out::println);
+
+        return "redirect:/";
+
+    }
+
+    @RequestMapping(value = "/asts", method = RequestMethod.GET)
+    public String getAddStoreToSystem(Model model) {
+
+        model.addAttribute("store", new Store());
+        return "asts";
+
+    }
+
+    @RequestMapping(value = "/asts", method = RequestMethod.POST)
+    public String postAddStoreToSystem(@ModelAttribute("store") Store store) {
+
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        store.setOwnerId(user.getUsername());
+
+        NitriteHelper.insert(store, Store.class);
+        NitriteHelper.all(Store.class).forEach(System.out::println);
 
         return "redirect:/";
 

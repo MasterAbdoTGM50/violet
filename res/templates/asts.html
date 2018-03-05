@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>violet2.0</title>
+</head>
+<body>
+    <form th:action="@{/asts}" method="post" th:object="${store}">
+        <div><label>ID: <input type="text" name="id" th:field="*{id}" /></label></div>
+        <div><label>Name: <input type="text" name="name" th:field="*{name}" /></label></div>
+        <div><label>Type: <input type="text" name="type" th:field="*{type}" /></label></div>
+        <div><label>Address: <input type="text" name="address" th:field="*{address}" /></label></div>
+        <div><input type="submit" value="Add" /></div>
+    </form>
+</body>
+</html>
