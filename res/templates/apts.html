@@ -14,8 +14,20 @@
             <h1> Add Product </h1>
             <div><label>ID: </label><input type="text" name="id" th:field="*{id}" /></div>
             <div><label>Name: </label><input type="text" name="password" th:field="*{name}" /></div>
-            <div><label>Category: </label><input type="text" name="category" th:field="*{category}" /></div>
-            <div><label>Brand: </label><input type="text" name="brand" th:field="*{brand}" /></div>
+            <div>
+                <label>Brand: </label>
+                <input list="brands" name="brand" th:field="*{brand}"></input>
+                <datalist id="brands">
+                    <option th:each="brand: ${brands}" th:value="${brand}"></option>
+                </datalist>
+            </div>
+            <div>
+                <label>Category: </label>
+                <input list="categories" name="category" th:field="*{category}"></input>
+                <datalist id="categories">
+                    <option th:each="category: ${categories}" th:value="${category}"></option>
+                </datalist>
+            </div>
             <div><label>Description: </label><input type="text" name="description" th:field="*{description} " /></div>
             <div><input type="submit" value="Add" /></div>
         </form>

@@ -1,6 +1,8 @@
 package jonamatoka.violet;
 
 import jonamatoka.violet.account.User;
+import jonamatoka.violet.product.Brand;
+import jonamatoka.violet.product.Category;
 import jonamatoka.violet.util.NitriteHelper;
 import net.openhft.hashing.LongHashFunction;
 import org.springframework.boot.SpringApplication;
@@ -40,6 +42,26 @@ public class App {
                         .setHash(LongHashFunction.xx().hashChars("Shehab"))
                         .setPriviliges(6)
                 , User.class
+        );
+
+        NitriteHelper.get().insert(
+                new Brand().setName("HP")
+                , Brand.class
+        );
+
+        NitriteHelper.get().insert(
+                new Brand().setName("LENOVO")
+                , Brand.class
+        );
+
+        NitriteHelper.get().insert(
+                new Category().setName("Laptop")
+                , Category.class
+        );
+
+        NitriteHelper.get().insert(
+                new Category().setName("Phone")
+                , Category.class
         );
 
     }

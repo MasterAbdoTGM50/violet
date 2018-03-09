@@ -8,8 +8,8 @@ public class Product implements ITrackable {
     @Id
     private String id;
     private String name;
-    private String category;
-    private String brand;
+    private Brand brand;
+    private Category category;
     private String description;
 
     private int views;
@@ -23,13 +23,13 @@ public class Product implements ITrackable {
 
     public Product setName(String name) { this.name = name; return this; }
 
-    public String getCategory() { return category; }
+    public Brand getBrand() { return brand; }
 
-    public Product setCategory(String category) { this.category = category; return this; }
+    public Product setBrand(Brand brand) { this.brand = brand; return this; }
 
-    public String getBrand() { return brand; }
+    public Category getCategory() { return category; }
 
-    public Product setBrand(String brand) { this.brand = brand; return this; }
+    public Product setCategory(Category category) { this.category = category; return this; }
 
     public String getDescription() { return description; }
 
