@@ -1,8 +1,9 @@
 package jonamatoka.violet.store;
 
+import jonamatoka.violet.util.ITrackable;
 import org.dizitart.no2.objects.Id;
 
-public class Store {
+public class Store implements ITrackable {
 
     @Id
     private String id;
@@ -10,6 +11,9 @@ public class Store {
     private String name;
     private String type;
     private String address;
+
+    private int views;
+    private int orders;
 
     public String getId() { return id; }
 
@@ -30,6 +34,18 @@ public class Store {
     public String getAddress() { return address; }
 
     public void setAddress(String address) { this.address = address; }
+
+    @Override
+    public int views() { return views; }
+
+    @Override
+    public int orders() { return orders; }
+
+    @Override
+    public void view(int views) { this.views += views; }
+
+    @Override
+    public void order(int orders) { this.orders += orders; }
 
     @Override
     public String toString() {
