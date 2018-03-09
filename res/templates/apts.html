@@ -16,14 +16,14 @@
             <div><label>Name: </label><input type="text" name="password" th:field="*{name}" /></div>
             <div>
                 <label>Brand: </label>
-                <input list="brands" name="brand" th:field="*{brand}"></input>
+                <input list="brands" name="brand" th:field="*{brand}" />
                 <datalist id="brands">
                     <option th:each="brand: ${brands}" th:value="${brand}"></option>
                 </datalist>
             </div>
             <div>
                 <label>Category: </label>
-                <input list="categories" name="category" th:field="*{category}"></input>
+                <input list="categories" name="category" th:field="*{category}" />
                 <datalist id="categories">
                     <option th:each="category: ${categories}" th:value="${category}"></option>
                 </datalist>
