@@ -8,8 +8,18 @@ import java.util.List;
 
 public class NitriteHelper {
 
+    private static NitriteHelper instance;
+
+    private NitriteHelper() { }
+    public static NitriteHelper get() {
+
+        if(null == instance) { instance = new NitriteHelper(); }
+        return instance;
+
+    }
+
     @SuppressWarnings("unchecked")
-    public static <T> boolean insert(T obj, Class<T> clazz) {
+    public <T> boolean insert(T obj, Class<T> clazz) {
 
         try {
 
@@ -22,7 +32,7 @@ public class NitriteHelper {
 
     }
 
-    public static <T> boolean update(T obj, Class<T> clazz) {
+    public <T> boolean update(T obj, Class<T> clazz) {
 
         ObjectRepository<T> objs = Platform.get().db.getRepository(clazz);
         objs.update(obj);
@@ -30,7 +40,7 @@ public class NitriteHelper {
 
     }
 
-    public static <T> boolean remove(T obj, Class<T> clazz) {
+    public <T> boolean remove(T obj, Class<T> clazz) {
 
         ObjectRepository<T> objs = Platform.get().db.getRepository(clazz);
         objs.remove(obj);
@@ -38,7 +48,7 @@ public class NitriteHelper {
 
     }
 
-    public static <T> List<T> all(Class<T> clazz) {
+    public <T> List<T> all(Class<T> clazz) {
 
         ObjectRepository<T> objs = Platform.get().db.getRepository(clazz);
         return objs.find().toList();

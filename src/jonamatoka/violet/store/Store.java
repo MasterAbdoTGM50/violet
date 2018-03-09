@@ -33,7 +33,7 @@ public class Store {
 
     @Override
     public String toString() {
-        return "Store{" +
+        return "StorePages{" +
                 "id='" + id + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", name='" + name + '\'' +

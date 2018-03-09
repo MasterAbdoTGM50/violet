@@ -1,5 +1,6 @@
-package jonamatoka.violet.rest;
+package jonamatoka.violet.web;
 
+import jonamatoka.violet.Lib;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,8 +17,8 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
             .antMatchers("/css/*").permitAll()
             .antMatchers("/register").permitAll()
-            .antMatchers("/apts").hasAuthority("0")
-            .antMatchers("/asts").hasAuthority("3")
+            .antMatchers("/apts").hasAuthority(Lib.Privliges.ADMIN.toString())
+            .antMatchers("/asts").hasAuthority(Lib.Privliges.OWNER.toString())
             .anyRequest().authenticated()
         .and().formLogin()
             .loginPage("/login").permitAll()

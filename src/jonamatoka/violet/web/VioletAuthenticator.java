@@ -1,4 +1,4 @@
-package jonamatoka.violet.rest;
+package jonamatoka.violet.web;
 
 import jonamatoka.violet.account.User;
 import jonamatoka.violet.util.NitriteHelper;
@@ -22,7 +22,7 @@ public class VioletAuthenticator implements AuthenticationProvider {
         String username = authentication.getName();
         long hash = LongHashFunction.xx().hashChars(authentication.getCredentials().toString());
 
-        User user = NitriteHelper.all(User.class).stream()
+        User user = NitriteHelper.get().all(User.class).stream()
                 .filter(u -> u.getUsername().equals(username) && u.getHash() == hash)
                 .findFirst().orElse(null);
 

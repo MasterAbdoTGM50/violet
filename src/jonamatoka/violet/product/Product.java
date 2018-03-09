@@ -33,7 +33,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductPages{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
