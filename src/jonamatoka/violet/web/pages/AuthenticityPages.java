@@ -24,7 +24,6 @@ public class AuthenticityPages {
         return Lib.Templates.REGISTER;
 
     }
-
     @RequestMapping(value = Lib.Mappings.REGISTER, method = RequestMethod.POST)
     public String postRegister(@ModelAttribute("user") User user, @RequestParam("pass") String pass) {
 

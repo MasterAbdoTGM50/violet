@@ -16,24 +16,18 @@ public class StorePages {
 
     @RequestMapping(value = Lib.Mappings.ADD_STORE_SYSTEM, method = RequestMethod.GET)
     public String getAddStoreToSystem(Model model) {
-
         model.addAttribute("store", new Store());
         return Lib.Templates.ADD_STORE_SYSTEM;
-
     }
 
     @RequestMapping(value = Lib.Mappings.ADD_STORE_SYSTEM, method = RequestMethod.POST)
     public String postAddStoreToSystem(@ModelAttribute("store") Store store) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         store.setOwnerId(user.getUsername());
-
         NitriteHelper.get().insert(store, Store.class);
         NitriteHelper.get().all(Store.class).forEach(System.out::println);
-
         return "redirect:" + Lib.Mappings.ADD_STORE_SYSTEM;
-
     }
 
 }

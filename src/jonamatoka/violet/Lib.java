@@ -14,6 +14,8 @@ public class Lib {
         public static final String ADD_PRODUCT_SYSTEM = ROOT + "apts";
         public static final String ADD_STORE_SYSTEM = ROOT + "asts";
         public static final String ADD_CATEGORY_SYSTEM = ROOT + "acts";
+        public static final String ADD_Brand_SYSTEM = "abts";
+
     }
 
     public static class Templates {
@@ -24,6 +26,8 @@ public class Lib {
         public static final String ADD_PRODUCT_SYSTEM = "apts";
         public static final String ADD_STORE_SYSTEM = "asts";
         public static final String ADD_CATEGORY_SYSTEM = "acts";
+        public static final String ADD_Brand_SYSTEM = "abts";
+
 
     }
 

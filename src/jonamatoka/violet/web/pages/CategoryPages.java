@@ -24,6 +24,5 @@ public class CategoryPages {
         NitriteHelper.get().insert(category, Category.class);
         NitriteHelper.get().all(Category.class).forEach(System.out::println);
         return "redirect:" + Lib.Mappings.ROOT;
-
     }
 }
