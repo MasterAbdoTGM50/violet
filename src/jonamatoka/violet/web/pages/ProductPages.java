@@ -5,6 +5,7 @@ import jonamatoka.violet.product.Brand;
 import jonamatoka.violet.product.Category;
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.util.NitriteHelper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +21,8 @@ public class ProductPages {
         model.addAttribute("product", new Product());
         model.addAttribute("brands", NitriteHelper.get().all(Brand.class));
         model.addAttribute("categories", NitriteHelper.get().all(Category.class));
-        return "apts";
+
+        return Lib.Templates.ADD_PRODUCT_SYSTEM;
 
     }
 

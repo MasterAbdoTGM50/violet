@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>violet2.0</title>
@@ -10,10 +10,5 @@
             <p>violet2.0</p>
         </div>
 
-        <form th:action="@{/}" method="post">
-            <h1 th:text="'Hello, ' + ${name} + '!'" />
-            <input type="submit" value="View Stores" name="btnViewStores"/>
-            <input type="submit" value="Sign Out" name = "btnLogout"/>
-        </form>
     </body>
 </html>

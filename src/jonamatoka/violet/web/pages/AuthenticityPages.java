@@ -3,7 +3,9 @@ package jonamatoka.violet.web.pages;
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.account.User;
 import jonamatoka.violet.util.NitriteHelper;
+
 import net.openhft.hashing.LongHashFunction;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +23,7 @@ public class AuthenticityPages {
     public String getRegister(Model model) {
 
         model.addAttribute("user", new User());
+
         return Lib.Templates.REGISTER;
 
     }
@@ -29,6 +32,7 @@ public class AuthenticityPages {
     public String postRegister(@ModelAttribute("user") User user, @RequestParam("pass") String pass) {
 
         NitriteHelper.get().insert(user.setHash(LongHashFunction.xx().hashChars(pass)).setPriviliges(6), User.class);
+
         return "redirect:" + Lib.Mappings.LOGIN;
 
     }

@@ -1,6 +1,7 @@
 package jonamatoka.violet.util;
 
 import jonamatoka.violet.Platform;
+
 import org.dizitart.no2.exceptions.UniqueConstraintException;
 import org.dizitart.no2.objects.ObjectRepository;
 
@@ -13,7 +14,7 @@ public class NitriteHelper {
     private NitriteHelper() { }
     public static NitriteHelper get() {
 
-        if(null == instance) { instance = new NitriteHelper(); }
+        if (null == instance) { instance = new NitriteHelper(); }
         return instance;
 
     }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>violet2.0</title>
+        <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <div class = "header">
+            <p>violet2.0</p>
+        </div>
+
+        <div class="container">
+            <div th:if="${not #lists.isEmpty(stores)}">
+                <h2>Stores</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="store : ${stores}">
+                        <td th:text="${store.name}"></td>
+                        <td>  <a th:href="@{'/store?id=' + ${store.id}}">Visit</a> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </body>
+</html>

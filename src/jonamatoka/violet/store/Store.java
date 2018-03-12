@@ -1,6 +1,7 @@
 package jonamatoka.violet.store;
 
 import jonamatoka.violet.util.ITrackable;
+
 import org.dizitart.no2.objects.Id;
 
 public class Store implements ITrackable {

@@ -1,6 +1,7 @@
 package jonamatoka.violet.product;
 
 import jonamatoka.violet.util.ITrackable;
+
 import org.dizitart.no2.objects.Id;
 
 public class Product implements ITrackable {

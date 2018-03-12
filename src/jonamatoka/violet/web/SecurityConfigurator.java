@@ -1,6 +1,7 @@
 package jonamatoka.violet.web;
 
 import jonamatoka.violet.Lib;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,11 +20,19 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
             .antMatchers("/register").permitAll()
             .antMatchers("/apts").hasAuthority(Lib.Privliges.ADMIN.toString())
             .antMatchers("/asts").hasAuthority(Lib.Privliges.OWNER.toString())
+            .antMatchers("/vsts").hasAuthority(Lib.Privliges.OWNER.toString())
             .antMatchers("/acts").hasAuthority(Lib.Privliges.ADMIN.toString())
-            .anyRequest().authenticated()
-        .and().formLogin()
+            .antMatchers("/abts").hasAuthority(Lib.Privliges.ADMIN.toString())
+            .antMatchers("/abts").hasAuthority(Lib.Privliges.ADMIN.toString())
+            .antMatchers("/vst").hasAnyAuthority(
+                                                            Lib.Privliges.ADMIN.toString(),
+                                                            Lib.Privliges.OWNER.toString(),
+                                                            Lib.Privliges.USER.toString())
+
+                .anyRequest().authenticated()
+            .and().formLogin()
             .loginPage("/login").permitAll()
-        .and().logout().permitAll();
+            .and().logout().permitAll();
 
     }
 

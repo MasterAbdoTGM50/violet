@@ -16,7 +16,7 @@ public class Platform {
 
     public static Platform get() {
 
-        if(instance == null) { instance = new Platform(); }
+        if (instance == null) { instance = new Platform(); }
         return instance;
 
     }

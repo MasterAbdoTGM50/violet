@@ -2,7 +2,9 @@ package jonamatoka.violet.web;
 
 import jonamatoka.violet.account.User;
 import jonamatoka.violet.util.NitriteHelper;
+
 import net.openhft.hashing.LongHashFunction;
+
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +28,7 @@ public class VioletAuthenticator implements AuthenticationProvider {
                 .filter(u -> u.getUsername().equals(username) && u.getHash() == hash)
                 .findFirst().orElse(null);
 
-        if(null == user) { throw new BadCredentialsException("Invalid Username or Password Douche!");}
+        if (null == user) { throw new BadCredentialsException("Invalid Username or Password Douche!");}
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(String.valueOf(user.getPriviliges())));
