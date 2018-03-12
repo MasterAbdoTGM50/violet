@@ -19,6 +19,7 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
             .antMatchers("/register").permitAll()
             .antMatchers("/apts").hasAuthority(Lib.Privliges.ADMIN.toString())
             .antMatchers("/asts").hasAuthority(Lib.Privliges.OWNER.toString())
+            .antMatchers("/vsts").hasAuthority(Lib.Privliges.OWNER.toString())
             .antMatchers("/acts").hasAuthority(Lib.Privliges.ADMIN.toString())
                 .antMatchers("/abts").hasAuthority(Lib.Privliges.ADMIN.toString())
                 .anyRequest().authenticated()
