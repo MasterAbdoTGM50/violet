@@ -21,11 +21,11 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
             .antMatchers("/asts").hasAuthority(Lib.Privliges.OWNER.toString())
             .antMatchers("/vsts").hasAuthority(Lib.Privliges.OWNER.toString())
             .antMatchers("/acts").hasAuthority(Lib.Privliges.ADMIN.toString())
-                .antMatchers("/abts").hasAuthority(Lib.Privliges.ADMIN.toString())
-                .anyRequest().authenticated()
-        .and().formLogin()
+            .antMatchers("/abts").hasAuthority(Lib.Privliges.ADMIN.toString())
+            .anyRequest().authenticated()
+            .and().formLogin()
             .loginPage("/login").permitAll()
-        .and().logout().permitAll();
+            .and().logout().permitAll();
 
     }
 
