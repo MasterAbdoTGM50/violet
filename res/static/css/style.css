@@ -73,5 +73,9 @@ body{
     h1{
         color: #89609e;
         margin-bottom: 10px;
-
+    }
+    h2{
+      text-align: center;
+      color: white;
+      font-size: 34px;
     }
