@@ -15,13 +15,8 @@
             <div th:if="${not #lists.isEmpty(stores)}">
                 <h2>Stores</h2>
                 <table class="table table-striped">
-                    <tr>
-                        <th>Name</th>
-                        <th></th>
-                    </tr>
                     <tr th:each="store : ${stores}">
-                        <td th:text="${store.name}"></td>
-                        <td>  <a th:href="@{'/store?id=' + ${store.id}}">Visit</a> </td>
+                        <td> <a th:text="${store.name}" th:href="@{'/store?id=' + ${store.id}}"></a> </td>
                     </tr>
                 </table>
             </div>

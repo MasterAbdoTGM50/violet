@@ -6,11 +6,16 @@ import java.util.List;
 
 public class Stores {
 
-    private static Stores instance = new Stores();
+    private static Stores instance;
 
-    private Stores() { }
+    private Stores() { };
 
-    public static Stores instance() { return instance; }
+    public static Stores get() {
+
+        if (null == instance) { instance = new Stores(); }
+        return instance;
+
+    }
 
     public boolean add(Store store) {
 
@@ -19,6 +24,18 @@ public class Stores {
         return true;
 
     }
+
+    public Store find(String id) {
+
+        Store ret = null;
+
+        for (Store store : all()) { if (store.getId().equals(id)) { ret = store; break; } }
+
+        return ret;
+
+    }
+
+    public boolean update(Store store) { return NitriteHelper.get().update(store, Store.class); }
 
     public List<Store> all() { return NitriteHelper.get().all(Store.class); }
 

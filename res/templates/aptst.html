@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>violet2.0</title>
+    <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div class = "header">
+    <p>violet2.0</p>
+</div>
+
+<form th:action="@{/aptst}" method="post">
+    <h1> Add Product </h1>
+    <div>
+        <label>Product: </label>
+        <input list="productList" name="productList" />
+        <datalist id="productList">
+            <option th:each="productOption : ${productList}" th:value="${productOption.name}"></option>
+        </datalist>
+    </div>
+
+    <div><label>Quantity: </label><input type="text" name="quantity" th:value="${productStack.quantity}"/></div>
+    <div><label>Price: </label><input type="text" name="price" th:value="${productStack.price}"/></div>
+
+    <div><input type="submit" value="Add" /></div>
+</form>
+</body>
+</html>

@@ -1,8 +1,9 @@
 package jonamatoka.violet;
 
 import jonamatoka.violet.account.User;
-import jonamatoka.violet.product.Brand;
-import jonamatoka.violet.product.Category;
+import jonamatoka.violet.product.*;
+import jonamatoka.violet.store.Store;
+import jonamatoka.violet.store.Stores;
 import jonamatoka.violet.util.NitriteHelper;
 
 import net.openhft.hashing.LongHashFunction;
@@ -65,6 +66,32 @@ public class App {
                 new Category().setName("Phone")
                 , Category.class
         );
+
+        Store mockStore = new Store();
+        mockStore.setId("1");
+        mockStore.setOwnerId("FCIWorks");
+        mockStore.setName("Marmatos");
+        mockStore.setAddress("Some addr.");
+        mockStore.setType("Onsite");
+
+        Stores.get().add(mockStore);
+
+        Product mockProduct = new Product();
+        mockProduct.setId("1");
+        mockProduct.setName("Marmatos Pizza");
+        mockProduct.setBrand(new Brand().setName("Marmatos"));
+        mockProduct.setCategory(new Category().setName("CATS"));
+        Products.get().add(mockProduct);
+
+        ProductStack mockProductStack = new ProductStack()
+                                                            .setProductId(mockProduct.getId())
+                                                            .setProductName(mockProduct.getName())
+                                                            .setPrice(10)
+                                                            .setQuantity(1);
+
+        mockStore.getInventory().add(mockProductStack);
+
+        Stores.get().update(mockStore);
 
     }
 

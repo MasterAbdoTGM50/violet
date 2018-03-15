@@ -18,7 +18,9 @@ public class Lib {
         public static final String ADD_PRODUCT_SYSTEM = ROOT + "apts";
         public static final String ADD_STORE_SYSTEM = ROOT + "asts";
         public static final String ADD_CATEGORY_SYSTEM = ROOT + "acts";
-        public static final String ADD_BRAND_SYSTEM = "abts";
+        public static final String ADD_BRAND_SYSTEM = ROOT + "abts";
+
+        public static final String ADD_PRODUCT_STORE = ROOT + "aptst";
 
         public static final String VIEW_SYSTEM_STATISTICS = ROOT + "vsts";
         public static final String VIEW_SYSTEM_STORES = ROOT + "vst";
@@ -38,6 +40,8 @@ public class Lib {
         public static final String ADD_STORE_SYSTEM = "asts";
         public static final String ADD_CATEGORY_SYSTEM = "acts";
         public static final String ADD_BRAND_SYSTEM = "abts";
+
+        public static final String ADD_PRODUCT_STORE = "aptst";
 
         public static final String VIEW_SYSTEM_STATISTICS = "vsts";
         public static final String VIEW_SYSTEM_STORES = "vst";

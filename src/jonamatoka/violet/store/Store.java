@@ -1,5 +1,8 @@
 package jonamatoka.violet.store;
 
+import jonamatoka.violet.product.Cart;
+
+import jonamatoka.violet.product.Product;
 import jonamatoka.violet.util.ITrackable;
 
 import org.dizitart.no2.objects.Id;
@@ -12,6 +15,8 @@ public class Store implements ITrackable {
     private String name;
     private String type;
     private String address;
+
+    private Cart inventory = new Cart();
 
     private int views;
     private int orders;
@@ -35,6 +40,12 @@ public class Store implements ITrackable {
     public String getAddress() { return address; }
 
     public void setAddress(String address) { this.address = address; }
+
+    public void add(Product product) { this.inventory.add(product); }
+
+    public void remove(Product product) { this.inventory.remove(product); }
+
+    public Cart getInventory() { return inventory; }
 
     @Override
     public int views() { return views; }
