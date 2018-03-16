@@ -32,6 +32,8 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
 
             .antMatchers("/aptst").hasAuthority(Lib.Privliges.OWNER.toString())
 
+                .antMatchers("/store").permitAll()
+
                 .anyRequest().authenticated()
             .and().formLogin()
             .loginPage("/login").permitAll()

@@ -16,7 +16,7 @@
                 <h2>Stores</h2>
                 <table class="table table-striped">
                     <tr th:each="store : ${stores}">
-                        <td> <a th:text="${store.name}" th:href="@{'/store?id=' + ${store.id}}"></a> </td>
+                        <td> <a th:text="${store.name}" th:href="@{'/store/' + ${store.id}}"></a> </td>
                     </tr>
                 </table>
             </div>

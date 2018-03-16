@@ -1,5 +1,7 @@
 package jonamatoka.violet.account;
 
+import jonamatoka.violet.product.Cart;
+import jonamatoka.violet.util.Wallet;
 import org.dizitart.no2.objects.Id;
 
 public class User {
@@ -9,6 +11,9 @@ public class User {
     private long hash;
     private String email;
     private int privileges;
+
+    private Wallet wallet = new Wallet();
+    private Cart cart = new Cart();
 
     public String getUsername() { return username; }
 
@@ -25,6 +30,10 @@ public class User {
     public int getPriviliges() { return privileges; }
 
     public User setPriviliges(int privileges) { this.privileges = privileges; return this; }
+
+    public Wallet getWallet() { return wallet; }
+
+    public Cart getCart() { return cart; }
 
     @Override
     public String toString() {

@@ -18,10 +18,38 @@
                 <h2>Products</h2>
                 <table class="table table-striped">
                     <tr th:each="product : ${products}">
-                        <td th:text="${product.productName}"></td>
+                        <td> <a th:text="${product.productName}" th:href="@{'/store/' + ${storeId} + '/' + ${product.productId}}"></a> </td>
                     </tr>
                 </table>
             </div>
+        </div>
+
+        <div th:if="${product != null}">
+            <form th:action="@{'/store/' + ${storeId} + '/' + ${product.productId}}" method="post" th:object="${order}">
+                <h1>Buy Product</h1>
+
+                <div>
+                    <label>Name: </label> <input type="text" name="productName" th:value="${product.productName}" readonly="readonly"/>
+                </div>
+
+                <div>
+                    <label>Available Quantity: </label> <input type="text" name="productQty" th:value="${product.quantity}" readonly="readonly"/>
+                </div>
+
+                <div>
+                    <label>Price: </label> <input type="text" name="productPrice" th:value="${product.price}" readonly="readonly"/>
+                </div>
+
+                <div>
+                    <label>Order Quantity: </label> <input type="text" name="orderQty" th:field="*{quantity}"/>
+                </div>
+
+                <div>
+                    <label>Order Address: </label> <input type="text" name="orderAddress" th:field="*{address}"/>
+                </div>
+
+                <div><input type="submit" value="Buy" /></div>
+            </form>
         </div>
 
     </body>

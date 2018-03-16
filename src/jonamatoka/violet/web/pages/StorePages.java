@@ -2,17 +2,18 @@ package jonamatoka.violet.web.pages;
 
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.account.User;
-import jonamatoka.violet.product.Category;
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.product.ProductStack;
 import jonamatoka.violet.store.Store;
 import jonamatoka.violet.store.Stores;
 import jonamatoka.violet.util.NitriteHelper;
 
+import jonamatoka.violet.util.Order;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -62,16 +63,50 @@ public class StorePages {
 
     }
 
-    @RequestMapping(value = Lib.Mappings.GET_STORE_PAGE, method = RequestMethod.GET)
-    public String getStorePage(Model model, @RequestParam("id") String id) {
+    @RequestMapping(value = Lib.Mappings.GET_STORE_PAGE + "/{storeId}", method = RequestMethod.GET)
+    public String getStorePage(Model model, @PathVariable("storeId") String storeId) {
 
-        Store store = Stores.get().find(id);
-        
+        Store store = Stores.get().find(storeId);
+
+        model.addAttribute("storeId", store.getId());
         model.addAttribute("products", store.getInventory().get());
 
         return Lib.Templates.GET_STORE_PAGE;
 
     }
+
+    @RequestMapping(value = Lib.Mappings.GET_STORE_PAGE + "/{storeId}/{productId}", method = RequestMethod.GET)
+    public String getStoreBuyProductPage(Model model, @PathVariable("storeId") String storeId, @PathVariable("productId") String productId)  {
+
+        Store store = Stores.get().find(storeId);
+
+        ProductStack product = store.getInventory().get().stream().filter(ps -> ps.getProductId().equals(productId)).findFirst().get();
+
+        Order order = new Order(storeId, productId);
+
+        model.addAttribute("storeId", store.getId());
+        model.addAttribute("product", product);
+        model.addAttribute("order", order);
+
+        return Lib.Templates.GET_STORE_PAGE;
+    }
+
+    @RequestMapping(value = Lib.Mappings.GET_STORE_PAGE + "/{storeId}/{productId}", method = RequestMethod.POST)
+    public String getStoreBuyProductPage(@ModelAttribute("order") Order order) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        ProductStack product = Stores.get().find(order.getStoreId()).getInventory().get().stream().filter(ps -> ps.getProductId().equals(order.getProductId())).findFirst().get();
+
+        product.setQuantity(product.getQuantity() - order.getQuantity());
+
+        user.getWallet().deduct(product.getPrice() * order.getQuantity());
+
+        user.getCart().add(product);
+
+        return "redirect:" + Lib.Mappings.GET_STORE_PAGE + "/" + order.getStoreId();
+    }
+
 
     @RequestMapping(value = Lib.Mappings.ADD_PRODUCT_STORE, method = RequestMethod.GET)
     public String getAddProductToStore(Model model) {
