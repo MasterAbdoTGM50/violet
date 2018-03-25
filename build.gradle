@@ -43,5 +43,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.dizitart:nitrite:$nitriteVersion"
     compile "net.openhft:zero-allocation-hashing:$xxHashVersion"
+    compile "org.springframework.boot:spring-boot-devtools"
 
 }
