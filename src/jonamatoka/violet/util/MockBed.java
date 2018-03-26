@@ -9,8 +9,12 @@ import jonamatoka.violet.product.ProductStack;
 import jonamatoka.violet.store.Store;
 import net.openhft.hashing.LongHashFunction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
-public class MockBed {
+@Component
+public class MockBed implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired private UserRepository userRepository;
     @Autowired private CategoryRepository categoryRepository;
@@ -18,39 +22,46 @@ public class MockBed {
     @Autowired private ProductRepository productRepository;
     @Autowired private StoreRepository storeRepository;
 
-    public void mockmock() {
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent event) {
 
-        userRepository.save(
-                new User().setUsername("Abdo")
+        User temsah = new User().setUsername("Abdo")
                         .setEmail("masterabdotgm50@ymail.com")
                         .setHash(LongHashFunction.xx().hashChars("Temsah"))
-                        .setPriviliges(0)
-        );
+                        .setPriviliges(0);
 
-        userRepository.save(
-                new User().setUsername("Mourad")
+        User mourad = new User().setUsername("Mourad")
                         .setEmail("sherieymourad1997@gmail.com")
                         .setHash(LongHashFunction.xx().hashChars("Sheriey"))
-                        .setPriviliges(3)
-        );
+                        .setPriviliges(3);
 
-        userRepository.save(
-                new User().setUsername("Jasmin")
+        User jasmin = new User().setUsername("Jasmin")
                         .setEmail("jasminsmail@somedomain.com")
                         .setHash(LongHashFunction.xx().hashChars("Shehab"))
-                        .setPriviliges(6)
-        );
+                        .setPriviliges(6);
 
-        brandRepository.save(new Brand().setName("HP"));
+        temsah = userRepository.save(temsah);
+        mourad = userRepository.save(mourad);
+        jasmin = userRepository.save(jasmin);
 
-        brandRepository.save(new Brand().setName("LENOVO"));
+        Brand hp = new Brand().setName("HP");
+        Brand lenovo = new Brand().setName("LENOVO");
+        Brand marmator = new Brand().setName("Marmator");
 
-        categoryRepository.save(new Category().setName("Laptop"));
+        Category laptop = new Category().setName("Laptop");
+        Category phone = new Category().setName("Phone");
+        Category cats = new Category().setName("CATS");
 
-        categoryRepository.save(new Category().setName("Phone"));
+        hp = brandRepository.save(hp);
+        lenovo = brandRepository.save(lenovo);
+        marmator = brandRepository.save(marmator);
+
+        laptop = categoryRepository.save(laptop);
+        phone = categoryRepository.save(phone);
+        cats = categoryRepository.save(cats);
 
         Store mockStore = new Store();
-        mockStore.setOwnerId("FCIWorks");
+        mockStore.setOwnerId("Mourad");
         mockStore.setName("Marmatos");
         mockStore.setAddress("Some addr.");
         mockStore.setType("Onsite");
@@ -59,9 +70,9 @@ public class MockBed {
 
         Product mockProduct = new Product();
         mockProduct.setName("Marmatos Pizza");
-        mockProduct.setBrand(new Brand().setName("Marmatos"));
-        mockProduct.setCategory(new Category().setName("CATS"));
-        productRepository.save(mockProduct);
+        mockProduct.setBrand(marmator);
+        mockProduct.setCategory(cats);
+        mockProduct = productRepository.save(mockProduct);
 
         ProductStack mockProductStack = new ProductStack()
                 .setProductId(mockProduct.getId())

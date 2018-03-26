@@ -5,6 +5,7 @@ import jonamatoka.violet.util.ITrackable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Product implements ITrackable {
@@ -13,7 +14,11 @@ public class Product implements ITrackable {
     @GeneratedValue
     private long id;
     private String name;
+
+    @ManyToOne
     private Brand brand;
+
+    @ManyToOne
     private Category category;
     private String description;
 

@@ -13,10 +13,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class VioletAuthenticator implements AuthenticationProvider {
 
     @Autowired
@@ -35,7 +38,7 @@ public class VioletAuthenticator implements AuthenticationProvider {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(String.valueOf(user.getPriviliges())));
 
-        return new UsernamePasswordAuthenticationToken(user, hash, grantedAuthorities);
+        return new UsernamePasswordAuthenticationToken(username, hash, grantedAuthorities);
 
     }
 

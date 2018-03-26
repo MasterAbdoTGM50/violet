@@ -3,6 +3,7 @@ package jonamatoka.violet.account;
 import jonamatoka.violet.product.Cart;
 import jonamatoka.violet.util.Wallet;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,7 +16,10 @@ public class User {
     private String email;
     private int privileges;
 
+    @Embedded
     private Wallet wallet = new Wallet();
+
+    @Embedded
     private Cart cart = new Cart();
 
     public String getUsername() { return username; }

@@ -1,10 +1,14 @@
 package jonamatoka.violet.product;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Embeddable
 public class Cart {
 
+    @ElementCollection
     private List<ProductStack> products = new ArrayList<>();
 
     public List<ProductStack> get() { return products; }

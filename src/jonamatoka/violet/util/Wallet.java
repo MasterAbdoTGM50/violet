@@ -1,5 +1,8 @@
 package jonamatoka.violet.util;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Wallet {
 
     private int balance = 300;

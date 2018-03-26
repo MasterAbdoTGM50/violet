@@ -4,6 +4,7 @@ import jonamatoka.violet.Lib;
 import jonamatoka.violet.account.User;
 import jonamatoka.violet.data.repo.ProductRepository;
 import jonamatoka.violet.data.repo.StoreRepository;
+import jonamatoka.violet.data.repo.UserRepository;
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.product.ProductStack;
 import jonamatoka.violet.store.Store;
@@ -22,10 +23,13 @@ import java.util.List;
 public class StorePages {
 
     @Autowired
-    StoreRepository storeRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    private StoreRepository storeRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @RequestMapping(value = Lib.Mappings.ADD_STORE_SYSTEM, method = RequestMethod.GET)
     public String getAddStoreToSystem(Model model) {
@@ -39,7 +43,7 @@ public class StorePages {
     @RequestMapping(value = Lib.Mappings.ADD_STORE_SYSTEM, method = RequestMethod.POST)
     public String postAddStoreToSystem(@ModelAttribute("store") Store store) {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findOne((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
         store.setOwnerId(user.getUsername());
 
@@ -101,7 +105,7 @@ public class StorePages {
     @RequestMapping(value = Lib.Mappings.GET_STORE_PAGE + "/{storeId}/{productId}", method = RequestMethod.POST)
     public String getStoreBuyProductPage(@ModelAttribute("order") Order order) {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findOne((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
         ProductStack product = storeRepository.findOne(order.getStoreId()).getInventory().get().stream().filter(ps -> ps.getProductId() == order.getProductId()).findFirst().get();
 

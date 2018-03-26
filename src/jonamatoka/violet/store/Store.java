@@ -5,6 +5,7 @@ import jonamatoka.violet.product.Cart;
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.util.ITrackable;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ public class Store implements ITrackable {
     private String type;
     private String address;
 
+    @Embedded
     private Cart inventory = new Cart();
 
     private int views;
