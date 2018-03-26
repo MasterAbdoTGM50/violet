@@ -1,15 +1,19 @@
 package jonamatoka.violet.web.pages;
 
 import jonamatoka.violet.Lib;
+import jonamatoka.violet.data.repo.BrandRepository;
 import jonamatoka.violet.product.Brand;
-import jonamatoka.violet.util.NitriteHelper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class BrandPages {
+
+    @Autowired
+    private BrandRepository brandRepository;
 
     @RequestMapping(value = Lib.Mappings.ADD_BRAND_SYSTEM, method = RequestMethod.GET)
     public String getAddBrandToSystem(Model model) {
@@ -23,7 +27,7 @@ public class BrandPages {
     @RequestMapping(value = Lib.Mappings.ADD_BRAND_SYSTEM, method = RequestMethod.POST)
     public String postAddBrandToSystem(@ModelAttribute("brand") Brand brand) {
 
-        NitriteHelper.get().insert(brand, Brand.class);
+        brandRepository.save(brand);
 
         return "redirect:" + Lib.Mappings.ROOT;
 

@@ -2,9 +2,10 @@ package jonamatoka.violet.web.pages;
 
 
 import jonamatoka.violet.Lib;
+import jonamatoka.violet.data.repo.CategoryRepository;
 import jonamatoka.violet.product.Category;
-import jonamatoka.violet.util.NitriteHelper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class CategoryPages {
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @RequestMapping(value = Lib.Mappings.ADD_CATEGORY_SYSTEM, method = RequestMethod.GET)
     public String getAddCategoryToSystem(Model model) {
@@ -26,9 +30,10 @@ public class CategoryPages {
     @RequestMapping(value = Lib.Mappings.ADD_CATEGORY_SYSTEM, method = RequestMethod.POST)
     public String postAddCategoryToSystem(@ModelAttribute("category") Category category) {
 
-        NitriteHelper.get().insert(category, Category.class);
-        NitriteHelper.get().all(Category.class).forEach(System.out::println);
+        categoryRepository.save(category);
 
         return "redirect:" + Lib.Mappings.ROOT;
+
     }
+
 }

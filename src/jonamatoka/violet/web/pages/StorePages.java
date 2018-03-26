@@ -2,23 +2,30 @@ package jonamatoka.violet.web.pages;
 
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.account.User;
+import jonamatoka.violet.data.repo.ProductRepository;
+import jonamatoka.violet.data.repo.StoreRepository;
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.product.ProductStack;
 import jonamatoka.violet.store.Store;
-import jonamatoka.violet.store.Stores;
-import jonamatoka.violet.util.NitriteHelper;
 
 import jonamatoka.violet.util.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class StorePages {
+
+    @Autowired
+    StoreRepository storeRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @RequestMapping(value = Lib.Mappings.ADD_STORE_SYSTEM, method = RequestMethod.GET)
     public String getAddStoreToSystem(Model model) {
@@ -36,8 +43,7 @@ public class StorePages {
 
         store.setOwnerId(user.getUsername());
 
-        Stores.get().add(store);
-        NitriteHelper.get().all(Store.class).forEach(System.out::println);
+        storeRepository.save(store);
 
         return "redirect:" + Lib.Mappings.ADD_STORE_SYSTEM;
     }
@@ -45,7 +51,8 @@ public class StorePages {
     @RequestMapping(value = Lib.Mappings.VIEW_SYSTEM_STATISTICS, method = RequestMethod.GET)
     public String getViewStoreStatisticsToSystem(Model model, @RequestParam("id") String id) {
 
-        List<Store> stores = Stores.get().all();
+        List<Store> stores = new ArrayList<>();
+        storeRepository.findAll().forEach(stores::add);
 
         if (stores.size() == 0) { stores.add(new Store()); }
 
@@ -57,16 +64,16 @@ public class StorePages {
     @RequestMapping(value = Lib.Mappings.VIEW_SYSTEM_STORES, method = RequestMethod.GET)
     public String getViewSystemStores(Model model) {
 
-        model.addAttribute("stores", Stores.get().all());
+        model.addAttribute("stores", storeRepository.findAll());
 
         return Lib.Templates.VIEW_SYSTEM_STORES;
 
     }
 
     @RequestMapping(value = Lib.Mappings.GET_STORE_PAGE + "/{storeId}", method = RequestMethod.GET)
-    public String getStorePage(Model model, @PathVariable("storeId") String storeId) {
+    public String getStorePage(Model model, @PathVariable("storeId") Long storeId) {
 
-        Store store = Stores.get().find(storeId);
+        Store store = storeRepository.findOne(storeId);
 
         model.addAttribute("storeId", store.getId());
         model.addAttribute("products", store.getInventory().get());
@@ -76,11 +83,11 @@ public class StorePages {
     }
 
     @RequestMapping(value = Lib.Mappings.GET_STORE_PAGE + "/{storeId}/{productId}", method = RequestMethod.GET)
-    public String getStoreBuyProductPage(Model model, @PathVariable("storeId") String storeId, @PathVariable("productId") String productId)  {
+    public String getStoreBuyProductPage(Model model, @PathVariable("storeId") Long storeId, @PathVariable("productId") Long productId)  {
 
-        Store store = Stores.get().find(storeId);
+        Store store = storeRepository.findOne(storeId);
 
-        ProductStack product = store.getInventory().get().stream().filter(ps -> ps.getProductId().equals(productId)).findFirst().get();
+        ProductStack product = store.getInventory().get().stream().filter(ps -> ps.getProductId() == productId).findFirst().get();
 
         Order order = new Order(storeId, productId);
 
@@ -96,7 +103,7 @@ public class StorePages {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        ProductStack product = Stores.get().find(order.getStoreId()).getInventory().get().stream().filter(ps -> ps.getProductId().equals(order.getProductId())).findFirst().get();
+        ProductStack product = storeRepository.findOne(order.getStoreId()).getInventory().get().stream().filter(ps -> ps.getProductId() == order.getProductId()).findFirst().get();
 
         product.setQuantity(product.getQuantity() - order.getQuantity());
 
@@ -112,7 +119,7 @@ public class StorePages {
     public String getAddProductToStore(Model model) {
 
         model.addAttribute("productStack", new ProductStack());
-        model.addAttribute("productList", NitriteHelper.get().all(Product.class));
+        model.addAttribute("productList", productRepository.findAll());
         model.addAttribute("selectedProduct", new Product());
 
         return Lib.Templates.ADD_PRODUCT_STORE;
@@ -122,7 +129,7 @@ public class StorePages {
     @RequestMapping(value = Lib.Mappings.ADD_PRODUCT_STORE, method = RequestMethod.POST)
     public String postAddProductToStore(@ModelAttribute("productStack") ProductStack productStack, @ModelAttribute("selectedProduct") Product product) {
 
-       // ToDo: Add Product to Store logic
+       // TODO: Add Product to Store logic
 
         return "redirect:" + Lib.Mappings.ADD_PRODUCT_STORE;
     }

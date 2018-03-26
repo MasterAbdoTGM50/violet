@@ -4,7 +4,7 @@ import jonamatoka.violet.util.ITrackable;
 
 public class ProductStack implements ITrackable {
 
-    private String productId;
+    private long productId;
     private String productName;
     private double price;
     private int quantity;
@@ -12,9 +12,9 @@ public class ProductStack implements ITrackable {
     private int views;
     private int orders;
 
-    public String getProductId() { return productId; }
+    public long getProductId() { return productId; }
 
-    public ProductStack setProductId(String productID) { this.productId = productID; return this; }
+    public ProductStack setProductId(long productID) { this.productId = productID; return this; }
 
     public String getProductName() { return productName; }
 

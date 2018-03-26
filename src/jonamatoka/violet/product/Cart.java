@@ -14,7 +14,7 @@ public class Cart {
     public void add(Product product) {
 
         products.stream()
-                .filter(p -> p.getProductId().equals(product.getId()))
+                .filter(p -> p.getProductId() == product.getId())
                 .forEach(p -> p.setQuantity(p.getQuantity() + 1));
 
     }
@@ -24,7 +24,7 @@ public class Cart {
     public void remove(Product product) {
 
         products.stream()
-                .filter(p -> p.getProductId().equals(product.getId()))
+                .filter(p -> p.getProductId() == product.getId())
                 .forEach(p -> p.setQuantity(p.getQuantity() - 1));
 
         products.stream()

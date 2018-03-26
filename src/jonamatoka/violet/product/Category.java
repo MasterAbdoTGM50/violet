@@ -1,7 +1,9 @@
 package jonamatoka.violet.product;
 
-import org.dizitart.no2.objects.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Category {
 
     @Id

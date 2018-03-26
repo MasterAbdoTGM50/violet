@@ -3,6 +3,7 @@ package jonamatoka.violet.web.pages;
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.account.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,4 +39,5 @@ public class MiscPages {
         return "redirect:" + Lib.Mappings.VIEW_SYSTEM_STORES;
 
     }
+
 }

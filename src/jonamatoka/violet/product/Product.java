@@ -2,12 +2,16 @@ package jonamatoka.violet.product;
 
 import jonamatoka.violet.util.ITrackable;
 
-import org.dizitart.no2.objects.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Product implements ITrackable {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private long id;
     private String name;
     private Brand brand;
     private Category category;
@@ -16,9 +20,9 @@ public class Product implements ITrackable {
     private int views;
     private int orders;
 
-    public String getId() { return id; }
+    public long getId() { return id; }
 
-    public Product setId(String id) { this.id = id; return this; }
+    public Product setId(long id) { this.id = id; return this; }
 
     public String getName() { return name; }
 
@@ -50,7 +54,7 @@ public class Product implements ITrackable {
 
     @Override
     public String toString() {
-        return "ProductPages{" +
+        return "Product{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +

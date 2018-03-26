@@ -2,6 +2,7 @@ package jonamatoka.violet.web;
 
 import jonamatoka.violet.Lib;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,12 +11,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
+public class SecurityConfigurator extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private VioletAuthenticator violetAuthenticator;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+            .antMatchers("/h2/*", "/h2").permitAll()
             .antMatchers("/css/*").permitAll()
             .antMatchers("/register").permitAll()
             .antMatchers("/apts").hasAuthority(Lib.Privliges.ADMIN.toString())
@@ -39,9 +44,13 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter{
             .loginPage("/login").permitAll()
             .and().logout().permitAll();
 
+        /* TODO//Temsah: Find valid alternative for production */
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception { auth.authenticationProvider(new VioletAuthenticator()); }
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception { auth.authenticationProvider(violetAuthenticator); }
 
 }

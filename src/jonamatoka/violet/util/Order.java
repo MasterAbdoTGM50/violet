@@ -2,25 +2,25 @@ package jonamatoka.violet.util;
 
 public class Order {
 
-    private String storeId;
-    private String productId;
+    private long storeId;
+    private long productId;
     private String address;
     private int quantity;
 
     public Order() { }
 
-    public Order(String storeId, String productId) {
+    public Order(long storeId, long productId) {
         this.storeId = storeId;
         this.productId = productId;
     }
 
-    public String getStoreId() { return storeId; }
+    public long getStoreId() { return storeId; }
 
-    public void setStoreId(String storeId) { this.storeId = storeId; }
+    public void setStoreId(long storeId) { this.storeId = storeId; }
 
-    public String getProductId() { return productId; }
+    public long getProductId() { return productId; }
 
-    public void setProductId(String productId) { this.productId = productId; }
+    public void setProductId(long productId) { this.productId = productId; }
 
     public String getAddress() { return address; }
 

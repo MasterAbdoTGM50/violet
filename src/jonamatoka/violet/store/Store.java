@@ -5,12 +5,18 @@ import jonamatoka.violet.product.Cart;
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.util.ITrackable;
 
-import org.dizitart.no2.objects.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+/*TODO//Temsah: Use builder pattern for setters*/
+
+@Entity
 public class Store implements ITrackable {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private long id;
     private String ownerId;
     private String name;
     private String type;
@@ -21,9 +27,9 @@ public class Store implements ITrackable {
     private int views;
     private int orders;
 
-    public String getId() { return id; }
+    public long getId() { return id; }
 
-    public void setId(String id) { this.id = id; }
+    public void setId(long id) { this.id = id; }
 
     public String getOwnerId() { return ownerId; }
 

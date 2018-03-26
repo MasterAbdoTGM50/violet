@@ -2,8 +2,11 @@ package jonamatoka.violet.account;
 
 import jonamatoka.violet.product.Cart;
 import jonamatoka.violet.util.Wallet;
-import org.dizitart.no2.objects.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
     @Id
