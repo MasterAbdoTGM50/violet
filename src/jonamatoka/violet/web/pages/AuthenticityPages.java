@@ -2,10 +2,8 @@ package jonamatoka.violet.web.pages;
 
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.account.User;
-
 import jonamatoka.violet.data.repo.UserRepository;
 import net.openhft.hashing.LongHashFunction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

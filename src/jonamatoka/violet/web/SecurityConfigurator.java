@@ -1,13 +1,13 @@
 package jonamatoka.violet.web;
 
 import jonamatoka.violet.Lib;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
@@ -33,16 +33,15 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter {
             .antMatchers("/vst").hasAnyAuthority(
                                                             Lib.Privliges.ADMIN.toString(),
                                                             Lib.Privliges.OWNER.toString(),
-                                                            Lib.Privliges.USER.toString())
-
+                                                            Lib.Privliges.USER.toString()
+            )
             .antMatchers("/aptst").hasAuthority(Lib.Privliges.OWNER.toString())
+            .antMatchers("/store").permitAll()
+            .anyRequest().authenticated();
 
-                .antMatchers("/store").permitAll()
-
-                .anyRequest().authenticated()
-            .and().formLogin()
-            .loginPage("/login").permitAll()
-            .and().logout().permitAll();
+        http.formLogin().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.httpBasic();
 
         /* TODO//Temsah: Find valid alternative for production */
         http.csrf().disable();

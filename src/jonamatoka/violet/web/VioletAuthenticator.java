@@ -1,10 +1,8 @@
 package jonamatoka.violet.web;
 
 import jonamatoka.violet.account.User;
-
 import jonamatoka.violet.data.repo.UserRepository;
 import net.openhft.hashing.LongHashFunction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,7 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;

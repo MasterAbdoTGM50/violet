@@ -8,7 +8,6 @@ import jonamatoka.violet.data.repo.UserRepository;
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.product.ProductStack;
 import jonamatoka.violet.store.Store;
-
 import jonamatoka.violet.util.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

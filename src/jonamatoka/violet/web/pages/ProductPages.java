@@ -4,10 +4,7 @@ import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.repo.BrandRepository;
 import jonamatoka.violet.data.repo.CategoryRepository;
 import jonamatoka.violet.data.repo.ProductRepository;
-import jonamatoka.violet.product.Brand;
-import jonamatoka.violet.product.Category;
 import jonamatoka.violet.product.Product;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

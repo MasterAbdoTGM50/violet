@@ -4,7 +4,6 @@ package jonamatoka.violet.web.pages;
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.repo.CategoryRepository;
 import jonamatoka.violet.product.Category;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

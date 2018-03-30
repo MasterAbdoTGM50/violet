@@ -1,8 +1,6 @@
 package jonamatoka.violet.web.pages;
 
 import jonamatoka.violet.Lib;
-import jonamatoka.violet.account.User;
-
 import jonamatoka.violet.data.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
