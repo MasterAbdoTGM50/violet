@@ -12,10 +12,8 @@ public class App {
         //left for testing
 
 /*        String jsonString = "{\"products\":[{\"name\" :\"p1\",\"price\":1.2},{\"name\" :\"p2\",\"price\":3}]}";
-        ObjectMapper mapper = new ObjectMapper();
-       JsonNode node = mapper.convertValue(jsonString, JsonNode.class);
-        JsonNode actualObj = mapper.readTree(jsonString);
-        Metrics metric= new Metrics();
+
+        Metrics metric= new Metrics(jasonString);
         System.out.println(metric.getMetics(actualObj,"products/price",new MAX(),"name"));
 */
         SpringApplication.run(App.class, args);
