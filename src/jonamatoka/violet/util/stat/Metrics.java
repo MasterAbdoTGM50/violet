@@ -9,7 +9,7 @@ import java.util.List;
 public class Metrics {
     private JsonNode JNode;
 
-    Metrics(String jsonString){
+    public Metrics(String jsonString){
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.convertValue(jsonString, JsonNode.class);
         try {

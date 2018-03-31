@@ -1,5 +1,6 @@
 package jonamatoka.violet;
 
+import jonamatoka.violet.util.stat.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,13 +11,13 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         //left for testing
+/*
+       String jsonString = "{\"products\":[{\"name\" :\"p1\",\"price\":1.2},{\"name\" :\"p2\",\"price\":3}]}";
 
-/*        String jsonString = "{\"products\":[{\"name\" :\"p1\",\"price\":1.2},{\"name\" :\"p2\",\"price\":3}]}";
-
-        Metrics metric= new Metrics(jasonString);
-        System.out.println(metric.getMetics(actualObj,"products/price",new MAX(),"name"));
+        Metrics metric= new Metrics(jsonString);
+        System.out.println(metric.getMetics("products/price",new MAX(),"name"));
 */
-        SpringApplication.run(App.class, args);
+        //SpringApplication.run(App.class, args);
 
     }
 
