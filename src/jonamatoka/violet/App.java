@@ -17,7 +17,7 @@ public class App {
         Metrics metric= new Metrics(jsonString);
         System.out.println(metric.getMetics("products/price",new MAX(),"name"));
 */
-        //SpringApplication.run(App.class, args);
+        SpringApplication.run(App.class, args);
 
     }
 
