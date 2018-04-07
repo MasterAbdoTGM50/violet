@@ -10,47 +10,28 @@ public class Lib {
 
         public static final String ROOT = "/";
 
-        public static final String LOGIN = ROOT + "login";
-        public static final String LOGOUT = ROOT + "login?logout";
-
         public static final String REGISTER = ROOT + "register";
 
-        public static final String ADD_PRODUCT_SYSTEM = ROOT + "apts";
-        public static final String ADD_STORE_SYSTEM = ROOT + "asts";
-        public static final String ADD_CATEGORY_SYSTEM = ROOT + "acts";
-        public static final String ADD_BRAND_SYSTEM = ROOT + "abts";
+        public static final String BRAND_SERVICES = ROOT + "brand";
+        public static final String ADD_BRAND_SYSTEM = BRAND_SERVICES + "/add";
 
-        public static final String ADD_PRODUCT_STORE = ROOT + "aptst";
+        public static final String CATEGORY_SERVICES = ROOT + "category";
+        public static final String ADD_CATEGORY_SYSTEM = CATEGORY_SERVICES + "/add";
 
-        public static final String VIEW_SYSTEM_STATISTICS = ROOT + "vsts";
-        public static final String VIEW_SYSTEM_STORES = ROOT + "vst";
+        public static final String PRODUCT_SERVICES = ROOT + "product";
+        public static final String ADD_PRODUCT_SYSTEM = PRODUCT_SERVICES + "/add";
 
-        public static final String GET_STORE_PAGE = ROOT + "store";
+        public static final String STORE_SERVICES = ROOT + "store";
+        public static final String ADD_STORE_SYSTEM = STORE_SERVICES + "/add";
 
+        public static final String GET_STORE_SYSTEM = STORE_SERVICES + "/{storeId}";
     }
 
     public static class Templates {
 
-        public static final String INDEX = "index";
-        public static final String LOGIN = "login";
-
-        public static final String REGISTER = "register";
-        public static final String ADD_PRODUCT_SYSTEM = "apts";
-
-        public static final String ADD_STORE_SYSTEM = "asts";
-        public static final String ADD_CATEGORY_SYSTEM = "acts";
-        public static final String ADD_BRAND_SYSTEM = "abts";
-
-        public static final String ADD_PRODUCT_STORE = "aptst";
-
-        public static final String VIEW_SYSTEM_STATISTICS = "vsts";
-        public static final String VIEW_SYSTEM_STORES = "vst";
-
-        public static final String GET_STORE_PAGE = "store";
-
     }
 
-    public static class Privliges {
+    public static class Privileges {
 
         public static final Integer ADMIN = 0;
         public static final Integer OWNER = 3;

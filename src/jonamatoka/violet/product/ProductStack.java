@@ -3,7 +3,6 @@ package jonamatoka.violet.product;
 import jonamatoka.violet.util.ITrackable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 
 @Embeddable
 public class ProductStack implements ITrackable {

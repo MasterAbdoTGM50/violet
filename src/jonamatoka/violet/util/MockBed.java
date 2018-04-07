@@ -26,19 +26,19 @@ public class MockBed implements ApplicationListener<ApplicationReadyEvent> {
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
         User temsah = new User().setUsername("Abdo")
-                        .setEmail("masterabdotgm50@ymail.com")
-                        .setHash(LongHashFunction.xx().hashChars("Temsah"))
-                        .setPriviliges(0);
+                .setEmail("masterabdotgm50@ymail.com")
+                .setHash(LongHashFunction.xx().hashChars("Temsah"))
+                .setPriviliges(0);
 
         User mourad = new User().setUsername("Mourad")
-                        .setEmail("sherieymourad1997@gmail.com")
-                        .setHash(LongHashFunction.xx().hashChars("Sheriey"))
-                        .setPriviliges(3);
+                .setEmail("sherieymourad1997@gmail.com")
+                .setHash(LongHashFunction.xx().hashChars("Sheriey"))
+                .setPriviliges(3);
 
         User jasmin = new User().setUsername("Jasmin")
-                        .setEmail("jasminsmail@somedomain.com")
-                        .setHash(LongHashFunction.xx().hashChars("Shehab"))
-                        .setPriviliges(6);
+                .setEmail("jasminsmail@somedomain.com")
+                .setHash(LongHashFunction.xx().hashChars("Shehab"))
+                .setPriviliges(6);
 
         temsah = userRepository.save(temsah);
         mourad = userRepository.save(mourad);
