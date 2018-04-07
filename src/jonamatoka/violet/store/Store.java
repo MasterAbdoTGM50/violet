@@ -1,7 +1,6 @@
 package jonamatoka.violet.store;
 
 import jonamatoka.violet.product.Cart;
-
 import jonamatoka.violet.product.Product;
 import jonamatoka.violet.util.ITrackable;
 

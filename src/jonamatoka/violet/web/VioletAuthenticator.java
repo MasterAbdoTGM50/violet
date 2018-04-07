@@ -4,7 +4,6 @@ import jonamatoka.violet.account.User;
 import jonamatoka.violet.data.repo.UserRepository;
 
 import net.openhft.hashing.LongHashFunction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
