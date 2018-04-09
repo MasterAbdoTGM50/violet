@@ -1,15 +1,11 @@
-package jonamatoka.violet.store;
+package jonamatoka.violet.data.model;
 
-import jonamatoka.violet.product.Cart;
-import jonamatoka.violet.product.Product;
 import jonamatoka.violet.util.ITrackable;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-/*TODO//Temsah: Use builder pattern for setters*/
 
 @Entity
 public class Store implements ITrackable {
@@ -42,11 +38,11 @@ public class Store implements ITrackable {
 
     public String getType() { return type; }
 
-    public void setType(String type) { this.type = type; }
+    public Store setType(String type) { this.type = type; return this; }
 
     public String getAddress() { return address; }
 
-    public void setAddress(String address) { this.address = address; }
+    public Store setAddress(String address) { this.address = address; return this; }
 
     public void add(Product product) { this.inventory.add(product); }
 

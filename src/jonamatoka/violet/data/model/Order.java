@@ -1,4 +1,4 @@
-package jonamatoka.violet.util;
+package jonamatoka.violet.data.model;
 
 public class Order {
 

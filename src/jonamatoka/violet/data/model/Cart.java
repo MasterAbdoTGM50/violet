@@ -1,4 +1,4 @@
-package jonamatoka.violet.product;
+package jonamatoka.violet.data.model;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;

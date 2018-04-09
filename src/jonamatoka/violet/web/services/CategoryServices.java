@@ -3,7 +3,7 @@ package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.repo.CategoryRepository;
-import jonamatoka.violet.product.Category;
+import jonamatoka.violet.data.model.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping(Lib.Mappings.API_V1_CATEGORY)
 public class CategoryServices {
 
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @RequestMapping(value = Lib.Mappings.CATEGORY_SERVICES, method = RequestMethod.GET)
-    public ResponseEntity<List<Category>> getAllCategory() {
+    @GetMapping
+    public ResponseEntity<List<Category>> all() {
 
         List<Category> categories = new ArrayList<>();
         categoryRepository.findAll().forEach(categories::add);
@@ -29,8 +30,8 @@ public class CategoryServices {
 
     }
 
-    @RequestMapping(value = Lib.Mappings.ADD_CATEGORY_SYSTEM, method = RequestMethod.POST)
-    public ResponseEntity<Boolean> addCategoryToSystem(@RequestBody Category category) {
+    @PostMapping
+    public ResponseEntity<Boolean> add(@RequestBody Category category) {
 
         categoryRepository.save(category);
 

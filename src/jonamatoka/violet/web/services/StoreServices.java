@@ -1,22 +1,22 @@
 package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
-import jonamatoka.violet.account.User;
+import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.StoreRepository;
 import jonamatoka.violet.data.repo.UserRepository;
-import jonamatoka.violet.store.Store;
+import jonamatoka.violet.data.model.Store;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping(Lib.Mappings.API_V1_STORE)
 public class StoreServices {
 
     @Autowired
@@ -25,18 +25,22 @@ public class StoreServices {
     @Autowired
     private StoreRepository storeRepository;
 
-    @RequestMapping(value = Lib.Mappings.STORE_SERVICES, method = RequestMethod.GET)
-    public ResponseEntity<List<Store>> getAllStores() {
+    @GetMapping
+    public ResponseEntity<List<Store>> all(@RequestParam("ownerId") String ownerId) {
 
         List<Store> stores = new ArrayList<>();
-        storeRepository.findAll().forEach(stores::add);
+
+        if("".equals(ownerId)) { storeRepository.findAll().forEach(stores::add); }
+        else {
+            storeRepository.findAll().forEach(s -> { if(ownerId.equals(s.getOwnerId())) { stores.add(s); } });
+        }
 
         return new ResponseEntity<>(stores, HttpStatus.OK);
 
     }
 
-    @RequestMapping(value = Lib.Mappings.GET_STORE_SYSTEM, method = RequestMethod.GET)
-    public ResponseEntity<Store> getStore(@PathVariable("storeId") long storeId) {
+    @GetMapping("/{storeId}")
+    public ResponseEntity<Store> get(@PathVariable("storeId") long storeId) {
 
         Store store = storeRepository.findOne(storeId);
 
@@ -44,8 +48,8 @@ public class StoreServices {
 
     }
 
-    @RequestMapping(value = Lib.Mappings.ADD_STORE_SYSTEM, method = RequestMethod.POST)
-    public ResponseEntity<Boolean> addStoreToSystem(@RequestBody Store store) {
+    @PostMapping
+    public ResponseEntity<Boolean> add(@RequestBody Store store) {
 
         User user = userRepository.findOne((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 

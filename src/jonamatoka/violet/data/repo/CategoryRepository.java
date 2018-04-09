@@ -1,6 +1,6 @@
 package jonamatoka.violet.data.repo;
 
-import jonamatoka.violet.product.Category;
+import jonamatoka.violet.data.model.Category;
 
 import org.springframework.data.repository.CrudRepository;
 

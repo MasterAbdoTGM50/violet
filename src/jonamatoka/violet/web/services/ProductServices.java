@@ -2,7 +2,7 @@ package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.repo.ProductRepository;
-import jonamatoka.violet.product.Product;
+import jonamatoka.violet.data.model.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping(Lib.Mappings.API_V1_PRODUCT)
 public class ProductServices {
 
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping(value = Lib.Mappings.PRODUCT_SERVICES, method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> getAllProducts() {
+    @GetMapping
+    public ResponseEntity<List<Product>> all() {
 
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
@@ -28,8 +29,17 @@ public class ProductServices {
 
     }
 
-    @RequestMapping(value = Lib.Mappings.ADD_PRODUCT_SYSTEM, method = RequestMethod.POST)
-    public ResponseEntity<Boolean> addProductToSystem(@RequestBody Product product) {
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> get(@PathVariable("productId") long productId) {
+
+        Product store = productRepository.findOne(productId);
+
+        return new ResponseEntity<>(store, HttpStatus.OK);
+
+    }
+
+    @PostMapping
+    public ResponseEntity<Boolean> add(@RequestBody Product product) {
 
         productRepository.save(product);
 

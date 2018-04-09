@@ -1,12 +1,12 @@
 package jonamatoka.violet.util;
 
-import jonamatoka.violet.account.User;
+import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.*;
-import jonamatoka.violet.product.Brand;
-import jonamatoka.violet.product.Category;
-import jonamatoka.violet.product.Product;
-import jonamatoka.violet.product.ProductStack;
-import jonamatoka.violet.store.Store;
+import jonamatoka.violet.data.model.Brand;
+import jonamatoka.violet.data.model.Category;
+import jonamatoka.violet.data.model.Product;
+import jonamatoka.violet.data.model.ProductStack;
+import jonamatoka.violet.data.model.Store;
 import net.openhft.hashing.LongHashFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

@@ -2,7 +2,7 @@ package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.repo.BrandRepository;
-import jonamatoka.violet.product.Brand;
+import jonamatoka.violet.data.model.Brand;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping(Lib.Mappings.API_V1_BRAND)
 public class BrandServices {
 
     @Autowired
     private BrandRepository brandRepository;
 
-    @RequestMapping(value = Lib.Mappings.BRAND_SERVICES, method = RequestMethod.GET)
-    public ResponseEntity<List<Brand>> getAllBrands() {
+    @GetMapping
+    public ResponseEntity<List<Brand>> all() {
 
         List<Brand> brands = new ArrayList<>();
         brandRepository.findAll().forEach(brands::add);
@@ -28,8 +29,8 @@ public class BrandServices {
 
     }
 
-    @RequestMapping(value = Lib.Mappings.ADD_BRAND_SYSTEM, method = RequestMethod.POST)
-    public ResponseEntity<Boolean> addBrandToSystem(@RequestBody Brand brand) {
+    @PostMapping
+    public ResponseEntity<Boolean> add(@RequestBody Brand brand) {
 
         brandRepository.save(brand);
 

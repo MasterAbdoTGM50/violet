@@ -1,7 +1,4 @@
-package jonamatoka.violet.account;
-
-import jonamatoka.violet.product.Cart;
-import jonamatoka.violet.util.Wallet;
+package jonamatoka.violet.data.model;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

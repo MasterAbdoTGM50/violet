@@ -1,6 +1,6 @@
 package jonamatoka.violet.web;
 
-import jonamatoka.violet.account.User;
+import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.UserRepository;
 
 import net.openhft.hashing.LongHashFunction;
