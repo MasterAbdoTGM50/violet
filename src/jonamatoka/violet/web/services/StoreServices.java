@@ -26,11 +26,11 @@ public class StoreServices {
     private StoreRepository storeRepository;
 
     @GetMapping
-    public ResponseEntity<List<Store>> all(@RequestParam("ownerId") String ownerId) {
+    public ResponseEntity<List<Store>> all(@RequestParam(name = "ownerId", required = false) String ownerId) {
 
         List<Store> stores = new ArrayList<>();
 
-        if("".equals(ownerId)) { storeRepository.findAll().forEach(stores::add); }
+        if(null == ownerId) { storeRepository.findAll().forEach(stores::add); }
         else {
             storeRepository.findAll().forEach(s -> { if(ownerId.equals(s.getOwnerId())) { stores.add(s); } });
         }
