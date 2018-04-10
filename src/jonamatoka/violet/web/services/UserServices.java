@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(Lib.Mappings.API_V1_USER)
-public class AuthenticityServices {
+public class UserServices {
 
     @Autowired
     private UserRepository userRepository;
