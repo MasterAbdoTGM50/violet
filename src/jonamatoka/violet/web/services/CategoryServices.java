@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(Lib.Mappings.API_V1_CATEGORY)
 public class CategoryServices {
 
