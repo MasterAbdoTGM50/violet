@@ -1,5 +1,6 @@
 package jonamatoka.violet.data.model;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jonamatoka.violet.util.ITrackable;
 
 import javax.persistence.Embedded;
@@ -19,6 +20,7 @@ public class Store implements ITrackable {
     private String address;
 
     @Embedded
+    @JsonUnwrapped
     private Cart inventory = new Cart();
 
     private int views;

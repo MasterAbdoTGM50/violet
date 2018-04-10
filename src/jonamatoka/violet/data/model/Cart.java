@@ -1,5 +1,7 @@
 package jonamatoka.violet.data.model;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.List;
 public class Cart {
 
     @ElementCollection
+    @JsonUnwrapped
     private List<ProductStack> products = new ArrayList<>();
 
     public List<ProductStack> get() { return products; }
