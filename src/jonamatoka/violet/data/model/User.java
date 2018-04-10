@@ -1,5 +1,7 @@
 package jonamatoka.violet.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +11,8 @@ public class User {
 
     @Id
     private String username;
+
+    @JsonIgnore
     private long hash;
     private String email;
     private int privileges;
