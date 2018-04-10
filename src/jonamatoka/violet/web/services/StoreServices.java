@@ -1,6 +1,7 @@
 package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
+import jonamatoka.violet.data.model.ProductStack;
 import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.StoreRepository;
 import jonamatoka.violet.data.repo.UserRepository;
@@ -60,4 +61,18 @@ public class StoreServices {
         return new ResponseEntity<>(true, HttpStatus.OK);
 
     }
+
+    @PostMapping("/{storeId}")
+    public ResponseEntity<Boolean> add(@PathVariable("storeId") long storeId, @RequestBody ProductStack pStack) {
+
+        System.out.println(pStack);
+
+        Store store = storeRepository.findOne(storeId);
+        store.getInventory().add(pStack);
+        storeRepository.save(store);
+
+        return new ResponseEntity<>(true, HttpStatus.OK);
+
+    }
+
 }
