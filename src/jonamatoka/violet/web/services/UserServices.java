@@ -34,9 +34,9 @@ public class UserServices {
     }
 
     @GetMapping
-    public ResponseEntity<User> login(@AuthenticationPrincipal Authentication auth) {
+    public ResponseEntity<User> login(@AuthenticationPrincipal String username) {
 
-        User user = userRepository.findOne((String)auth.getPrincipal());
+        User user = userRepository.findOne(username);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
 
