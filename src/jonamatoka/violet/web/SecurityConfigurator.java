@@ -26,9 +26,9 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2/*", "/h2").permitAll()
                 .antMatchers("/css/*").permitAll()
 
-                .antMatchers(Lib.Mappings.API_V1_USER).permitAll()
+                .antMatchers(HttpMethod.POST, Lib.Mappings.API_V1_USER).permitAll()
+                .antMatchers(HttpMethod.GET, Lib.Mappings.API_V1_USER).authenticated()
 
-                .antMatchers(HttpMethod.POST, Lib.Mappings.API_V1_USER).hasAuthority(Lib.Privileges.ADMIN.toString())
                 .antMatchers(HttpMethod.POST, Lib.Mappings.API_V1_BRAND).hasAuthority(Lib.Privileges.ADMIN.toString())
                 .antMatchers(HttpMethod.POST, Lib.Mappings.API_V1_CATEGORY).hasAuthority(Lib.Privileges.ADMIN.toString())
                 .antMatchers(HttpMethod.POST, Lib.Mappings.API_V1_PRODUCT).hasAuthority(Lib.Privileges.ADMIN.toString())
