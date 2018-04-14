@@ -21,7 +21,7 @@ public class ProductServices {
     private ProductRepository productRepository;
 
     @GetMapping
-    public ResponseEntity<List<Product>> all() {
+    public ResponseEntity<?> all() {
 
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
@@ -31,7 +31,7 @@ public class ProductServices {
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> get(@PathVariable("productId") long productId) {
+    public ResponseEntity<?> get(@PathVariable("productId") long productId) {
 
         Product store = productRepository.findOne(productId);
 
@@ -40,7 +40,7 @@ public class ProductServices {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> add(@RequestBody Product product) {
+    public ResponseEntity<?> add(@RequestBody Product product) {
 
         productRepository.save(product);
 

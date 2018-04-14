@@ -22,7 +22,7 @@ public class CategoryServices {
     private CategoryRepository categoryRepository;
 
     @GetMapping
-    public ResponseEntity<List<Category>> all() {
+    public ResponseEntity<?> all() {
 
         List<Category> categories = new ArrayList<>();
         categoryRepository.findAll().forEach(categories::add);
@@ -32,7 +32,7 @@ public class CategoryServices {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> add(@RequestBody Category category) {
+    public ResponseEntity<?> add(@RequestBody Category category) {
 
         categoryRepository.save(category);
 

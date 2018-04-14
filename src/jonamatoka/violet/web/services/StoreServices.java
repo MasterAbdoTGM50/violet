@@ -28,7 +28,7 @@ public class StoreServices {
     private StoreRepository storeRepository;
 
     @GetMapping
-    public ResponseEntity<List<Store>> all(@RequestParam(name = "ownerId", required = false) String ownerId) {
+    public ResponseEntity<?> all(@RequestParam(name = "ownerId", required = false) String ownerId) {
 
         List<Store> stores = new ArrayList<>();
 
@@ -42,7 +42,7 @@ public class StoreServices {
     }
 
     @GetMapping("/{storeId}")
-    public ResponseEntity<Store> get(@PathVariable("storeId") long storeId) {
+    public ResponseEntity<?> get(@PathVariable("storeId") long storeId) {
 
         Store store = storeRepository.findOne(storeId);
 
@@ -51,7 +51,7 @@ public class StoreServices {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> add(@RequestBody Store store) {
+    public ResponseEntity<?> add(@RequestBody Store store) {
 
         User user = userRepository.findOne((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
@@ -64,7 +64,7 @@ public class StoreServices {
     }
 
     @PostMapping("/{storeId}")
-    public ResponseEntity<Boolean> add(@PathVariable("storeId") long storeId, @RequestBody ProductStack pStack) {
+    public ResponseEntity<?> add(@PathVariable("storeId") long storeId, @RequestBody ProductStack pStack) {
 
         System.out.println(pStack);
 

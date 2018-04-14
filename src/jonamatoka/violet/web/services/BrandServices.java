@@ -21,7 +21,7 @@ public class BrandServices {
     private BrandRepository brandRepository;
 
     @GetMapping
-    public ResponseEntity<List<Brand>> all() {
+    public ResponseEntity<?> all() {
 
         List<Brand> brands = new ArrayList<>();
         brandRepository.findAll().forEach(brands::add);
@@ -31,7 +31,7 @@ public class BrandServices {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> add(@RequestBody Brand brand) {
+    public ResponseEntity<?> add(@RequestBody Brand brand) {
 
         brandRepository.save(brand);
 

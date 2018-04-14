@@ -22,7 +22,7 @@ public class UserServices {
     private UserRepository userRepository;
 
     @PostMapping
-    public ResponseEntity<Boolean> register(@RequestParam("username") String username,
+    public ResponseEntity<?> register(@RequestParam("username") String username,
                                             @RequestParam("email") String email,
                                             @RequestParam("pass") String pass) {
 
@@ -34,7 +34,7 @@ public class UserServices {
     }
 
     @GetMapping
-    public ResponseEntity<User> login(@AuthenticationPrincipal String username) {
+    public ResponseEntity<?> login(@AuthenticationPrincipal String username) {
 
         User user = userRepository.findOne(username);
 
