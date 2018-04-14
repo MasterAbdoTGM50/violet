@@ -41,7 +41,8 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter {
 
         .and().formLogin().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and().httpBasic();
+        .and().httpBasic()
+        .and().cors();
 
         /* TODO//Temsah: Find valid alternative for production */
         http.csrf().disable();
