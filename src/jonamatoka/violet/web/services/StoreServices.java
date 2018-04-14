@@ -66,8 +66,6 @@ public class StoreServices {
     @PostMapping("/{storeId}")
     public ResponseEntity<?> add(@PathVariable("storeId") long storeId, @RequestBody ProductStack pStack) {
 
-        System.out.println(pStack);
-
         Store store = storeRepository.findOne(storeId);
         store.getInventory().add(pStack);
         storeRepository.save(store);
