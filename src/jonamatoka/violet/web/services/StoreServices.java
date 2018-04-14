@@ -10,6 +10,7 @@ import jonamatoka.violet.data.model.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,12 +52,10 @@ public class StoreServices {
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Store store) {
+    public ResponseEntity<?> add(@RequestBody Store store,
+                                 @AuthenticationPrincipal String username) {
 
-        User user = userRepository.findOne((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-
-        store.setOwnerId(user.getUsername());
-
+        store.setOwnerId(username);
         storeRepository.save(store);
 
         return new ResponseEntity<>(true, HttpStatus.OK);
@@ -64,13 +63,23 @@ public class StoreServices {
     }
 
     @PostMapping("/{storeId}")
-    public ResponseEntity<?> add(@PathVariable("storeId") long storeId, @RequestBody ProductStack pStack) {
+    public ResponseEntity<?> add(@PathVariable("storeId") long storeId,
+                                 @RequestBody ProductStack pStack,
+                                 @AuthenticationPrincipal String username) {
+
+        boolean status = false;
 
         Store store = storeRepository.findOne(storeId);
-        store.getInventory().add(pStack);
-        storeRepository.save(store);
 
-        return new ResponseEntity<>(true, HttpStatus.OK);
+        if(store.getOwnerId().equals(username)) {
+
+            store.getInventory().add(pStack);
+            storeRepository.save(store);
+            status = true;
+
+        }
+
+        return new ResponseEntity<>(status, HttpStatus.OK);
 
     }
 
