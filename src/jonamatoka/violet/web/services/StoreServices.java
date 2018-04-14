@@ -63,9 +63,9 @@ public class StoreServices {
     }
 
     @PostMapping("/{storeId}")
-    public ResponseEntity<?> add(@PathVariable("storeId") long storeId,
-                                 @RequestBody ProductStack pStack,
-                                 @AuthenticationPrincipal String username) {
+    public ResponseEntity<?> addProduct(@PathVariable("storeId") long storeId,
+                                        @RequestBody ProductStack pStack,
+                                        @AuthenticationPrincipal String username) {
 
         boolean status = false;
 
