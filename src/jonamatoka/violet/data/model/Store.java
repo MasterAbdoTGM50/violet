@@ -3,10 +3,9 @@ package jonamatoka.violet.data.model;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jonamatoka.violet.util.ITrackable;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Store implements ITrackable {
@@ -18,6 +17,9 @@ public class Store implements ITrackable {
     private String name;
     private String type;
     private String address;
+
+    @ElementCollection
+    private List<String> collaborators = new ArrayList<>();
 
     @Embedded
     @JsonUnwrapped
@@ -49,6 +51,8 @@ public class Store implements ITrackable {
     public void add(Product product) { this.inventory.add(product); }
 
     public void remove(Product product) { this.inventory.remove(product); }
+
+    public List<String> getCollaborators() { return collaborators; }
 
     public Cart getInventory() { return inventory; }
 

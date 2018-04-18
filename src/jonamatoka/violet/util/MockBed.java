@@ -35,6 +35,11 @@ public class MockBed implements ApplicationListener<ApplicationReadyEvent> {
                 .setHash(LongHashFunction.xx().hashChars("Sheriey"))
                 .setPriviliges(3);
 
+        User jo = new User().setUsername("Jo")
+                .setEmail("sherieymourad1997@gmail.com")
+                .setHash(LongHashFunction.xx().hashChars("Amr"))
+                .setPriviliges(3);
+
         User jasmin = new User().setUsername("Jasmin")
                 .setEmail("jasminsmail@somedomain.com")
                 .setHash(LongHashFunction.xx().hashChars("Shehab"))
@@ -42,6 +47,7 @@ public class MockBed implements ApplicationListener<ApplicationReadyEvent> {
 
         temsah = userRepository.save(temsah);
         mourad = userRepository.save(mourad);
+        jo = userRepository.save(jo);
         jasmin = userRepository.save(jasmin);
 
         Brand hp = new Brand().setName("HP");

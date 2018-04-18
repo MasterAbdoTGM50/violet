@@ -23,9 +23,6 @@ import java.util.List;
 public class StoreServices {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private StoreRepository storeRepository;
 
     @GetMapping
@@ -62,24 +59,46 @@ public class StoreServices {
 
     }
 
-    @PostMapping("/{storeId}")
+    @GetMapping("/{storeId}/products")
+    public ResponseEntity<?> allProducts(@PathVariable("storeId") long storeId) {
+
+        Store store = storeRepository.findOne(storeId);
+
+        return new ResponseEntity<>(store.getInventory().get(), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/{storeId}/products")
     public ResponseEntity<?> addProduct(@PathVariable("storeId") long storeId,
                                         @RequestBody ProductStack pStack,
                                         @AuthenticationPrincipal String username) {
 
-        boolean status = false;
+        Store store = storeRepository.findOne(storeId);
+
+        if(!(store.getOwnerId().equals(username) || store.getCollaborators().contains(username))) {
+            return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+        }
+
+        store.getInventory().add(pStack);
+        storeRepository.save(store);
+
+        return new ResponseEntity<>(true, HttpStatus.OK);
+
+    }
+
+    @PostMapping("/{storeId}/collaborators")
+    public ResponseEntity<?> addCollaborator(@PathVariable("storeId") long storeId,
+                                             @RequestBody User collaborator,
+                                             @AuthenticationPrincipal String username) {
 
         Store store = storeRepository.findOne(storeId);
 
-        if(store.getOwnerId().equals(username)) {
+        if(!store.getOwnerId().equals(username)) { return new ResponseEntity<>(false, HttpStatus.FORBIDDEN); }
 
-            store.getInventory().add(pStack);
-            storeRepository.save(store);
-            status = true;
+        store.getCollaborators().add(collaborator.getUsername());
+        storeRepository.save(store);
 
-        }
-
-        return new ResponseEntity<>(status, HttpStatus.OK);
+        return new ResponseEntity<>(true, HttpStatus.OK);
 
     }
 
