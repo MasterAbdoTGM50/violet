@@ -39,12 +39,12 @@ repositories {
 dependencies {
 
     compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-starter-jdbc"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "com.h2database:h2"
     compile "net.openhft:zero-allocation-hashing:$xxHashVersion"
     compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-test"
 
 }
