@@ -2,9 +2,8 @@ package jonamatoka.violet.web.services;
 
 
 import jonamatoka.violet.Lib;
-import jonamatoka.violet.data.repo.CategoryRepository;
 import jonamatoka.violet.data.model.Category;
-
+import jonamatoka.violet.data.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

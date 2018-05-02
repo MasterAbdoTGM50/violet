@@ -2,6 +2,7 @@ package jonamatoka.violet.data.model;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jonamatoka.violet.util.ITrackable;
+import jonamatoka.violet.util.action.StoreAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class Store implements ITrackable {
     @Embedded
     @JsonUnwrapped
     private Cart inventory = new Cart();
+
+    @OneToMany
+    private List<StoreAction> actions = new ArrayList<>();
 
     private int views;
     private int orders;
@@ -48,13 +52,11 @@ public class Store implements ITrackable {
 
     public Store setAddress(String address) { this.address = address; return this; }
 
-    public void add(Product product) { this.inventory.add(product); }
-
-    public void remove(Product product) { this.inventory.remove(product); }
-
     public List<String> getCollaborators() { return collaborators; }
 
     public Cart getInventory() { return inventory; }
+
+    public List<StoreAction> getActions() { return this.actions; }
 
     @Override
     public int views() { return views; }

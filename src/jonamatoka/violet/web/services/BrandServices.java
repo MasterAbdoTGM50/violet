@@ -1,9 +1,8 @@
 package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
-import jonamatoka.violet.data.repo.BrandRepository;
 import jonamatoka.violet.data.model.Brand;
-
+import jonamatoka.violet.data.repo.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

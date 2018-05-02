@@ -1,12 +1,7 @@
 package jonamatoka.violet.util;
 
-import jonamatoka.violet.data.model.User;
+import jonamatoka.violet.data.model.*;
 import jonamatoka.violet.data.repo.*;
-import jonamatoka.violet.data.model.Brand;
-import jonamatoka.violet.data.model.Category;
-import jonamatoka.violet.data.model.Product;
-import jonamatoka.violet.data.model.ProductStack;
-import jonamatoka.violet.data.model.Store;
 import net.openhft.hashing.LongHashFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -82,7 +77,6 @@ public class MockBed implements ApplicationListener<ApplicationReadyEvent> {
 
         ProductStack mockProductStack = new ProductStack()
                 .setProductId(mockProduct.getId())
-                .setProductName(mockProduct.getName())
                 .setPrice(10)
                 .setQuantity(1);
 

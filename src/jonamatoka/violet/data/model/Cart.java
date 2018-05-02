@@ -16,27 +16,28 @@ public class Cart {
 
     public List<ProductStack> get() { return products; }
 
-    public void add(ProductStack stack) { this.products.add(stack); }
+    public ProductStack add(ProductStack stack) {
 
-    public void add(Product product) {
-
-        products.stream()
-                .filter(p -> p.getProductId() == product.getId())
-                .forEach(p -> p.setQuantity(p.getQuantity() + 1));
+        stack.setKey(stack.getProductId() + ":" + stack.getQuantity() + ":" + stack.getPrice());
+        this.products.add(stack);
+        return stack;
 
     }
 
-    public void remove(ProductStack stack) { this.products.remove(stack); }
+    public ProductStack remove(ProductStack stack) {
 
-    public void remove(Product product) {
+        ProductStack pStack = this.findByKey(stack.getKey());
+        this.products.remove(pStack);
+        return pStack;
 
-        products.stream()
-                .filter(p -> p.getProductId() == product.getId())
-                .forEach(p -> p.setQuantity(p.getQuantity() - 1));
+    }
 
-        products.stream()
-                .filter(p -> p.getQuantity() < 1)
-                .forEach(p -> products.remove(p));
+    public ProductStack findByKey(String key) {
+
+        return products.stream()
+                .filter(p -> p.getKey().equals(key))
+                .findFirst()
+                .orElse(null);
 
     }
 

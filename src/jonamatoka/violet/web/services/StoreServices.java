@@ -2,16 +2,17 @@ package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.model.ProductStack;
+import jonamatoka.violet.data.model.Store;
 import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.StoreRepository;
-import jonamatoka.violet.data.repo.UserRepository;
-import jonamatoka.violet.data.model.Store;
-
+import jonamatoka.violet.data.repo.action.StoreActionRepository;
+import jonamatoka.violet.util.action.StoreAction;
+import jonamatoka.violet.util.action.StoreAddProductAction;
+import jonamatoka.violet.util.action.StoreRemProductAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class StoreServices {
 
     @Autowired
     private StoreRepository storeRepository;
+
+    @Autowired
+    private StoreActionRepository storeActionRepository;
 
     @GetMapping
     public ResponseEntity<?> all(@RequestParam(name = "ownerId", required = false) String ownerId) {
@@ -79,7 +83,35 @@ public class StoreServices {
             return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
         }
 
-        store.getInventory().add(pStack);
+        StoreAddProductAction action = new StoreAddProductAction().setStack(pStack);
+        action.exec(store);
+
+        store.getActions().add(action);
+
+        storeActionRepository.save(action);
+        storeRepository.save(store);
+
+        return new ResponseEntity<>(true, HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/{storeId}/products/{stackKey}")
+    public ResponseEntity<?> removeProduct(@PathVariable("storeId") long storeId,
+                                           @PathVariable String stackKey,
+                                           @AuthenticationPrincipal String username) {
+
+        Store store = storeRepository.findOne(storeId);
+
+        if(!(store.getOwnerId().equals(username) || store.getCollaborators().contains(username))) {
+            return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+        }
+
+        StoreRemProductAction action = new StoreRemProductAction().setStack(new ProductStack().setKey(stackKey));
+        action.exec(store);
+
+        store.getActions().add(action);
+
+        storeActionRepository.save(action);
         storeRepository.save(store);
 
         return new ResponseEntity<>(true, HttpStatus.OK);
@@ -97,6 +129,42 @@ public class StoreServices {
 
         store.getCollaborators().add(collaborator.getUsername());
         storeRepository.save(store);
+
+        return new ResponseEntity<>(true, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/{storeId}/actions")
+    public ResponseEntity<?> actions(@PathVariable("storeId") long storeId,
+                                     @AuthenticationPrincipal String username) {
+
+        Store store = storeRepository.findOne(storeId);
+        if(!store.getOwnerId().equals(username)) { return new ResponseEntity<>(false, HttpStatus.FORBIDDEN); }
+
+        return new ResponseEntity<>(store.getActions(), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/{storeId}/actions/{actionId}/{state}")
+    public ResponseEntity<?> doAction(@PathVariable("storeId") long storeId,
+                                      @PathVariable("actionId") long actionId,
+                                      @PathVariable("state") String state,
+                                      @AuthenticationPrincipal String username) {
+
+        Store store = storeRepository.findOne(storeId);
+        if(!store.getOwnerId().equals(username)) { return new ResponseEntity<>(false, HttpStatus.FORBIDDEN); }
+
+        StoreAction action = store.getActions().stream().filter(a -> a.getId() == actionId).findFirst().orElse(null);
+
+        if(action != null) {
+
+            if(state.equalsIgnoreCase("do")) { action.exec(store); }
+            if(state.equalsIgnoreCase("undo")) { action.unexec(store); }
+
+            storeActionRepository.save(action);
+            storeRepository.save(store);
+
+        }
 
         return new ResponseEntity<>(true, HttpStatus.OK);
 
