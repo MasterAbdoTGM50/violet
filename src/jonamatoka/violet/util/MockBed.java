@@ -76,7 +76,7 @@ public class MockBed implements ApplicationListener<ApplicationReadyEvent> {
         mockProduct = productRepository.save(mockProduct);
 
         ProductStack mockProductStack = new ProductStack()
-                .setProductId(mockProduct.getId())
+                .setProductId(mockProduct.getProductId())
                 .setPrice(10)
                 .setQuantity(1);
 

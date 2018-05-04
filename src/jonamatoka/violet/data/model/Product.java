@@ -1,5 +1,6 @@
 package jonamatoka.violet.data.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jonamatoka.violet.util.ITrackable;
 
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ public class Product implements ITrackable {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long productId;
     private String name;
 
     @ManyToOne
@@ -25,9 +26,9 @@ public class Product implements ITrackable {
     private int views;
     private int orders;
 
-    public long getId() { return id; }
+    public long getProductId() { return productId; }
 
-    public Product setId(long id) { this.id = id; return this; }
+    public Product setProductId(long productId) { this.productId = productId; return this; }
 
     public String getName() { return name; }
 
@@ -45,9 +46,11 @@ public class Product implements ITrackable {
 
     public Product setDescription(String description) { this.description = description; return this; }
 
+    @JsonProperty("views")
     @Override
     public int views() { return views; }
 
+    @JsonProperty("orders")
     @Override
     public int orders() { return orders; }
 
@@ -56,16 +59,5 @@ public class Product implements ITrackable {
 
     @Override
     public void order(int orders) { this.orders += orders; }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", brand='" + brand + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 
 }

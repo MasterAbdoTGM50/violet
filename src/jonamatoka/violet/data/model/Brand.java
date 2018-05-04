@@ -13,7 +13,4 @@ public class Brand {
 
     public Brand setName(String name) { this.name = name; return this; }
 
-    @Override
-    public String toString() { return name; }
-
 }

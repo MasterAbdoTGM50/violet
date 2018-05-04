@@ -17,6 +17,7 @@ public class Lib {
         public static final String API_V1_CATEGORY = API_V1 + "/categories";
         public static final String API_V1_PRODUCT = API_V1 + "/products";
         public static final String API_V1_STORE = API_V1 + "/stores";
+        public static final String API_V1_TRANSACTION = API_V1 + "/transaction";
 
     }
 

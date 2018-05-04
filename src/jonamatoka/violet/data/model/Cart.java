@@ -1,6 +1,7 @@
 package jonamatoka.violet.data.model;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import net.openhft.hashing.LongHashFunction;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
@@ -18,7 +19,7 @@ public class Cart {
 
     public ProductStack add(ProductStack stack) {
 
-        stack.setKey(stack.getProductId() + ":" + stack.getQuantity() + ":" + stack.getPrice());
+        stack.setStackId(LongHashFunction.xx().hashChars(stack.getProductId() + ":" + stack.getQuantity() + ":" + stack.getPrice()));
         this.products.add(stack);
         return stack;
 
@@ -26,16 +27,16 @@ public class Cart {
 
     public ProductStack remove(ProductStack stack) {
 
-        ProductStack pStack = this.findByKey(stack.getKey());
+        ProductStack pStack = this.findById(stack.getStackId());
         this.products.remove(pStack);
         return pStack;
 
     }
 
-    public ProductStack findByKey(String key) {
+    public ProductStack findById(long key) {
 
         return products.stream()
-                .filter(p -> p.getKey().equals(key))
+                .filter(p -> p.getStackId() == key)
                 .findFirst()
                 .orElse(null);
 

@@ -7,7 +7,9 @@ public class Wallet {
 
     private int balance = 300;
 
-    public double get() { return balance; }
+    public int getBalance() { return balance; }
+
+    public Wallet setBalance(int balance) { this.balance = balance; return this; }
 
     public boolean check(double balance) { return this.balance >= balance; }
 

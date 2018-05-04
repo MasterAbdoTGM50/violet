@@ -42,15 +42,5 @@ public class User {
     public Wallet getWallet() { return wallet; }
 
     public Cart getCart() { return cart; }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", hash=" + hash +
-                ", email='" + email + '\'' +
-                ", privileges=" + privileges +
-                '}';
-    }
-
+    
 }

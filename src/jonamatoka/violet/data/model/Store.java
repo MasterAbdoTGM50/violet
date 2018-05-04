@@ -1,5 +1,7 @@
 package jonamatoka.violet.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jonamatoka.violet.util.ITrackable;
 import jonamatoka.violet.util.action.StoreAction;
@@ -13,7 +15,7 @@ public class Store implements ITrackable {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long storeId;
     private String ownerId;
     private String name;
     private String type;
@@ -26,15 +28,18 @@ public class Store implements ITrackable {
     @JsonUnwrapped
     private Cart inventory = new Cart();
 
+    @ElementCollection
+    private List<Offer> offers = new ArrayList<>();
+
     @OneToMany
     private List<StoreAction> actions = new ArrayList<>();
 
     private int views;
     private int orders;
 
-    public long getId() { return id; }
+    public long getStoreId() { return storeId; }
 
-    public void setId(long id) { this.id = id; }
+    public void setStoreId(long storeId) { this.storeId = storeId; }
 
     public String getOwnerId() { return ownerId; }
 
@@ -56,11 +61,16 @@ public class Store implements ITrackable {
 
     public Cart getInventory() { return inventory; }
 
+    public List<Offer> getOffers() { return offers; }
+
+    @JsonIgnore
     public List<StoreAction> getActions() { return this.actions; }
 
+    @JsonProperty("views")
     @Override
     public int views() { return views; }
 
+    @JsonProperty("orders")
     @Override
     public int orders() { return orders; }
 
@@ -69,16 +79,5 @@ public class Store implements ITrackable {
 
     @Override
     public void order(int orders) { this.orders += orders; }
-
-    @Override
-    public String toString() {
-        return "StorePages{" +
-                "id='" + id + '\'' +
-                ", ownerId='" + ownerId + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
 
 }

@@ -1,5 +1,6 @@
 package jonamatoka.violet.data.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jonamatoka.violet.util.ITrackable;
 
 import javax.persistence.Embeddable;
@@ -7,7 +8,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ProductStack implements ITrackable {
 
-    private String key = null;
+    private long stackId;
 
     private long productId;
     private double price;
@@ -16,9 +17,9 @@ public class ProductStack implements ITrackable {
     private int views;
     private int orders;
 
-    public String getKey() { return key; }
+    public long getStackId() { return stackId; }
 
-    public ProductStack setKey(String key) { this.key = key; return this; }
+    public ProductStack setStackId(long stackId) { this.stackId = stackId; return this; }
 
     public long getProductId() { return productId; }
 
@@ -34,9 +35,11 @@ public class ProductStack implements ITrackable {
 
     public ProductStack setQuantity(int quantity) { this.quantity = quantity; return this; }
 
+    @JsonProperty("views")
     @Override
     public int views() { return views; }
 
+    @JsonProperty("orders")
     @Override
     public int orders() { return orders; }
 
@@ -47,6 +50,6 @@ public class ProductStack implements ITrackable {
     public void order(int orders) { this.orders += orders; quantity -= orders; }
 
     @Override
-    public String toString() { return getProductId() + ":" + getQuantity() + ":" + getPrice(); }
+    public String toString() { return "{ " + getProductId() + ":" + getQuantity() + ":" + getPrice() + " }"; }
 
 }

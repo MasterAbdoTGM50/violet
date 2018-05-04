@@ -37,8 +37,11 @@ public class StoreRemProductAction extends StoreAction {
     @Override
     public StoreRemProductAction setId(long id) { super.setId(id); return this; }
 
-    public ProductStack getStack() { return stack; }
+    public ProductStack getStack() { return this.stack; }
 
     public StoreRemProductAction setStack(ProductStack stack) { this.stack = stack; return this; }
+
+    @Override
+    public String getDescrition() { return "Removed Stack " + this.stack; }
 
 }

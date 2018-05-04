@@ -1,5 +1,7 @@
 package jonamatoka.violet.util.action;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -24,6 +26,9 @@ public abstract class Action<T> {
     public State getState() { return state; }
 
     public Action<T> setState(State state) { this.state = state; return this; }
+
+    @JsonProperty("description")
+    public abstract String getDescrition();
 
     public enum State {
 

@@ -1,14 +1,13 @@
 package jonamatoka.violet.web.services;
 
 import jonamatoka.violet.Lib;
+import jonamatoka.violet.data.model.Offer;
 import jonamatoka.violet.data.model.ProductStack;
 import jonamatoka.violet.data.model.Store;
 import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.StoreRepository;
 import jonamatoka.violet.data.repo.action.StoreActionRepository;
-import jonamatoka.violet.util.action.StoreAction;
-import jonamatoka.violet.util.action.StoreAddProductAction;
-import jonamatoka.violet.util.action.StoreRemProductAction;
+import jonamatoka.violet.util.action.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/*TODO//Temsah: Refactor Store Services as the class is very fat*/
 
 @RestController
 @CrossOrigin
@@ -95,9 +96,9 @@ public class StoreServices {
 
     }
 
-    @DeleteMapping("/{storeId}/products/{stackKey}")
+    @DeleteMapping("/{storeId}/products/{stackId}")
     public ResponseEntity<?> removeProduct(@PathVariable("storeId") long storeId,
-                                           @PathVariable String stackKey,
+                                           @PathVariable long stackId,
                                            @AuthenticationPrincipal String username) {
 
         Store store = storeRepository.findOne(storeId);
@@ -106,7 +107,7 @@ public class StoreServices {
             return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
         }
 
-        StoreRemProductAction action = new StoreRemProductAction().setStack(new ProductStack().setKey(stackKey));
+        StoreRemProductAction action = new StoreRemProductAction().setStack(new ProductStack().setStackId(stackId));
         action.exec(store);
 
         store.getActions().add(action);
@@ -131,6 +132,50 @@ public class StoreServices {
         storeRepository.save(store);
 
         return new ResponseEntity<>(true, HttpStatus.OK);
+
+    }
+
+    @PostMapping("/{storeId}/offers")
+    public ResponseEntity<?> addOffer(@PathVariable("storeId") long storeId,
+                                      @RequestBody Offer offer,
+                                      @AuthenticationPrincipal String username) {
+
+        Store store = storeRepository.findOne(storeId);
+        if(!(store.getOwnerId().equals(username) || store.getCollaborators().contains(username))) {
+            return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+        }
+
+        StoreAddOfferAction action = new StoreAddOfferAction().setOffer(offer);
+        action.exec(store);
+
+        store.getActions().add(action);
+
+        storeActionRepository.save(action);
+        storeRepository.save(store);
+
+        return new ResponseEntity<>(true, HttpStatus.FORBIDDEN);
+
+    }
+
+    @DeleteMapping("/{storeId}/offers")
+    public ResponseEntity<?> removeOffer(@PathVariable("storeId") long storeId,
+                                         @RequestBody Offer offer,
+                                         @AuthenticationPrincipal String username) {
+
+        Store store = storeRepository.findOne(storeId);
+        if(!(store.getOwnerId().equals(username) || store.getCollaborators().contains(username))) {
+            return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+        }
+
+        StoreRemOfferAction action = new StoreRemOfferAction().setOffer(offer);
+        action.exec(store);
+
+        store.getActions().add(action);
+
+        storeActionRepository.save(action);
+        storeRepository.save(store);
+
+        return new ResponseEntity<>(true, HttpStatus.FORBIDDEN);
 
     }
 
