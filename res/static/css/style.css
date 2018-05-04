@@ -1,0 +1,76 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+}
+
+.form-signin {
+  max-width: 500px;
+  padding: 30px;
+  margin: 0 auto;
+  background: #755286;
+  margin-top: 10%; 
+}
+
+#form_ {
+    margin: 0 0;
+    padding: 15px;
+    width: 70%;
+}
+
+#sidebar {
+    position: absolute;
+    left: 10px;
+    border: solid 1px #CCCCCC;
+    background-color: whitesmoke;
+    overflow-y: scroll;
+    top: 70px;
+    bottom: 20px;
+    float: left;
+}
+
+#content{
+    float: right;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0px;
+}
+
+li a {
+    text-decoration: none;
+    display: block;
+    color: #805e9a;
+    border-bottom: solid 1px #CCCCCC;
+    padding: 8px;
+}
+
+li a:hover {
+    background-color: #805e9a;
+    color: white;
+}
+
+table {
+    text-align: center;
+}
+
+tr:nth-child(even){background-color: #e8dfec}
+tr:nth-child(odd){background-color: #f4eff5}
+
+
+.tbody:hover {
+   background-color: #b9a0c5;
+   color: white;
+}
+
+th {
+    font-weight: bold;
+    text-align: center;
+    color: #805e9a;
+    background:white;
+}
+
+fieldset[disabled] .form-control {
+    cursor: pointer;
+}

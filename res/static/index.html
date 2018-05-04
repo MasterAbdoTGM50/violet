@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Admin Panel</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css"    >
+
+	<script type="text/javascript" src="js/lib/jquery.js"         ></script>
+	<script type="text/javascript" src="js/lib/underscore.js"     ></script>
+	<script type="text/javascript" src="js/lib/backbone.js"       ></script>
+	<script type="text/javascript" src="js/lib/bootstrap.js"      ></script>
+	<script type="text/javascript" src="js/lib/backbone.auth.js"  ></script>
+
+	<script type="text/javascript" src="js/model.js"        ></script>
+	<script type="text/javascript" src="js/views/login.js"        ></script>
+	<script type="text/javascript" src="js/views/page.js"         ></script>
+	<script type="text/javascript" src="js/views/admin.js"        ></script>
+	<script type="text/javascript" src="js/views/owner.js"        ></script>
+	<script type="text/javascript" src="js/views/navbar.js"       ></script>
+	<script type="text/javascript" src="js/views/store-list.js"   ></script>
+	<script type="text/javascript" src="js/views/store-details.js"></script>
+	<script type="text/javascript" src="js/views/add-store.js"    ></script>
+	<script type="text/javascript" src="js/views/add-brand.js"    ></script>
+	<script type="text/javascript" src="js/views/add-category.js" ></script>
+	<script type="text/javascript" src="js/views/add-product.js"  ></script>
+	<script type="text/javascript" src="js/router.js"             ></script>
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var app = new AppRouter();
+        Backbone.history.start();
+    });
+</script>
+
+<div id="page"></div>
+
+<!-- Templates -->
+
+<!-- Login Form -->
+<script type="text/template" id="login-template">
+	<div id="login-view" class="form-signin">
+		<div class="text-center mb-4">
+			<img src="img/violet.png" alt="" width="100" height="100">
+		</div>
+		<br>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			<input id="username" type="text" name="username" class="form-control">
+			</label>
+		</div>
+		<br>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			<input id="password" type="password" name="password" class="form-control">
+		</div>
+		<br>
+		<button id="btn-login" class="btn btn-lg btn-primary btn-block">Login</button>
+	</div>
+</script>
+
+<!-- Base Page -->
+<script type="text/template" id="page-template">
+	<div id="nav"></div>
+	<div class="container">
+		<div class="row">
+			<div id="sidebar" class="col-sm-3"></div>
+			<div id="content" class="col-sm-8"></div>
+		</div>
+	</div>
+</script>
+
+<!-- Nav bar -->
+<script type="text/template" id="nav-template">
+	<nav class="navbar navbar-default" style="border:0px; border-radius:0px;">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<p class="navbar-brand">violet2.0</p>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a class="navbar-brand" href="#home"><i class="acctive glyphicon glyphicon-home fa fa-home"></i> Home</a></li>
+
+				<li><a class="navbar-brand" href="#add-store"><span class="glyphicon glyphicon-plus"></span> Store</a></li>
+
+				<li><a class="navbar-brand" href="#add-product"><i class="glyphicon glyphicon-plus"></i> Product</a></li>
+
+				<li><a class="navbar-brand" href="#add-brand"><span class="glyphicon glyphicon-plus"></span> Brand</a></li>
+
+				<li><a class="navbar-brand" href="#add-category"><span class="glyphicon glyphicon-plus"></span> Category</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="navbar-header">
+					<p class="navbar-brand"> Welcome <%= username %></p>
+				</li>
+				<li>
+					<a href="#login"> <span class="glyphicon glyphicon-log-out"></span></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</script>
+
+<script type="text/template" id="table-store-list">
+	<ul id="stores-list"></ul>
+</script>
+
+<script type="text/template" id="table-store-list-item">
+	<a href='#stores/<%= storeId %>'><%= name %></a>
+</script>
+
+<script type="text/template" id="table-store-details">
+	<fieldset disabled>
+		<legend>Store Details</legend>
+		<div class="form-group">
+			<label>ownerId: </label>
+			<input type="text" class="form-control" id="ownerId" name="ownerId" value="<%= ownerId %>"/>
+		</div>
+		<div class="form-group">
+			<label>name:</label>
+			<input type="text" class="form-control" id="name" name="name" value="<%= name %>"/>
+		</div>
+		<div class="form-group">
+			<label>type:</label>
+			<input type="text" class="form-control" id="type" name="type" value="<%= type %>"/>
+		</div>
+		<div class="form-group">
+			<label>address:</label>
+			<input type="text" class="form-control" id="address" name="address"  value="<%= address %>"/>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Store Product
+			<a data-toggle="modal" data-target="#AddProduct"><span class="glyphicon glyphicon-plus" style="color: white; margin-left:2%;"></span></a>
+		</legend>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Product Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+			</tr>
+			</thead>
+			<tbody>
+			<% for(var tag in products) { %>
+			<tr class="tbody">
+				<td><span class="name"><%= products[tag].productName %></span></td>
+				<td><span class="name"><%= products[tag].price %></span></td>
+				<td><span class="name"><%= products[tag].quantity %></span></td>
+			</tr>
+			<% } %>
+			</tbody>
+		</table>
+	</fieldset>
+</script>
+
+<!-- Add Store Template -->
+<script type="text/template" id="add-store-template">
+	<form>
+		<legend>Add Store</legend>
+		<div class="form-group">
+			<label>Name:</label>
+			<input class = "form-control" id = "store-name">
+		</div>
+		<div class="form-group">
+			<label>Type:</label>
+			<input class = "form-control" id = "store-type">
+		</div>
+		<div class="form-group">
+			<label>Address:</label>
+			<input class = "form-control" id = "store-address">
+		</div>
+		<a id="btn-store-add" class="btn btn-primary">Add</a>
+	</form>
+</script>
+
+<!-- Add Brand Template -->
+<script type="text/template" id="add-brand-template">
+	<form>
+		<legend>Add Brand</legend>
+		<div class="form-group">
+			<label>Name:</label>
+			<input class = "form-control" id = "brand-name">
+		</div>
+		<a id = "btn-brand-add" class="btn btn-primary">Add</a>
+	</form>
+</script>
+
+<!-- Add Category Modal -->
+<script type="text/template" id="add-category-template">
+	<form>
+		<legend>Add Category</legend>
+		<div class="form-group">
+			<label>Name:</label>
+			<input class = "form-control" id = "category-name">
+		</div>
+		<a id = "btn-category-add" class="btn btn-primary">Add</a>
+	</form>
+</script>
+
+<!-- Add Product Template -->
+<script type="text/template" id="add-product-template">
+	<form>
+		<legend>Add Product</legend>
+		<div class="form-group">
+			<label>Name:</label>
+			<input class = "form-control" id = "product-name">
+		</div>
+		<div class="form-group">
+			<label>Brand:</label>
+			<select id="product-brand-list" class="form-control"></select>
+		</div>
+		<div class="form-group">
+			<label>Category:</label>
+			<select id="product-category-list" class="form-control"></select>
+		</div>
+		<div class="form-group">
+			<label>Description:</label>
+			<input class = "form-control" id = "product-description">
+		</div>
+		<a id="btn-product-add" class="btn btn-primary">Add</a>
+	</form>
+</script>
+
+<script type="text/template" id="brand-dropdown-template">
+	<option value="<%= name %>"><%= name %></option>
+</script>
+
+<script type="text/template" id="category-dropdown-template">
+	<option value="<%= name %>"><%= name %></option>
+</script>
+
+</body>
+</html>
