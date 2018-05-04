@@ -24,7 +24,15 @@ public class SecurityConfigurator extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET).permitAll()
                 .antMatchers("/h2/*", "/h2").permitAll()
+
                 .antMatchers("/css/*").permitAll()
+                .antMatchers("/fonts/*").permitAll()
+                .antMatchers("/img/*").permitAll()
+                .antMatchers("/js/*").permitAll()
+                .antMatchers("/icons/*").permitAll()
+                .antMatchers("/browserconfig.xml").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/site.webmanifest").permitAll()
 
                 .antMatchers(HttpMethod.POST, Lib.Mappings.API_V1_USER).permitAll()
                 .antMatchers(HttpMethod.GET, Lib.Mappings.API_V1_USER).authenticated()
