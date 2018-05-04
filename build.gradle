@@ -1,17 +1,17 @@
-project.ext.violetGroup = "jonamato"
-project.ext.violetVersion = "0.0.1"
+buildscript {
 
-project.ext.nitriteVersion = "2.1.0"
-project.ext.xxHashVersion = "0.8"
-project.ext.lanternaVersion = "3.0.0"
-project.ext.testngVersion = "6.10"
+    repositories { mavenCentral() }
+    dependencies { classpath "org.springframework.boot:spring-boot-gradle-plugin:$springVersion" }
 
-group = project.ext.violetGroup
-version = project.ext.violetVersion
+}
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = "$violetGroup"
+version = "$violetVersion"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -20,6 +20,14 @@ sourceSets.main.java.srcDirs = ["src"]
 sourceSets.main.resources.srcDirs = ["res"]
 sourceSets.test.java.srcDirs = ["tst"]
 sourceSets.test.resources.srcDirs = ["res"]
+
+
+jar {
+
+    baseName = "$violetArtifact"
+    version =  "$violetVersion"
+
+}
 
 repositories {
 
@@ -30,9 +38,13 @@ repositories {
 
 dependencies {
 
-    compile "org.dizitart:nitrite:${nitriteVersion}"
-    compile "net.openhft:zero-allocation-hashing:${xxHashVersion}"
-    compile "com.googlecode.lanterna:lanterna:${lanternaVersion}"
-    testCompile "org.testng:testng:${testngVersion}"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.boot:spring-boot-starter-jdbc"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "com.h2database:h2"
+    compile "net.openhft:zero-allocation-hashing:$xxHashVersion"
+    compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-test"
 
 }
