@@ -19,6 +19,12 @@ public class BrandServices {
     @Autowired
     private BrandRepository brandRepository;
 
+    public BrandServices(BrandRepository brandRepository) {
+
+        this.brandRepository = brandRepository;
+
+    }
+
     @GetMapping
     public ResponseEntity<?> all() {
 
