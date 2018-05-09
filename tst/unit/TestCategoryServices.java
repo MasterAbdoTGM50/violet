@@ -72,7 +72,6 @@ public class TestCategoryServices {
 
     }
 
-
     @Test(dependsOnMethods = "addCategoryValidData")
     public void getAllCategories() {
 
