@@ -19,6 +19,12 @@ public class ProductServices {
     @Autowired
     private ProductRepository productRepository;
 
+    public ProductServices(ProductRepository productRepository) {
+
+        this.productRepository = productRepository;
+
+    }
+
     @GetMapping
     public ResponseEntity<?> all() {
 
