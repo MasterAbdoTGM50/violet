@@ -20,6 +20,12 @@ public class CategoryServices {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    public CategoryServices(CategoryRepository categoryRepository) {
+
+        this.categoryRepository = categoryRepository;
+
+    }
+
     @GetMapping
     public ResponseEntity<?> all() {
 
