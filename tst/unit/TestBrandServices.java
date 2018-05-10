@@ -35,6 +35,14 @@ public class TestBrandServices {
 
     }
 
+    private Object addBrand(Brand brand) {
+
+        when(brandRepository.save(Matchers.any(Brand.class))).thenReturn(brand);
+
+        return brandServices.add(brand).getBody();
+
+    }
+
     @DataProvider(name = "brandValidDataProvider")
     public Object[][] brandValidDataProvider() {
 
@@ -42,19 +50,14 @@ public class TestBrandServices {
 
     }
 
-    private Object addBrand(String name) {
-
-        Brand brand = new Brand().setName(name);
-        when(brandRepository.save(Matchers.any(Brand.class))).thenReturn(brand);
-        brands.add(brand);
-        return brandServices.add(brand).getBody();
-
-    }
-
     @Test(dataProvider = "brandValidDataProvider")
     public void addBrandValidData(String name) {
 
-        Assert.assertEquals(addBrand(name), true);
+        Brand brand = new Brand().setName(name);
+
+        Assert.assertEquals(addBrand(brand), true);
+
+        brands.add(brand);
 
     }
 
@@ -68,7 +71,9 @@ public class TestBrandServices {
    @Test(dataProvider = "brandInvalidDataProvider")
     public void addBrandInvalidData(String name) {
 
-       Assert.assertEquals(addBrand(name), false);
+       Brand brand = new Brand().setName(name);
+
+       Assert.assertEquals(addBrand(brand), false);
 
     }
 
@@ -76,6 +81,7 @@ public class TestBrandServices {
     public void getAllBrands() {
 
         when(brandRepository.findAll()).thenReturn(brands);
+
         Assert.assertEquals(brandServices.all().getBody().equals(brands), true);
 
     }

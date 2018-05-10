@@ -35,6 +35,15 @@ public class TestCategoryServices {
 
     }
 
+    private Object addCategory(Category category) {
+
+        when(categoryRepository.save(Matchers.any(Category.class))).thenReturn(category);
+
+        return categoryServices.add(category).getBody();
+
+    }
+
+
     @DataProvider(name = "categoryValidDataProvider")
     public Object[][] categoryValidDataProvider() {
 
@@ -42,19 +51,14 @@ public class TestCategoryServices {
 
     }
 
-    private Object addCategory(String name) {
-
-        Category category = new Category().setName(name);
-        when(categoryRepository.save(Matchers.any(Category.class))).thenReturn(category);
-        categories.add(category);
-        return categoryServices.add(category).getBody();
-
-    }
-
     @Test(dataProvider = "categoryValidDataProvider")
     public void addCategoryValidData(String name) {
 
-        Assert.assertEquals(addCategory(name), true);
+        Category category = new Category().setName(name);
+
+        Assert.assertEquals(addCategory(category), true);
+
+        categories.add(category);
 
     }
 
@@ -68,7 +72,9 @@ public class TestCategoryServices {
     @Test(dataProvider = "categoryInvalidDataProvider")
     public void addCategoryInvalidData(String name) {
 
-        Assert.assertEquals(addCategory(name), false);
+        Category category = new Category().setName(name);
+
+        Assert.assertEquals(addCategory(category), false);
 
     }
 
@@ -76,6 +82,7 @@ public class TestCategoryServices {
     public void getAllCategories() {
 
         when(categoryRepository.findAll()).thenReturn(categories);
+
         Assert.assertEquals(categoryServices.all().getBody().equals(categories), true);
 
     }

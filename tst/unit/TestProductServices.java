@@ -55,6 +55,16 @@ public class TestProductServices {
 
     }
 
+    private Object addProduct(Product product) {
+
+        /*TODO//Mourad: mock brand/brand/category repository FindOne return*/
+
+        when(productRepository.save(Matchers.any(Product.class))).thenReturn(product);
+
+        return productServices.add(product).getBody();
+
+    }
+
     @DataProvider(name = "productValidDataProvider")
     public Object[][] productValidDataProvider() {
 
@@ -68,7 +78,8 @@ public class TestProductServices {
 
     }
 
-    private Object addProduct(long id, String name, Brand brand, Category category, String description) {
+    @Test(dataProvider = "productValidDataProvider")
+    public void addProductValidData(long id, String name, Brand brand, Category category, String description) {
 
         Product product = new Product()
                 .setProductId(id)
@@ -77,19 +88,9 @@ public class TestProductServices {
                 .setCategory(category)
                 .setDescription(description);
 
-        /*TODO//Mourad: mock product/brand/category repository FindOne return*/
+        Assert.assertEquals(addProduct(product), true);
 
-        when(productRepository.save(Matchers.any(Product.class))).thenReturn(product);
         products.add(product);
-
-        return productServices.add(product).getBody();
-
-    }
-
-    @Test(dataProvider = "productValidDataProvider")
-    public void addProductValidData(long id, String name, Brand brand, Category category, String description) {
-
-        Assert.assertEquals(addProduct(id, name, brand, category, description), true);
 
     }
 
@@ -107,7 +108,14 @@ public class TestProductServices {
     @Test(dataProvider = "productInvalidDataProvider")
     public void addProductInvalidData(long id, String name, Brand brand, Category category, String description)  {
 
-        Assert.assertEquals(addProduct(id, name, brand, category, description), false);
+        Product product = new Product()
+                .setProductId(id)
+                .setName(name)
+                .setBrand(brand)
+                .setCategory(category)
+                .setDescription(description);
+
+        Assert.assertEquals(addProduct(product), false);
 
     }
 
@@ -115,6 +123,7 @@ public class TestProductServices {
     public void getAllProducts() {
 
         when(productRepository.findAll()).thenReturn(products);
+
         Assert.assertEquals(productServices.all().getBody().equals(products), true);
 
     }
