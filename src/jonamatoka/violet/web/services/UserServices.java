@@ -18,6 +18,12 @@ public class UserServices {
     @Autowired
     private UserRepository userRepository;
 
+    public UserServices(UserRepository userRepository) {
+
+        this.userRepository = userRepository;
+
+    }
+
     @PostMapping
     public ResponseEntity<?> register(@RequestParam("username") String username,
                                             @RequestParam("email") String email,
