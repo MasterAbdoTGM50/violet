@@ -5,17 +5,25 @@ import selenium.tests.WebDriverTestCase;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 
 public class TestAddBrandValidData extends WebDriverTestCase {
 
-    @Test
-    public void addBrandValidData() {
+    @DataProvider(name = "addBrandValidDataProvider")
+    public static Object[][] addBrandValidDataProvider() {
+
+        return new Object[][] { {"Marmatos"}, {"_brand"}, {"BRAND"} };
+
+    }
+
+    @Test(dataProvider = "addBrandValidDataProvider")
+    public void addBrandValidData(String name) {
 
         userAction.login("Abdo", "Temsah");
-        userAction.addBrand("Marmatos");
+
+        userAction.addBrand(name);
 
         Assert.assertEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
-
     }
 
 }
