@@ -78,4 +78,23 @@ public class UserAction {
 
     }
 
+    public void addProduct(String name, String description){
+
+        driver.findElement(By.xpath("//*[@id=\"nav\"]/nav/div/ul[1]/li[3]/a")).click();
+
+        driver.findElement(By.xpath("//*[@id=\"product-name\"]")).clear();
+        driver.findElement(By.xpath("//*[@id=\"product-name\"]")).sendKeys(name);
+
+        driver.findElement(By.xpath("//*[@id=\"product-brand-list\"]/option[1]")).isSelected();
+
+        driver.findElement(By.xpath("//*[@id=\"product-category-list\"]/option[1]")).isSelected();
+
+        driver.findElement(By.xpath("//*[@id=\"product-description\"]")).clear();
+        driver.findElement(By.xpath("//*[@id=\"product-description\"]")).sendKeys(description);
+
+        driver.findElement(By.xpath("//*[@id=\"btn-product-add\"]")).click();
+
+        clickHome();
+    }
+
 }
