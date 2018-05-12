@@ -1,8 +1,7 @@
-package jonamatoka.violet.util.Statisticsnewversion.Collection;
+package jonamatoka.violet.util.qstat.collection;
 
 import jonamatoka.violet.data.model.Store;
 import jonamatoka.violet.data.repo.StoreRepository;
-import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
 
 import java.util.ArrayList;
 import java.util.List;

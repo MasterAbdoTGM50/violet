@@ -1,7 +1,7 @@
-package jonamatoka.violet.util.Statisticsnewversion.StatQuery;
+package jonamatoka.violet.util.qstat.query;
 
-import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
-import jonamatoka.violet.util.Statisticsnewversion.IStatistic.*;
+import jonamatoka.violet.util.qstat.collection.Collection;
+import jonamatoka.violet.util.qstat.statistic.*;
 
 public class IStatisticFactory {
     public static final IStatistic getIStatisticQuery(String query, Collection collection) {

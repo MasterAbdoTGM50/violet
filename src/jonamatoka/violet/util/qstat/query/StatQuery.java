@@ -1,11 +1,12 @@
-package jonamatoka.violet.util.Statisticsnewversion.StatQuery;
+package jonamatoka.violet.util.qstat.query;
 
-import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
-import jonamatoka.violet.util.Statisticsnewversion.IStatistic.IStatistic;
-import jonamatoka.violet.util.Statisticsnewversion.Operation.Operation;
+import jonamatoka.violet.util.qstat.collection.Collection;
+import jonamatoka.violet.util.qstat.statistic.IStatistic;
+import jonamatoka.violet.util.qstat.op.Operation;
 
-//Avg:storeviews:stiresbyid‹123›
+//Avg:ProductOrders:StoresById<123>
 //Max:ProductOrders:Products<>
+
 public class StatQuery {
     private String[] query;
 
@@ -31,10 +32,10 @@ public class StatQuery {
             //get collection object from collectionFactory
             Collection collection = collectionFactory.getIStatisticQuery(query[2].substring(0, query[2].indexOf('<')), id);
 
-            //get IStatistic object from IStatisticFactory
+            //get statistic object from IStatisticFactory
             IStatistic statistic = IStatisticFactory.getIStatisticQuery(query[1], collection);
 
-            //get Operation object from OperationFactory
+            //get op object from OperationFactory
             Operation operation = OperationFactory.getOperationQuery(query[0], statistic);
             return operation;
         } catch (NullPointerException e) {

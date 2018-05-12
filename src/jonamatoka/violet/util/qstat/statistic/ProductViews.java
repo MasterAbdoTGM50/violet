@@ -1,8 +1,8 @@
-package jonamatoka.violet.util.Statisticsnewversion.IStatistic;
+package jonamatoka.violet.util.qstat.statistic;
 
 
 import jonamatoka.violet.data.model.Product;
-import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
+import jonamatoka.violet.util.qstat.collection.Collection;
 
 import java.util.ArrayList;
 

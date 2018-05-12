@@ -1,8 +1,8 @@
-package jonamatoka.violet.util.Statisticsnewversion.StatQuery;
+package jonamatoka.violet.util.qstat.query;
 
 import jonamatoka.violet.data.repo.ProductRepository;
 import jonamatoka.violet.data.repo.StoreRepository;
-import jonamatoka.violet.util.Statisticsnewversion.Collection.*;
+import jonamatoka.violet.util.qstat.collection.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CollectionFactory {

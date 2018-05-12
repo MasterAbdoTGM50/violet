@@ -1,4 +1,4 @@
-package jonamatoka.violet.util.Statisticsnewversion.Collection;
+package jonamatoka.violet.util.qstat.collection;
 
 import jonamatoka.violet.data.model.Product;
 import jonamatoka.violet.data.model.ProductStack;
@@ -9,15 +9,15 @@ import jonamatoka.violet.data.repo.StoreRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsByOwnerId implements Collection<Product> {
+public class ProductsByStoreId implements Collection<Product> {
 
-    private String ownerId;
+    private long storeId;
     private StoreRepository storeRepository=null;
     private ProductRepository productRepository=null;
 
-    public ProductsByOwnerId(StoreRepository storeRepository, ProductRepository productRepository, String ownerId){
+    public ProductsByStoreId(StoreRepository storeRepository, ProductRepository productRepository, long storeId){
 
-        this.ownerId=ownerId;
+        this.storeId = storeId;
         this.storeRepository=storeRepository;
         this.productRepository=productRepository;
 
@@ -27,14 +27,13 @@ public class ProductsByOwnerId implements Collection<Product> {
     public List<Product> calc() {
 
         List products = new ArrayList<Product>();
-        List <Store> storesOwned = new ArrayList<>(new StoresByOwnerId(storeRepository,ownerId).calc());
-        for(Store s:storesOwned) {
-            for (ProductStack ps : s.getInventory().get()) {
-                products.add(productRepository.findOne(ps.getProductId()));
-            }
+        Store s=storeRepository.findOne(storeId);
+        for(ProductStack ps : s.getInventory().get()){
+            products.add(productRepository.findOne(ps.getProductId()));
         }
+
         return products;
+
     }
 
 }
-

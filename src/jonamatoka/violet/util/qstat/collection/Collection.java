@@ -1,4 +1,4 @@
-package jonamatoka.violet.util.Statisticsnewversion.Collection;
+package jonamatoka.violet.util.qstat.collection;
 
 import java.util.List;
 

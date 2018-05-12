@@ -1,5 +1,5 @@
-package jonamatoka.violet.util.Statisticsnewversion.IStatistic;
-import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
+package jonamatoka.violet.util.qstat.statistic;
+import jonamatoka.violet.util.qstat.collection.Collection;
 
 import java.util.ArrayList;
 public abstract class IStatistic {

@@ -1,4 +1,4 @@
-package jonamatoka.violet.util.Statisticsnewversion.Collection;
+package jonamatoka.violet.util.qstat.collection;
 
 import jonamatoka.violet.data.model.Product;
 import jonamatoka.violet.data.repo.ProductRepository;

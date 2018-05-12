@@ -1,6 +1,6 @@
-package jonamatoka.violet.util.Statisticsnewversion.Operation;
+package jonamatoka.violet.util.qstat.op;
 
-import jonamatoka.violet.util.Statisticsnewversion.IStatistic.IStatistic;
+import jonamatoka.violet.util.qstat.statistic.IStatistic;
 
 public abstract class Operation {
 
