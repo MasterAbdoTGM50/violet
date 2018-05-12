@@ -6,9 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import unit.TestVioletServices;
-
-public class TestAddCategoryInvalidData extends TestVioletServices {
+public class TestAddCategoryInvalidData extends TestCategoryService {
 
     @DataProvider(name = "categoryInvalidDataProvider")
     public Object[][] categoryInvalidDataProvider() {
@@ -18,7 +16,7 @@ public class TestAddCategoryInvalidData extends TestVioletServices {
     @Test(dataProvider = "categoryInvalidDataProvider")
     public void addCategoryInvalidData(String name) {
         Category category = new Category().setName(name);
-        Assert.assertFalse(addCategory(category));
+        Assert.assertFalse(getCategoryServices().add(category).getBody());
     }
 
 }

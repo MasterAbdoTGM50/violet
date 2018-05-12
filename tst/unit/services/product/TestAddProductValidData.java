@@ -2,6 +2,11 @@ package unit.services.product;
 
 import jonamatoka.violet.data.model.Product;
 
+import jonamatoka.violet.data.repo.BrandRepository;
+import jonamatoka.violet.data.repo.CategoryRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -21,11 +26,11 @@ public class TestAddProductValidData extends TestAddProduct {
     public void addProductValidData(String name, String brand, String category, String description) {
         Product product = new Product()
                 .setName(name)
-                .setBrand(brandRepository.findOne(brand))
-                .setCategory(categoryRepository.findOne(category))
+                .setBrand(getBrandRepository().findOne(brand))
+                .setCategory(getCategoryRepository().findOne(category))
                 .setDescription(description);
 
-        Assert.assertTrue(addProduct(product));
+        Assert.assertTrue(getProductServices().add(product).getBody());
     }
 
 }

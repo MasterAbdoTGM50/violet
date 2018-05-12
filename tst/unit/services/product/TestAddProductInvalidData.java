@@ -19,11 +19,11 @@ public class TestAddProductInvalidData extends TestAddProduct {
     public void addProductInvalidData(String name, String brand, String category, String description)  {
         Product product = new Product()
                 .setName(name)
-                .setBrand(brandRepository.findOne(brand))
-                .setCategory(categoryRepository.findOne(category))
+                .setBrand(getBrandRepository().findOne(brand))
+                .setCategory(getCategoryRepository().findOne(category))
                 .setDescription(description);
 
-        Assert.assertFalse(addProduct(product));
+        Assert.assertFalse(getProductServices().add(product).getBody());
     }
 
 }

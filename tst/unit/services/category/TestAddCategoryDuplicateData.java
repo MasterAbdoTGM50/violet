@@ -6,9 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import unit.TestVioletServices;
-
-public class TestAddCategoryDuplicateData extends TestVioletServices {
+public class TestAddCategoryDuplicateData extends TestCategoryService {
 
     @DataProvider(name = "categoryDuplicateDataProvider")
     public Object[][] categoryDuplicateDataProvider() {
@@ -18,8 +16,8 @@ public class TestAddCategoryDuplicateData extends TestVioletServices {
     @Test(dataProvider = "categoryDuplicateDataProvider")
     public void addCategoryDuplicateData(String name) {
         Category category = new Category().setName(name);
-        addCategory(category);
-        Assert.assertFalse(addCategory(category));
+        getCategoryServices().add(category);
+        Assert.assertFalse(getCategoryServices().add(category).getBody());
     }
 
 }

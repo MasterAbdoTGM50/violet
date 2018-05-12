@@ -6,9 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import unit.TestVioletServices;
-
-public class TestAddBrandInvalidData extends TestVioletServices {
+public class TestAddBrandInvalidData extends TestBrandsService {
 
     @DataProvider(name = "brandInvalidDataProvider")
     public Object[][] brandInvalidDataProvider() {
@@ -18,7 +16,7 @@ public class TestAddBrandInvalidData extends TestVioletServices {
     @Test(dataProvider = "brandInvalidDataProvider")
     public void addBrandInvalidData(String name) {
         Brand brand = new Brand().setName(name);
-        Assert.assertFalse(addBrand(brand));
+        Assert.assertFalse(getBrandServices().add(brand).getBody());
     }
 
 }

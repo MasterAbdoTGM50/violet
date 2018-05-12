@@ -4,9 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import unit.TestVioletServices;
-
-public class TestRegisterDuplicateData extends TestVioletServices {
+public class TestRegisterDuplicateData extends TestUserServices {
 
     @DataProvider(name = "registerDuplicateDataProvider")
     public Object[][] registerDuplicateDataProvider() {
@@ -19,8 +17,8 @@ public class TestRegisterDuplicateData extends TestVioletServices {
 
     @Test(dataProvider = "registerDuplicateDataProvider")
     public void registerDuplicateData(String username, String email, String pass) {
-        register(username, email, pass);
-        Assert.assertFalse(register(username, email, pass));
+        getUserServices().register(username, email, pass);
+        Assert.assertFalse(getUserServices().register(username, email, pass).getBody());
     }
 
 }

@@ -3,13 +3,11 @@ package unit.services.category;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import unit.TestVioletServices;
-
-public class TestGetAllCategories extends TestVioletServices {
+public class TestGetAllCategories extends TestCategoryService {
 
     @Test
     public void getAllCategories() {
-        Assert.assertEquals(allBrands().size(), categoryRepository.count());
+        Assert.assertEquals(getCategoryServices().all().getBody().size(), getCategoryRepository().count());
     }
 
 }

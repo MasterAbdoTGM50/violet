@@ -7,9 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import unit.TestVioletServices;
-
-public class TestAddStoreDuplicateData extends TestVioletServices {
+public class TestAddStoreDuplicateData extends TestStoreService {
 
     @DataProvider(name = "storeDuplicateDataProvider")
     public Object[][] storeDuplicateDataProvider() {
@@ -21,8 +19,8 @@ public class TestAddStoreDuplicateData extends TestVioletServices {
     @Test(dataProvider = "storeDuplicateDataProvider")
     public void addStoreDuplicateDataAsOwner(String name, String type, String address) {
         Store store = new Store().setName(name).setType(type).setAddress(address);
-        addStore(user.get(Lib.Privileges.OWNER).getUsername(), store);
-        Assert.assertFalse(addStore(user.get(Lib.Privileges.OWNER).getUsername(), store));
+        getStoreServices().add(store, user.get(Lib.Privileges.OWNER).getUsername());
+        Assert.assertFalse(getStoreServices().add(store, user.get(Lib.Privileges.OWNER).getUsername()).getBody());
     }
 
 }

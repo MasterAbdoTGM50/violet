@@ -5,15 +5,15 @@ import jonamatoka.violet.data.model.Product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import unit.TestVioletServices;
+import unit.TestVioletService;
 
-public class TestGetProduct extends TestVioletServices {
+public class TestGetProduct extends TestProductService {
 
     @Test
     public void getProduct() {
         boolean getOk = true;
-        for (Product product : productRepository.findAll()) {
-            if (productServices.get(product.getProductId()).getBody().getProductId() != product.getProductId()) {
+        for (Product product : getProductRepository().findAll()) {
+            if (getProductServices().get(product.getProductId()).getBody().getProductId() != product.getProductId()) {
                 getOk = false;
                 break;
             }
