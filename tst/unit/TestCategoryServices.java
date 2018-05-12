@@ -1,40 +1,28 @@
 package unit;
 
+import jonamatoka.violet.App;
 import jonamatoka.violet.data.model.Category;
 import jonamatoka.violet.data.repo.CategoryRepository;
 import jonamatoka.violet.web.services.CategoryServices;
 
-import org.mockito.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
-import java.util.List;
-import java.util.ArrayList;
+@SpringBootTest(classes = App.class)
+public class TestCategoryServices extends AbstractTestNGSpringContextTests {
 
-import static org.mockito.Mockito.when;
-
-public class TestCategoryServices {
-
-    private List<Category> categories = new ArrayList<>();
-
-    @Mock
+    @Autowired
     private CategoryRepository categoryRepository;
 
-    @InjectMocks
+    @Autowired
     private CategoryServices categoryServices;
 
-    @BeforeTest
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        categoryRepository = Mockito.mock(CategoryRepository.class);
-        categoryServices = new CategoryServices(categoryRepository);
-        when(categoryRepository.findAll()).thenReturn(categories);
-    }
-
-    private Object addCategory(Category category) {
+    private boolean addCategory(Category category) {
         return categoryServices.add(category).getBody();
     }
 
@@ -46,17 +34,13 @@ public class TestCategoryServices {
     @Test(dataProvider = "categoryValidDataProvider")
     public void addCategoryValidData(String name) {
         Category category = new Category().setName(name);
-        Assert.assertEquals(addCategory(category), true);
-
-        categories.add(category);
-        when(categoryRepository.findOne(category.getName())).thenReturn(category);
-        when(categoryRepository.exists(category.getName())).thenReturn(true);
+        Assert.assertTrue(addCategory(category));
     }
 
     @Test(dataProvider = "categoryValidDataProvider", dependsOnMethods = "addCategoryValidData")
     public void addCategoryDuplicateData(String name) {
         Category category = new Category().setName(name);
-        Assert.assertEquals(addCategory(category), false);
+        Assert.assertFalse(addCategory(category));
     }
 
     @DataProvider(name = "categoryInvalidDataProvider")
@@ -67,12 +51,12 @@ public class TestCategoryServices {
     @Test(dataProvider = "categoryInvalidDataProvider")
     public void addCategoryInvalidData(String name) {
         Category category = new Category().setName(name);
-        Assert.assertEquals(addCategory(category), false);
+        Assert.assertFalse(addCategory(category));
     }
 
-    @Test(dependsOnMethods = "addCategoryValidData")
+    @Test(dependsOnMethods = {"addCategoryValidData", "addCategoryDuplicateData", "addCategoryInvalidData"})
     public void getAllCategories() {
-        Assert.assertEquals(categoryServices.all().getBody().equals(categories), true);
+        Assert.assertEquals(categoryServices.all().getBody().size(), categoryRepository.count());
     }
 
 }

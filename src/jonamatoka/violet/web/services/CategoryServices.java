@@ -1,9 +1,9 @@
 package jonamatoka.violet.web.services;
 
-
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.model.Category;
 import jonamatoka.violet.data.repo.CategoryRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,29 +20,17 @@ public class CategoryServices {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public CategoryServices(CategoryRepository categoryRepository) {
-
-        this.categoryRepository = categoryRepository;
-
-    }
-
     @GetMapping
-    public ResponseEntity<?> all() {
-
+    public ResponseEntity<List<Category>> all() {
         List<Category> categories = new ArrayList<>();
         categoryRepository.findAll().forEach(categories::add);
-
         return new ResponseEntity<>(categories, HttpStatus.OK);
-
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Category category) {
-
+    public ResponseEntity<Boolean> add(@RequestBody Category category) {
         categoryRepository.save(category);
-
         return new ResponseEntity<>(true, HttpStatus.OK);
-
     }
 
 }
