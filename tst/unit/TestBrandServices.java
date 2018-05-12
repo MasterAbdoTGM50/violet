@@ -53,7 +53,7 @@ public class TestBrandServices extends AbstractTestNGSpringContextTests {
        Assert.assertFalse(add(brand));
     }
 
-    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addInvalidData"})
+    @Test
     public void all() {
         Assert.assertEquals(brandServices.all().getBody().size(), brandRepository.count());
     }

@@ -54,7 +54,7 @@ public class TestCategoryServices extends AbstractTestNGSpringContextTests {
         Assert.assertFalse(add(category));
     }
 
-    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addInvalidData"})
+    @Test
     public void all() {
         Assert.assertEquals(categoryServices.all().getBody().size(), categoryRepository.count());
     }

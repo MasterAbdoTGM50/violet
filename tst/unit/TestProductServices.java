@@ -112,7 +112,7 @@ public class TestProductServices extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(productServices.all().getBody().size(), productRepository.count());
     }
 
-    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addProductInvalidData"})
+    @Test
     public void get() {
         boolean getOk = true;
         for (Product product : productRepository.findAll()) {

@@ -2,6 +2,8 @@ package unit;
 
 import jonamatoka.violet.App;
 import jonamatoka.violet.Lib;
+import jonamatoka.violet.data.model.Product;
+import jonamatoka.violet.data.model.ProductStack;
 import jonamatoka.violet.data.model.Store;
 import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.StoreRepository;
@@ -74,5 +76,11 @@ public class TestStoreServices extends TestPrivilegedServices {
         }
         Assert.assertEquals(userStoreCount, storeRepository.count());
     }
+
+    public boolean addProduct(long storeId, ProductStack pStack, String username) {
+        return storeServices.addProduct(storeId, pStack, username).getBody();
+    }
+
+
 
 }
