@@ -20,31 +20,22 @@ public class ProductServices {
     private ProductRepository productRepository;
 
     @GetMapping
-    public ResponseEntity<?> all() {
-
+    public ResponseEntity<List<Product>> all() {
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
-
         return new ResponseEntity<>(products, HttpStatus.OK);
-
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<?> get(@PathVariable("productId") long productId) {
-
-        Product store = productRepository.findOne(productId);
-
-        return new ResponseEntity<>(store, HttpStatus.OK);
-
+    public ResponseEntity<Product> get(@PathVariable("productId") long productId) {
+        Product product = productRepository.findOne(productId);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Product product) {
-
+    public ResponseEntity<Boolean> add(@RequestBody Product product) {
         productRepository.save(product);
-
         return new ResponseEntity<>(true, HttpStatus.OK);
-
     }
 
 }

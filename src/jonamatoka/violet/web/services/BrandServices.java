@@ -3,6 +3,7 @@ package jonamatoka.violet.web.services;
 import jonamatoka.violet.Lib;
 import jonamatoka.violet.data.model.Brand;
 import jonamatoka.violet.data.repo.BrandRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +21,16 @@ public class BrandServices {
     private BrandRepository brandRepository;
 
     @GetMapping
-    public ResponseEntity<?> all() {
-
+    public ResponseEntity<List<Brand>> all() {
         List<Brand> brands = new ArrayList<>();
         brandRepository.findAll().forEach(brands::add);
-
         return new ResponseEntity<>(brands, HttpStatus.OK);
-
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Brand brand) {
-
+    public ResponseEntity<Boolean> add(@RequestBody Brand brand) {
         brandRepository.save(brand);
-
         return new ResponseEntity<>(true, HttpStatus.OK);
-
     }
 
 }
