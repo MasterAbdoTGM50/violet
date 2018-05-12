@@ -45,6 +45,10 @@ dependencies {
     compile "com.h2database:h2"
     compile "net.openhft:zero-allocation-hashing:$xxHashVersion"
     compile "org.springframework.boot:spring-boot-devtools"
-    compile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.springframework.security:spring-security-test"
+    testCompile "org.testng:testng:$testngVersion"
+    testCompile "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+    testCompile "com.google.guava:guava:$guavaVersion"
 
 }
