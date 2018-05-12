@@ -17,6 +17,7 @@ var AppRouter = Backbone.Router.extend({
     loginView: null,
     pageView: null,
     adminView: null,
+    ownerView: null,
     storesView: null,
     storeView: null,
     addStoreView: null,
@@ -109,7 +110,26 @@ var AppRouter = Backbone.Router.extend({
         }
     },
 
-    owner: function() {},
+    owner: function() {
+        if(!this.loggedIn) { this.go("login"); }
+        else {
+            if(this.pageView == null) { this.pageView = new PageView({ el: $("#page") }); }
+            if(this.ownerView == null) { this.ownerView = new OwnerView({ el: $("#page"), model: this.user }); }
+
+            if(this.storeLst == null) { this.storeLst = new StoreCollection(); }
+
+            if(this.storesView == null) { this.storesView = new StoreListView({  el: $("#page"), model: this.storeLst }); }
+
+            this.storeLst.fetch();
+
+            this.view = this.pageView;
+            this.navView = this.ownerView;
+            this.sideView = this.storesView;
+            this.cntntView = null;
+
+            this.render();
+        }
+    },
 
     storeDetails: function(id) {
         if(!this.loggedIn) { this.go("login"); }

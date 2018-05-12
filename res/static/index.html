@@ -108,6 +108,31 @@
 	</nav>
 </script>
 
+<!-- Nav bar for store owner -->
+<script type="text/template" id="nav-storeOwner-template">
+    <nav class="navbar navbar-default" style="border:0px; border-radius:0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <p class="navbar-brand">violet2.0</p>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="#home"><i class="acctive glyphicon glyphicon-home fa fa-home"></i> Home</a></li>
+
+                <li><a class="navbar-brand" href="#add-store"><span class="glyphicon glyphicon-plus"></span> Store</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-header">
+                    <p class="navbar-brand"> Welcome <%= username %></p>
+                </li>
+                <li>
+                    <a href="#login"> <span class="glyphicon glyphicon-log-out"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</script>
+
 <script type="text/template" id="table-store-list">
 	<ul id="stores-list"></ul>
 </script>
