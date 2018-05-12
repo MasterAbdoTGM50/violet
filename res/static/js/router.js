@@ -29,6 +29,7 @@ var AppRouter = Backbone.Router.extend({
         "": "home",
         "home": "home",
         "login": "login",
+        "logout": "logout",
         "admin": "admin",
         "owner": "owner",
         "stores": "stores",
@@ -77,6 +78,11 @@ var AppRouter = Backbone.Router.extend({
         this.cntntView = null;
 
         this.render();
+    },
+
+    logout:function(){
+        this.loggedIn = false;
+        this.go("login");
     },
 
     admin: function() {
