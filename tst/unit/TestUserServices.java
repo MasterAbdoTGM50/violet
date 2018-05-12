@@ -1,42 +1,27 @@
 package unit;
 
-import jonamatoka.violet.data.model.User;
-
+import jonamatoka.violet.App;
 import jonamatoka.violet.data.repo.UserRepository;
 import jonamatoka.violet.web.services.UserServices;
 
-import net.openhft.hashing.LongHashFunction;
-
-import org.mockito.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
-import java.util.List;
-import java.util.ArrayList;
+@SpringBootTest(classes = App.class)
+public class TestUserServices extends AbstractTestNGSpringContextTests {
 
-import static org.mockito.Mockito.when;
-
-public class TestUserServices {
-
-    private List<User> users = new ArrayList<>();
-
-    @Mock
+    @Autowired
     private UserRepository userRepository;
 
-    @InjectMocks
+    @Autowired
     private UserServices userServices;
 
-    @BeforeTest
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        userRepository = Mockito.mock(UserRepository.class);
-        userServices = new UserServices(userRepository);
-    }
-
-    private Object register(String username, String email, String pass) {
+    private boolean register(String username, String email, String pass) {
         return userServices.register(username, email, pass).getBody();
     }
 
@@ -51,21 +36,12 @@ public class TestUserServices {
 
     @Test(dataProvider = "registerValidDataProvider")
     public void registerValidData(String username, String email, String pass) {
-            Assert.assertEquals(register(username, email, pass), true);
-
-            User user = new User()
-                .setUsername(username)
-                .setEmail(email)
-                .setHash(LongHashFunction.xx().hashChars(pass)).setPriviliges(6);
-
-            users.add(user);
-            when(userRepository.findOne(username)).thenReturn(user);
-            when(userRepository.exists(username)).thenReturn(true);
+            Assert.assertTrue(register(username, email, pass));
     }
 
     @Test(dataProvider = "registerValidDataProvider")
     public void registerDuplicateData(String username, String email, String pass) {
-        Assert.assertEquals(register(username, email, pass), false);
+        Assert.assertFalse(register(username, email, pass));
     }
 
     @DataProvider(name = "registerInvalidDataProvider")
@@ -79,7 +55,7 @@ public class TestUserServices {
 
     @Test(dataProvider = "registerInvalidDataProvider")
     public void registerInvalidData(String username, String email, String pass) {
-        Assert.assertEquals(register(username, email, pass), false);
+        Assert.assertFalse(register(username, email, pass));
     }
 
 }
