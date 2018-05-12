@@ -27,7 +27,7 @@ public class TestStoreServices extends AbstractTestNGSpringContextTests {
     @Autowired
     private StoreServices storeServices;
 
-    private boolean addStore(Store store, String username) {
+    private boolean add(Store store, String username) {
         return storeServices.add(store, username).getBody();
     }
 
@@ -39,23 +39,23 @@ public class TestStoreServices extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "storeValidDataProvider")
-    public void addStoreValidData(String username, String name, String type, String address) {
+    public void addValidData(String username, String name, String type, String address) {
         Store store = new Store()
                 .setName(name)
                 .setType(type)
                 .setAddress(address);
 
-        Assert.assertTrue(addStore(store, username));
+        Assert.assertTrue(add(store, username));
     }
 
-    @Test(dataProvider = "storeValidDataProvider", dependsOnMethods = "addStoreValidData")
-    public void addStoreDuplicateData(String username, String name, String type, String address) {
+    @Test(dataProvider = "storeValidDataProvider", dependsOnMethods = "addValidData")
+    public void addDuplicateData(String username, String name, String type, String address) {
         Store store = new Store()
                 .setName(name)
                 .setType(type)
                 .setAddress(address);
 
-        Assert.assertTrue(addStore(store, username));
+        Assert.assertTrue(add(store, username));
     }
 
     @DataProvider(name = "storeInvalidDataProvider")
@@ -69,17 +69,17 @@ public class TestStoreServices extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "storeInvalidDataProvider")
-    public void addStoreInvalidData(String username, String name, String type, String address) {
+    public void addInvalidData(String username, String name, String type, String address) {
         Store store = new Store()
                 .setName(name)
                 .setType(type)
                 .setAddress(address);
 
-        Assert.assertFalse(addStore(store, username));
+        Assert.assertFalse(add(store, username));
     }
 
-    @Test(dependsOnMethods = {"addStoreValidData", "addStoreDuplicateData", "addStoreInvalidData"})
-    public void getAllStores() {
+    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addInvalidData"})
+    public void all() {
         long userStoreCount = 0;
         for (User user : userRepository.findAll()) {
             userStoreCount += storeServices.all(user.getUsername()).getBody().size();

@@ -22,7 +22,7 @@ public class TestCategoryServices extends AbstractTestNGSpringContextTests {
     @Autowired
     private CategoryServices categoryServices;
 
-    private boolean addCategory(Category category) {
+    private boolean add(Category category) {
         return categoryServices.add(category).getBody();
     }
 
@@ -32,15 +32,15 @@ public class TestCategoryServices extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "categoryValidDataProvider")
-    public void addCategoryValidData(String name) {
+    public void addValidData(String name) {
         Category category = new Category().setName(name);
-        Assert.assertTrue(addCategory(category));
+        Assert.assertTrue(add(category));
     }
 
-    @Test(dataProvider = "categoryValidDataProvider", dependsOnMethods = "addCategoryValidData")
-    public void addCategoryDuplicateData(String name) {
+    @Test(dataProvider = "categoryValidDataProvider", dependsOnMethods = "addValidData")
+    public void addDuplicateData(String name) {
         Category category = new Category().setName(name);
-        Assert.assertFalse(addCategory(category));
+        Assert.assertFalse(add(category));
     }
 
     @DataProvider(name = "categoryInvalidDataProvider")
@@ -49,13 +49,13 @@ public class TestCategoryServices extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "categoryInvalidDataProvider")
-    public void addCategoryInvalidData(String name) {
+    public void addInvalidData(String name) {
         Category category = new Category().setName(name);
-        Assert.assertFalse(addCategory(category));
+        Assert.assertFalse(add(category));
     }
 
-    @Test(dependsOnMethods = {"addCategoryValidData", "addCategoryDuplicateData", "addCategoryInvalidData"})
-    public void getAllCategories() {
+    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addInvalidData"})
+    public void all() {
         Assert.assertEquals(categoryServices.all().getBody().size(), categoryRepository.count());
     }
 

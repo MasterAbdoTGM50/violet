@@ -56,7 +56,7 @@ public class TestProductServices extends AbstractTestNGSpringContextTests {
         }
     }
 
-    private boolean addProduct(Product product) { return productServices.add(product).getBody(); }
+    private boolean add(Product product) { return productServices.add(product).getBody(); }
 
     @DataProvider(name = "productValidDataProvider")
     public Object[][] productValidDataProvider() {
@@ -68,25 +68,25 @@ public class TestProductServices extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "productValidDataProvider")
-    public void addProductValidData(String name, String brand, String category, String description) {
+    public void addValidData(String name, String brand, String category, String description) {
         Product product = new Product()
                 .setName(name)
                 .setBrand(brandRepository.findOne(brand))
                 .setCategory(categoryRepository.findOne(category))
                 .setDescription(description);
 
-        Assert.assertTrue(addProduct(product));
+        Assert.assertTrue(add(product));
     }
 
-    @Test(dataProvider = "productValidDataProvider", dependsOnMethods = "addProductValidData")
-    public void addProductDuplicateData(String name, String brand, String category, String description) {
+    @Test(dataProvider = "productValidDataProvider", dependsOnMethods = "addValidData")
+    public void addDuplicateData(String name, String brand, String category, String description) {
         Product product = new Product()
                 .setName(name)
                 .setBrand(brandRepository.findOne(brand))
                 .setCategory(categoryRepository.findOne(category))
                 .setDescription(description);
 
-        Assert.assertFalse(addProduct(product));
+        Assert.assertFalse(add(product));
     }
 
     @DataProvider(name = "productInvalidDataProvider")
@@ -104,16 +104,16 @@ public class TestProductServices extends AbstractTestNGSpringContextTests {
                 .setCategory(categoryRepository.findOne(category))
                 .setDescription(description);
 
-        Assert.assertFalse(addProduct(product));
+        Assert.assertFalse(add(product));
     }
 
-    @Test(dependsOnMethods = {"addProductValidData", "addProductDuplicateData", "addProductInvalidData"})
-    public void getAllProducts() {
+    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addProductInvalidData"})
+    public void all() {
         Assert.assertEquals(productServices.all().getBody().size(), productRepository.count());
     }
 
-    @Test(dependsOnMethods = {"addProductValidData", "addProductDuplicateData", "addProductInvalidData"})
-    public void getProduct() {
+    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addProductInvalidData"})
+    public void get() {
         boolean getOk = true;
         for (Product product : productRepository.findAll()) {
             if (productServices.get(product.getProductId()).getBody().getProductId() != product.getProductId()) {

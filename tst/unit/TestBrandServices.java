@@ -21,7 +21,7 @@ public class TestBrandServices extends AbstractTestNGSpringContextTests {
     @Autowired
     private BrandServices brandServices;
 
-    private boolean addBrand(Brand brand) {
+    private boolean add(Brand brand) {
         return brandServices.add(brand).getBody();
     }
 
@@ -31,15 +31,15 @@ public class TestBrandServices extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "brandValidDataProvider")
-    public void addBrandValidData(String name) {
+    public void addValidData(String name) {
         Brand brand = new Brand().setName(name);
-        Assert.assertTrue(addBrand(brand));
+        Assert.assertTrue(add(brand));
     }
 
-    @Test(dataProvider = "brandValidDataProvider", dependsOnMethods = "addBrandValidData")
-    public void addBrandDuplicateData(String name) {
+    @Test(dataProvider = "brandValidDataProvider", dependsOnMethods = "addValidData")
+    public void addDuplicateData(String name) {
         Brand brand = new Brand().setName(name);
-        Assert.assertFalse(addBrand(brand));
+        Assert.assertFalse(add(brand));
     }
 
     @DataProvider(name = "brandInvalidDataProvider")
@@ -48,13 +48,13 @@ public class TestBrandServices extends AbstractTestNGSpringContextTests {
     }
 
    @Test(dataProvider = "brandInvalidDataProvider")
-    public void addBrandInvalidData(String name) {
+    public void addInvalidData(String name) {
        Brand brand = new Brand().setName(name);
-       Assert.assertFalse(addBrand(brand));
+       Assert.assertFalse(add(brand));
     }
 
-    @Test(dependsOnMethods = {"addBrandValidData", "addBrandDuplicateData", "addBrandInvalidData"})
-    public void getAllBrands() {
+    @Test(dependsOnMethods = {"addValidData", "addDuplicateData", "addInvalidData"})
+    public void all() {
         Assert.assertEquals(brandServices.all().getBody().size(), brandRepository.count());
     }
 
