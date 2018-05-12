@@ -8,6 +8,7 @@ import jonamatoka.violet.data.model.User;
 import jonamatoka.violet.data.repo.StoreRepository;
 import jonamatoka.violet.data.repo.action.StoreActionRepository;
 import jonamatoka.violet.util.action.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,37 +32,26 @@ public class StoreServices {
     private StoreActionRepository storeActionRepository;
 
     @GetMapping
-    public ResponseEntity<?> all(@RequestParam(name = "ownerId", required = false) String ownerId) {
-
+    public ResponseEntity<List<Store>> all(@RequestParam(name = "ownerId", required = false) String ownerId) {
         List<Store> stores = new ArrayList<>();
-
-        if(null == ownerId) { storeRepository.findAll().forEach(stores::add); }
-        else {
-            storeRepository.findAll().forEach(s -> { if(ownerId.equals(s.getOwnerId())) { stores.add(s); } });
-        }
-
+        if (null == ownerId) { storeRepository.findAll().forEach(stores::add); }
+        else { storeRepository.findAll().forEach(s -> { if (ownerId.equals(s.getOwnerId())) { stores.add(s); } }); }
         return new ResponseEntity<>(stores, HttpStatus.OK);
-
     }
 
     @GetMapping("/{storeId}")
     public ResponseEntity<?> get(@PathVariable("storeId") long storeId) {
-
         Store store = storeRepository.findOne(storeId);
-
         return new ResponseEntity<>(store, HttpStatus.OK);
-
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Store store,
-                                 @AuthenticationPrincipal String username) {
+    public ResponseEntity<Boolean> add(@RequestBody Store store,
+                                       @AuthenticationPrincipal String username) {
 
         store.setOwnerId(username);
         storeRepository.save(store);
-
         return new ResponseEntity<>(true, HttpStatus.OK);
-
     }
 
     @GetMapping("/{storeId}/products")
