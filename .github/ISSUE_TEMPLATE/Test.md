@@ -1,6 +1,7 @@
 ---
 name: test_name
 type: test_type
+about: 
 ---
 
 Feature Tested: test_service
