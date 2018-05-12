@@ -1,7 +1,7 @@
 ---
 name: test_name
 type: test_type
-about: 
+about: feature to be tested?
 ---
 
 Feature Tested: test_service
