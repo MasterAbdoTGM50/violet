@@ -1,18 +1,20 @@
-package jonamatoka.violet.util.Statisticsnewversion;
+package jonamatoka.violet.util.Statisticsnewversion.Collection;
 
 import jonamatoka.violet.data.model.Store;
 import jonamatoka.violet.data.repo.StoreRepository;
-
+import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stores implements Collection<Store> {
+public class StoresById implements Collection<Store> {
 
+    private long storeId;
     private StoreRepository storeRepository = null;
 
-    Stores(StoreRepository storeRepository){
+    public StoresById(StoreRepository storeRepository, long storeId){
 
+        this.storeId = storeId;
         this.storeRepository = storeRepository;
 
     }
@@ -21,7 +23,7 @@ public class Stores implements Collection<Store> {
     public List<Store> calc() {
 
         List stores = new ArrayList<Store>();
-        storeRepository.findAll().forEach(stores::add);
+        stores.add(storeRepository.findOne(storeId));
 
         return stores;
 

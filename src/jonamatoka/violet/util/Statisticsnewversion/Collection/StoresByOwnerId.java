@@ -1,7 +1,8 @@
-package jonamatoka.violet.util.Statisticsnewversion;
+package jonamatoka.violet.util.Statisticsnewversion.Collection;
 
 import jonamatoka.violet.data.model.Store;
 import jonamatoka.violet.data.repo.StoreRepository;
+import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class StoresByOwnerId implements Collection<Store> {
     private String ownerId;
     private StoreRepository storeRepository = null;
 
-    StoresByOwnerId(StoreRepository storeRepository, String ownerId){
+    public StoresByOwnerId(StoreRepository storeRepository, String ownerId){
 
         this.ownerId = ownerId;
         this.storeRepository = storeRepository;

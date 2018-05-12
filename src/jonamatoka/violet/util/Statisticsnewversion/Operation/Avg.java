@@ -1,10 +1,10 @@
-package jonamatoka.violet.util.Statisticsnewversion;
+package jonamatoka.violet.util.Statisticsnewversion.Operation;
 
-import java.util.ArrayList;
+import jonamatoka.violet.util.Statisticsnewversion.IStatistic.IStatistic;
 
-public class Avg extends Operation{
+public class Avg extends Operation {
 
-    Avg(IStatistic statistic){
+    public Avg(IStatistic statistic){
         super(statistic);
     }
 

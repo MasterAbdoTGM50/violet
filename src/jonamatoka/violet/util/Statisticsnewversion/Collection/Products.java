@@ -1,15 +1,16 @@
-package jonamatoka.violet.util.Statisticsnewversion;
+package jonamatoka.violet.util.Statisticsnewversion.Collection;
 
 import jonamatoka.violet.data.model.Product;
 import jonamatoka.violet.data.repo.ProductRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Products implements  Collection<Product>{
+public class Products implements Collection<Product> {
 
     private ProductRepository productRepository = null;
 
-    Products(ProductRepository productRepository){
+    public Products(ProductRepository productRepository){
 
         this.productRepository = productRepository;
 

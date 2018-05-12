@@ -1,10 +1,10 @@
-package jonamatoka.violet.util.Statisticsnewversion;
+package jonamatoka.violet.util.Statisticsnewversion.Operation;
 
-import java.util.ArrayList;
+import jonamatoka.violet.util.Statisticsnewversion.IStatistic.IStatistic;
 
 public class Sum extends Operation{
 
-    Sum(IStatistic statistic){super(statistic); }
+    public Sum(IStatistic statistic){super(statistic); }
 
     @Override
     public double calc() {

@@ -1,15 +1,14 @@
-package jonamatoka.violet.util.Statisticsnewversion;
-
+package jonamatoka.violet.util.Statisticsnewversion.IStatistic;
 
 import jonamatoka.violet.data.model.Product;
+import jonamatoka.violet.util.Statisticsnewversion.Collection.Collection;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
-public class ProductViews extends IStatistic {
+public class ProductOrders extends IStatistic {
 
-    ProductViews(Collection<Product> dc){
+    public ProductOrders(Collection<Product> dc){
         super(dc);
     }
 
@@ -19,7 +18,7 @@ public class ProductViews extends IStatistic {
         ArrayList<Double> res = new ArrayList<>();
         List<Product> products = dataCollection.calc();
         for(Product p: products)
-            res.add((double)p.views());
+            res.add((double)p.orders());
 
         return res;
 
