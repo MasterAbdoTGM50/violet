@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestAddStoreDuplicateData extends TestStoreService {
+public class TestAddStoreDuplicateData extends AbstractTestStoreService {
 
     @DataProvider(name = "storeDuplicateDataProvider")
     public Object[][] storeDuplicateDataProvider() {

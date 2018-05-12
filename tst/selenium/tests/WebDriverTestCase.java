@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
-public class WebDriverTestCase {
+public abstract class WebDriverTestCase {
 
     protected WebDriver driver;
 
@@ -19,17 +19,11 @@ public class WebDriverTestCase {
 
     @BeforeMethod
     public void launchWebDriver() {
-
         System.setProperty("webdriver.chrome.driver", Lib.Paths.WEB_DRIVER);
-
         driver = new ChromeDriver();
-
         driver.manage().window().maximize();
-
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         userAction = new UserAction(driver);
-
     }
 
     @AfterMethod

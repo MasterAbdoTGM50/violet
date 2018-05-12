@@ -5,9 +5,7 @@ import jonamatoka.violet.data.model.Product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import unit.TestVioletService;
-
-public class TestGetProduct extends TestProductService {
+public class TestGetProduct extends AbstractTestProductService {
 
     @Test
     public void getProduct() {

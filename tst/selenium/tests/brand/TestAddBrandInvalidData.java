@@ -11,18 +11,14 @@ public class TestAddBrandInvalidData extends WebDriverTestCase {
 
     @DataProvider(name = "addBrandInvalidDataProvider")
     public static Object[][] addBrandInvalidDataProvider() {
-
         return new Object[][] { {" "}, {"or 1=1"}, {"&#165"}, {"<script>alert(\"123\")</script>"} };
-
     }
 
     @Test(dataProvider = "addBrandInvalidDataProvider")
     public void addBrandInvalidData(String name) {
-
         userAction.login("Abdo", "Temsah");
-
         userAction.addBrand(name);
-
         Assert.assertEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
     }
+
 }

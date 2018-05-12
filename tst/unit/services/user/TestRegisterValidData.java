@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestRegisterValidData extends TestUserServices {
+public class TestRegisterValidData extends AbstractTestUserService {
 
     @DataProvider(name = "registerValidDataProvider")
     public Object[][] registerValidDataProvider() {

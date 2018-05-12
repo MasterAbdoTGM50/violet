@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootTest(classes = App.class)
-public abstract class TestVioletService extends AbstractTestNGSpringContextTests {
+public abstract class AbstractTestVioletService extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private UserRepository userRepository;

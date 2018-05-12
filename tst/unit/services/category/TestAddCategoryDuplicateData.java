@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestAddCategoryDuplicateData extends TestCategoryService {
+public class TestAddCategoryDuplicateData extends AbstractTestCategoryService {
 
     @DataProvider(name = "categoryDuplicateDataProvider")
     public Object[][] categoryDuplicateDataProvider() {

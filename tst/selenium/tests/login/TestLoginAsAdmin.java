@@ -10,12 +10,9 @@ public class TestLoginAsAdmin extends WebDriverTestCase {
 
     @Test
     public void loginAsAdmin() {
-
         userAction.login("Abdo", "Temsah");
         userAction.clickHome();
-
         Assert.assertEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
-
     }
 
 }

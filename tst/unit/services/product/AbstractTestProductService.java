@@ -5,9 +5,9 @@ import jonamatoka.violet.web.services.ProductServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import unit.TestVioletService;
+import unit.AbstractTestVioletService;
 
-public class TestProductService extends TestVioletService {
+public abstract class AbstractTestProductService extends AbstractTestVioletService {
 
     @Autowired
     private ProductRepository productRepository;

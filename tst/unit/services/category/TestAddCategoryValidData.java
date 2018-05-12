@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestAddCategoryValidData extends TestCategoryService {
+public class TestAddCategoryValidData extends AbstractTestCategoryService {
 
     @DataProvider(name = "categoryValidDataProvider")
     public Object[][] categoryValidDataProvider() {

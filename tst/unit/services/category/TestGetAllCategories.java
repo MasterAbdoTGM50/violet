@@ -3,7 +3,7 @@ package unit.services.category;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestGetAllCategories extends TestCategoryService {
+public class TestGetAllCategories extends AbstractTestCategoryService {
 
     @Test
     public void getAllCategories() {

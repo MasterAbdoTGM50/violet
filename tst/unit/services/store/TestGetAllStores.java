@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TestGetAllStores extends TestStoreService {
+public class TestGetAllStores extends AbstractTestStoreService {
 
     @Autowired
     private UserRepository userRepository;

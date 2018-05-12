@@ -3,9 +3,7 @@ package unit.services.product;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import unit.TestVioletService;
-
-public class TestGetAllProducts extends TestProductService {
+public class TestGetAllProducts extends AbstractTestProductService {
 
     @Test
     public void getAllProducts() {

@@ -5,9 +5,9 @@ import jonamatoka.violet.web.services.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import unit.TestVioletService;
+import unit.AbstractTestVioletService;
 
-public class TestUserServices extends TestVioletService {
+public abstract class AbstractTestUserService extends AbstractTestVioletService {
 
     @Autowired
     private UserRepository userRepository;

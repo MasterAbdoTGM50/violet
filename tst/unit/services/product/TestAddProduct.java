@@ -8,9 +8,7 @@ import jonamatoka.violet.data.repo.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeClass;
 
-import unit.TestVioletService;
-
-public abstract class TestAddProduct extends TestProductService {
+public abstract class TestAddProduct extends AbstractTestProductService {
 
     @Autowired
     private BrandRepository brandRepository;

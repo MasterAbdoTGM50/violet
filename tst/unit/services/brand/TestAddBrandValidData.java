@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestAddBrandValidData extends TestBrandsService {
+public class TestAddBrandValidData extends AbstractTestBrandService {
 
     @DataProvider(name = "brandValidDataProvider")
     public Object[][] brandValidDataProvider() {

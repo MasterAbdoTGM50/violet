@@ -1,14 +1,13 @@
 package unit.services.category;
 
-import jonamatoka.violet.data.model.Category;
 import jonamatoka.violet.data.repo.CategoryRepository;
 import jonamatoka.violet.web.services.CategoryServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import unit.TestVioletService;
+import unit.AbstractTestVioletService;
 
-public abstract class TestCategoryService extends TestVioletService {
+public abstract class AbstractTestCategoryService extends AbstractTestVioletService {
 
     @Autowired
     private CategoryRepository categoryRepository;

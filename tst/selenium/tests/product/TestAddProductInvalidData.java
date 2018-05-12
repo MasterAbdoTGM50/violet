@@ -11,18 +11,19 @@ public class TestAddProductInvalidData extends WebDriverTestCase {
 
     @DataProvider(name = "TestAddProductInvalidData")
     public static Object[][] addProductInvalidDataProvider() {
-
-        return new Object[][] { {" ", " "}, {"name", "description"}, {"name", "description"}, {"<script>alert(\"NAYRA\")</script>", "desc.."}};
-
+        return new Object[][] {
+                {" ", " "},
+                {"name", "description"},
+                {"name", "description"},
+                {"<script>alert(\"NAYRA\")</script>", "desc.."}
+        };
     }
 
     @Test(dataProvider = "addProductInvalidDataProvider")
     public void addProductInvalidData(String name, String description) {
-
         userAction.login("Abdo", "Temsah");
-
         userAction.addProduct(name, description);
-
         Assert.assertEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
     }
+
 }
