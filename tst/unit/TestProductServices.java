@@ -1,131 +1,127 @@
 package unit;
 
+import jonamatoka.violet.App;
 import jonamatoka.violet.data.model.Brand;
 import jonamatoka.violet.data.model.Category;
 import jonamatoka.violet.data.model.Product;
+import jonamatoka.violet.data.repo.BrandRepository;
+import jonamatoka.violet.data.repo.CategoryRepository;
 import jonamatoka.violet.data.repo.ProductRepository;
-
+import jonamatoka.violet.web.services.BrandServices;
+import jonamatoka.violet.web.services.CategoryServices;
 import jonamatoka.violet.web.services.ProductServices;
-import org.mockito.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
-import java.util.List;
-import java.util.ArrayList;
+@SpringBootTest(classes = App.class)
+public class TestProductServices extends AbstractTestNGSpringContextTests {
 
-import static org.mockito.Mockito.when;
+    @Autowired
+    private BrandRepository brandRepository;
 
-public class TestProductServices {
+    @Autowired
+    private BrandServices brandServices;
 
-    private List<Brand> brands = new ArrayList<>();
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    private List<Category> categories = new ArrayList<>();
+    @Autowired
+    private CategoryServices categoryServices;
 
-    private List<Product> products = new ArrayList<>();
-
-    @Mock
-    private ProductRepository brandRepository;
-
-    @Mock
-    private ProductRepository categoryRepository;
-
-    @Mock
+    @Autowired
     private ProductRepository productRepository;
 
-    @InjectMocks
+    @Autowired
     private ProductServices productServices;
 
-    @BeforeTest
-    public void setup() {
+    @BeforeClass
+    void setup() {
+        String[] mockBrands = {"Brand_1", "Brand1", "BRAND"};
+        for (String mockBrand : mockBrands) {
+            Brand brand = new Brand().setName(mockBrand);
+            brandServices.add(brand);
+        }
 
-        MockitoAnnotations.initMocks(this);
-        productRepository = Mockito.mock(ProductRepository.class);
-        productServices = new ProductServices(productRepository);
-
-        brands.add(new Brand().setName("Brand_1"));
-        brands.add(new Brand().setName("Brand1"));
-        brands.add(new Brand().setName("BRAND"));
-
-        categories.add(new Category().setName("Category_1"));
-        categories.add(new Category().setName("Category1"));
-        categories.add(new Category().setName("CATEGORY"));
-
+        String[] mockCategories = {"Category_1", "Category1", "CATEGORY"};
+        for (String mockCategory : mockCategories) {
+            Category category = new Category().setName(mockCategory);
+            categoryServices.add(category);
+        }
     }
 
-    private Object addProduct(Product product) {
-
-        /*TODO//Mourad: mock brand/brand/category repository FindOne return*/
-
-        when(productRepository.save(Matchers.any(Product.class))).thenReturn(product);
-
-        return productServices.add(product).getBody();
-
-    }
+    private boolean addProduct(Product product) { return productServices.add(product).getBody(); }
 
     @DataProvider(name = "productValidDataProvider")
     public Object[][] productValidDataProvider() {
-
         return new Object[][] {
-
-                {0, "Product_1", brands.get(0), categories.get(0), "Desc1"},
-                {1, "Product1", brands.get(1), categories.get(1), "Desc2"},
-                {2, "PRODUCT", brands.get(2), categories.get(2), "Desc3"}
-
+                {"Product_1", "Brand_1", "Category_1", "Desc1"},
+                {"Product1", "Brand1", "Category1", "Desc2"},
+                {"PRODUCT", "BRAND", "CATEGORY", "Desc3"}
         };
-
     }
 
     @Test(dataProvider = "productValidDataProvider")
-    public void addProductValidData(long id, String name, Brand brand, Category category, String description) {
-
+    public void addProductValidData(String name, String brand, String category, String description) {
         Product product = new Product()
-                .setProductId(id)
                 .setName(name)
-                .setBrand(brand)
-                .setCategory(category)
+                .setBrand(brandRepository.findOne(brand))
+                .setCategory(categoryRepository.findOne(category))
                 .setDescription(description);
 
-        Assert.assertEquals(addProduct(product), true);
+        Assert.assertTrue(addProduct(product));
+    }
 
-        products.add(product);
+    @Test(dataProvider = "productValidDataProvider", dependsOnMethods = "addProductValidData")
+    public void addProductDuplicateData(String name, String brand, String category, String description) {
+        Product product = new Product()
+                .setName(name)
+                .setBrand(brandRepository.findOne(brand))
+                .setCategory(categoryRepository.findOne(category))
+                .setDescription(description);
 
+        Assert.assertFalse(addProduct(product));
     }
 
     @DataProvider(name = "productInvalidDataProvider")
     public Object[][] productInvalidDataProvider() {
-
         return new Object[][] {
-
-                {0, "Product_1", new Brand().setName("Invalid Brand"), new Category().setName("Invalid Category"), "Desc1"}
-
+                {"Product_1", "Invalid Brand", "Invalid Category", "Desc1"}
         };
-
     }
 
     @Test(dataProvider = "productInvalidDataProvider")
-    public void addProductInvalidData(long id, String name, Brand brand, Category category, String description)  {
-
+    public void addProductInvalidData(String name, String brand, String category, String description)  {
         Product product = new Product()
-                .setProductId(id)
                 .setName(name)
-                .setBrand(brand)
-                .setCategory(category)
+                .setBrand(brandRepository.findOne(brand))
+                .setCategory(categoryRepository.findOne(category))
                 .setDescription(description);
 
-        Assert.assertEquals(addProduct(product), false);
-
+        Assert.assertFalse(addProduct(product));
     }
 
-    @Test(dependsOnMethods = "addProductValidData")
+    @Test(dependsOnMethods = {"addProductValidData", "addProductDuplicateData", "addProductInvalidData"})
     public void getAllProducts() {
+        Assert.assertEquals(productServices.all().getBody().size(), productRepository.count());
+    }
 
-        when(productRepository.findAll()).thenReturn(products);
-
-        Assert.assertEquals(productServices.all().getBody().equals(products), true);
-
+    @Test(dependsOnMethods = {"addProductValidData", "addProductDuplicateData", "addProductInvalidData"})
+    public void getProduct() {
+        boolean getOk = true;
+        for (Product product : productRepository.findAll()) {
+            if (productServices.get(product.getProductId()).getBody().getProductId() != product.getProductId()) {
+                getOk = false;
+                break;
+            }
+        }
+        Assert.assertTrue(getOk);
     }
 
 }
