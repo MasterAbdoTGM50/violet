@@ -55,22 +55,18 @@ public class StoreServices {
     }
 
     @GetMapping("/{storeId}/products")
-    public ResponseEntity<?> allProducts(@PathVariable("storeId") long storeId) {
-
+    public ResponseEntity<List<ProductStack>> allProducts(@PathVariable("storeId") long storeId) {
         Store store = storeRepository.findOne(storeId);
-
         return new ResponseEntity<>(store.getInventory().get(), HttpStatus.OK);
-
     }
 
     @PostMapping("/{storeId}/products")
-    public ResponseEntity<?> addProduct(@PathVariable("storeId") long storeId,
+    public ResponseEntity<Boolean> addProduct(@PathVariable("storeId") long storeId,
                                         @RequestBody ProductStack pStack,
                                         @AuthenticationPrincipal String username) {
 
         Store store = storeRepository.findOne(storeId);
-
-        if(!(store.getOwnerId().equals(username) || store.getCollaborators().contains(username))) {
+        if (!(store.getOwnerId().equals(username) || store.getCollaborators().contains(username))) {
             return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
         }
 
@@ -83,7 +79,6 @@ public class StoreServices {
         storeRepository.save(store);
 
         return new ResponseEntity<>(true, HttpStatus.OK);
-
     }
 
     @DeleteMapping("/{storeId}/products/{stackId}")

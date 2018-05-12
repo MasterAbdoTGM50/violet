@@ -9,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import org.testng.Assert;
-import org.testng.annotations.Test;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.*;
 
 @SpringBootTest(classes = App.class)
 public class TestUserServices extends AbstractTestNGSpringContextTests {
@@ -36,7 +35,7 @@ public class TestUserServices extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider = "registerValidDataProvider")
     public void registerValidData(String username, String email, String pass) {
-            Assert.assertTrue(register(username, email, pass));
+        Assert.assertTrue(register(username, email, pass));
     }
 
     @Test(dataProvider = "registerValidDataProvider")
