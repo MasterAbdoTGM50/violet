@@ -22,7 +22,7 @@ public class TestAddStoreInvalidData extends TestStoreService {
     @Test(dataProvider = "storeInvalidDataProvider")
     public void addStoreInvalidDataAsOwner(String name, String type, String address) {
         Store store = new Store().setName(name).setType(type).setAddress(address);
-        Assert.assertFalse(getStoreServices().add(store, user.get(Lib.Privileges.OWNER).getUsername()).getBody());
+        Assert.assertFalse(getStoreServices().add(store, getUser(Lib.Privileges.OWNER).getUsername()).getBody());
     }
 
 }

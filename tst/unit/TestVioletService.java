@@ -21,7 +21,7 @@ public abstract class TestVioletService extends AbstractTestNGSpringContextTests
     @Autowired
     private UserRepository userRepository;
 
-    protected Map<Integer, User> user = new HashMap<>();
+    private Map<Integer, User> user = new HashMap<>();
 
     @BeforeClass
     public void setup() {
@@ -49,5 +49,7 @@ public abstract class TestVioletService extends AbstractTestNGSpringContextTests
         user.put(Lib.Privileges.USER, testUser);
         userRepository.save(testUser);
     }
+
+    public User getUser(Integer privilege) { return user.get(privilege); }
 
 }

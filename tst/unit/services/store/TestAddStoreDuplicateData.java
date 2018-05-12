@@ -19,8 +19,8 @@ public class TestAddStoreDuplicateData extends TestStoreService {
     @Test(dataProvider = "storeDuplicateDataProvider")
     public void addStoreDuplicateDataAsOwner(String name, String type, String address) {
         Store store = new Store().setName(name).setType(type).setAddress(address);
-        getStoreServices().add(store, user.get(Lib.Privileges.OWNER).getUsername());
-        Assert.assertFalse(getStoreServices().add(store, user.get(Lib.Privileges.OWNER).getUsername()).getBody());
+        getStoreServices().add(store, getUser(Lib.Privileges.OWNER).getUsername());
+        Assert.assertFalse(getStoreServices().add(store, getUser(Lib.Privileges.OWNER).getUsername()).getBody());
     }
 
 }

@@ -19,7 +19,7 @@ public class TestAddStoreValidData extends TestStoreService {
     @Test(dataProvider = "storeValidDataProvider")
     public void addStoreValidDataAsOwner(String name, String type, String address) {
         Store store = new Store().setName(name).setType(type).setAddress(address);
-        Assert.assertTrue(getStoreServices().add(store, user.get(Lib.Privileges.OWNER).getUsername()).getBody());
+        Assert.assertTrue(getStoreServices().add(store, getUser(Lib.Privileges.OWNER).getUsername()).getBody());
     }
 
 }
