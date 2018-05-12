@@ -19,10 +19,6 @@ public class ProductServices {
     @Autowired
     private ProductRepository productRepository;
 
-    public ProductServices(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
     @GetMapping
     public ResponseEntity<List<Product>> all() {
         List<Product> products = new ArrayList<>();
