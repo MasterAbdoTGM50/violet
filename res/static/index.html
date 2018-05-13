@@ -9,25 +9,27 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css"    >
 
-	<script type="text/javascript" src="js/lib/jquery.js"         ></script>
-	<script type="text/javascript" src="js/lib/underscore.js"     ></script>
-	<script type="text/javascript" src="js/lib/backbone.js"       ></script>
-	<script type="text/javascript" src="js/lib/bootstrap.js"      ></script>
-	<script type="text/javascript" src="js/lib/backbone.auth.js"  ></script>
+	<script type="text/javascript" src="js/lib/jquery.js"                 ></script>
+	<script type="text/javascript" src="js/lib/underscore.js"             ></script>
+	<script type="text/javascript" src="js/lib/backbone.js"               ></script>
+	<script type="text/javascript" src="js/lib/bootstrap.js"              ></script>
+	<script type="text/javascript" src="js/lib/backbone.auth.js"          ></script>
 
-	<script type="text/javascript" src="js/model.js"        ></script>
-	<script type="text/javascript" src="js/views/login.js"        ></script>
-	<script type="text/javascript" src="js/views/page.js"         ></script>
-	<script type="text/javascript" src="js/views/admin.js"        ></script>
-	<script type="text/javascript" src="js/views/owner.js"        ></script>
-	<script type="text/javascript" src="js/views/navbar.js"       ></script>
-	<script type="text/javascript" src="js/views/store-list.js"   ></script>
-	<script type="text/javascript" src="js/views/store-details.js"></script>
-	<script type="text/javascript" src="js/views/add-store.js"    ></script>
-	<script type="text/javascript" src="js/views/add-brand.js"    ></script>
-	<script type="text/javascript" src="js/views/add-category.js" ></script>
-	<script type="text/javascript" src="js/views/add-product.js"  ></script>
-	<script type="text/javascript" src="js/router.js"             ></script>
+	<script type="text/javascript" src="js/model.js"                      ></script>
+	<script type="text/javascript" src="js/views/login.js"                ></script>
+	<script type="text/javascript" src="js/views/page.js"                 ></script>
+	<script type="text/javascript" src="js/views/admin.js"                ></script>
+	<script type="text/javascript" src="js/views/owner.js"                ></script>
+	<script type="text/javascript" src="js/views/navbar.js"               ></script>
+	<script type="text/javascript" src="js/views/store-list.js"           ></script>
+	<script type="text/javascript" src="js/views/store-details.js"        ></script>
+	<script type="text/javascript" src="js/views/add-store.js"            ></script>
+	<script type="text/javascript" src="js/views/add-brand.js"            ></script>
+	<script type="text/javascript" src="js/views/add-category.js"         ></script>
+	<script type="text/javascript" src="js/views/add-product.js"          ></script>
+    <script type="text/javascript" src="js/views/add-stack.js"            ></script>
+    <script type="text/javascript" src="js/views/add-collaborators.js"    ></script>
+    <script type="text/javascript" src="js/router.js"                     ></script>
 
 </head>
 
@@ -101,11 +103,36 @@
 					<p class="navbar-brand"> Welcome <%= username %></p>
 				</li>
 				<li>
-					<a href="#login"> <span class="glyphicon glyphicon-log-out"></span></a>
+					<a href="#logout"> <span class="glyphicon glyphicon-log-out"></span></a>
 				</li>
 			</ul>
 		</div>
 	</nav>
+</script>
+
+<!-- Nav bar for store owner -->
+<script type="text/template" id="nav-storeOwner-template">
+    <nav class="navbar navbar-default" style="border:0px; border-radius:0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <p class="navbar-brand">violet2.0</p>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="#home"><i class="acctive glyphicon glyphicon-home fa fa-home"></i> Home</a></li>
+
+                <li><a class="navbar-brand" href="#add-store"><span class="glyphicon glyphicon-plus"></span> Store</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-header">
+                    <p class="navbar-brand"> Welcome <%= username %></p>
+                </li>
+                <li>
+                    <a href="#login"> <span class="glyphicon glyphicon-log-out"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </script>
 
 <script type="text/template" id="table-store-list">
@@ -138,12 +165,12 @@
 	</fieldset>
 	<fieldset>
 		<legend>Store Product
-			<a data-toggle="modal" data-target="#AddProduct"><span class="glyphicon glyphicon-plus" style="color: white; margin-left:2%;"></span></a>
+            <a href= "#add-productStack"><span class="glyphicon glyphicon-plus" style="color: gray; margin-left:2%;"></span></a>
 		</legend>
 		<table class="table">
 			<thead>
 			<tr>
-				<th>Product Name</th>
+				<th>Product ID</th>
 				<th>Price</th>
 				<th>Quantity</th>
 			</tr>
@@ -151,7 +178,7 @@
 			<tbody>
 			<% for(var tag in products) { %>
 			<tr class="tbody">
-				<td><span class="name"><%= products[tag].productName %></span></td>
+				<td><span class="name"><%= products[tag].productId %></span></td>
 				<td><span class="name"><%= products[tag].price %></span></td>
 				<td><span class="name"><%= products[tag].quantity %></span></td>
 			</tr>
@@ -159,6 +186,24 @@
 			</tbody>
 		</table>
 	</fieldset>
+    <fieldset>
+        <legend>Collaborators
+            <a href= "#add-collaborator"><span class="glyphicon glyphicon-plus" style="color: gray; margin-left:2%;"></span></a></legend>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var tag in collaborators) { %>
+            <tr class="tbody">
+                <td><span class="name"><%= collaborators[tag] %></span></td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </fieldset>
 </script>
 
 <!-- Add Store Template -->
@@ -229,12 +274,48 @@
 	</form>
 </script>
 
+<!-- Add Product Stack Template -->
+<script type="text/template" id="add-productStack-template">
+    <form>
+        <legend>Add Product</legend>
+        <div class="form-group">
+            <label>Name:</label>
+            <select id="product-stack-list" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label>Price:</label>
+            <input class = "form-control" id = "product-price">
+        </div>
+        <div class="form-group">
+            <label>Quantity:</label>
+            <input class = "form-control" id = "product-quantity">
+        </div>
+        <a id="btn-productStack-add" class="btn btn-primary">Add</a>
+    </form>
+</script>
+
+<!-- Add Collaborators Template -->
+<script type="text/template" id="add-collaborator-template">
+    <form>
+        <legend>Add Collaborator</legend>
+        <div class="form-group">
+            <label>Name:</label>
+            <input class = "form-control" id = "collaborator-name">
+        </div>
+        <a id = "btn-collaborator-add" class="btn btn-primary">Add</a>
+    </form>
+</script>
+
 <script type="text/template" id="brand-dropdown-template">
 	<option value="<%= name %>"><%= name %></option>
 </script>
 
 <script type="text/template" id="category-dropdown-template">
 	<option value="<%= name %>"><%= name %></option>
+</script>
+
+<script type="text/template" id="product-dropdown-template">
+    <option value="<%= name %>"><%= name %></option>
 </script>
 
 </body>

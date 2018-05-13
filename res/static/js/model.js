@@ -34,3 +34,8 @@ var StoreCollection = Backbone.Collection.extend({
     model: Store,
     url: "api/v1/stores"
 });
+
+var ProductCollection = Backbone.Collection.extend({
+    model: Product,
+    url: "http://localhost:8585/api/v1/products"
+});

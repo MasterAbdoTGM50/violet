@@ -14,21 +14,27 @@ var AppRouter = Backbone.Router.extend({
     brandLst: null,
     categoryLst: null,
 
+    storeID: null,
+
     loginView: null,
     pageView: null,
     adminView: null,
+    ownerView: null,
     storesView: null,
     storeView: null,
     addStoreView: null,
     addBrandView: null,
     addCategoryView: null,
     addProductView: null,
+    addProductStackView: null,
+    addCollaboratorView:null,
 
     routes: {
 
         "": "home",
         "home": "home",
         "login": "login",
+        "logout": "logout",
         "admin": "admin",
         "owner": "owner",
         "stores": "stores",
@@ -37,7 +43,9 @@ var AppRouter = Backbone.Router.extend({
         "add-store": "addStore",
         "add-brand": "addBrand",
         "add-category": "addCategory",
-        "add-product": "addProduct"
+        "add-product": "addProduct",
+        "add-productStack": "addProductStack",
+        "add-collaborator": "addCollaborator"
 
     },
 
@@ -79,6 +87,11 @@ var AppRouter = Backbone.Router.extend({
         this.render();
     },
 
+    logout:function(){
+        this.loggedIn = false;
+        this.go("login");
+    },
+
     admin: function() {
         if(!this.loggedIn) { this.go("login"); }
         else {
@@ -103,13 +116,34 @@ var AppRouter = Backbone.Router.extend({
         }
     },
 
-    owner: function() {},
+    owner: function() {
+        if(!this.loggedIn) { this.go("login"); }
+        else {
+            if(this.pageView == null) { this.pageView = new PageView({ el: $("#page") }); }
+            if(this.ownerView == null) { this.ownerView = new OwnerView({ el: $("#page"), model: this.user }); }
+
+            if(this.storeLst == null) { this.storeLst = new StoreCollection(); }
+
+            if(this.storesView == null) { this.storesView = new StoreListView({  el: $("#page"), model: this.storeLst }); }
+
+            this.storeLst.fetch();
+
+            this.view = this.pageView;
+            this.navView = this.ownerView;
+            this.sideView = this.storesView;
+            this.cntntView = null;
+
+            this.render();
+        }
+    },
 
     storeDetails: function(id) {
         if(!this.loggedIn) { this.go("login"); }
         else {
             if(this.storeView == null) { this.storeView = new StoreDetailsView({ el: $("#page") }); }
             this.cntntView = this.storeView;
+
+            this.storeID = id;
 
             this.storeView.model = this.storeLst.get(id);
 
@@ -149,6 +183,29 @@ var AppRouter = Backbone.Router.extend({
         else {
             if(this.addProductView == null) { this.addProductView = new AddProductView({ el: $("#page"), router: this, brandLst: this.brandLst, categoryLst: this.categoryLst }); }
             this.cntntView = this.addProductView;
+            this.render();
+        }
+    },
+
+    addProductStack: function() {
+        if(!this.loggedIn) { this.go("login"); }
+        else {
+            if(this.productLst == null) { this.productLst = new ProductCollection(); }
+
+            this.productLst.fetch();
+
+            if(this.addProductStackView == null) { this.addProductStackView = new AddProductStackView({ el: $("#page"), router: this, productLst: this.productLst, StoreId : this.storeID}); }
+
+            this.cntntView = this.addProductStackView;
+            this.render();
+        }
+    },
+
+    addCollaborator: function() {
+        if(!this.loggedIn) { this.go("login"); }
+        else {console.log(this.storeID);
+            if(this.addCollaboratorView == null) { this.addCollaboratorView = new AddCollaboratorView({ el: $("#page"), router: this, StoreId : this.storeID }); }
+            this.cntntView = this.addCollaboratorView;
             this.render();
         }
     }

@@ -2,7 +2,7 @@ var OwnerView = Backbone.View.extend({
 
     initialize: function(options) {
         this.listenTo(this.model, "sync change", this.render);
-        this.template = _.template($("#nav-template").html());
+        this.template = _.template($("#nav-storeOwner-template").html());
     },
 
     render: function() {
