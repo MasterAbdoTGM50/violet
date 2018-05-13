@@ -34,11 +34,9 @@ AddProductStackView = Backbone.View.extend({
 
             url: "http://localhost:8585/api/v1/stores/" + this.StoreId + "/products"
         });
-        
 
         var product_name = $("#product-stack-list").val();
         var pID = null;
-
 
         _.each(this.productLst.models, function(product) {
 
@@ -48,13 +46,11 @@ AddProductStackView = Backbone.View.extend({
 
         }, this);
 
-
         var _productStack = new ProductStack({
             productId: pID,
             price: $("#product-price").val(),
             quantity: $("#product-quantity").val(),
         });
-
 
         _productStack.credentials = {
             username: this.router.username,

@@ -9,26 +9,27 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css"    >
 
-	<script type="text/javascript" src="js/lib/jquery.js"         ></script>
-	<script type="text/javascript" src="js/lib/underscore.js"     ></script>
-	<script type="text/javascript" src="js/lib/backbone.js"       ></script>
-	<script type="text/javascript" src="js/lib/bootstrap.js"      ></script>
-	<script type="text/javascript" src="js/lib/backbone.auth.js"  ></script>
+	<script type="text/javascript" src="js/lib/jquery.js"                 ></script>
+	<script type="text/javascript" src="js/lib/underscore.js"             ></script>
+	<script type="text/javascript" src="js/lib/backbone.js"               ></script>
+	<script type="text/javascript" src="js/lib/bootstrap.js"              ></script>
+	<script type="text/javascript" src="js/lib/backbone.auth.js"          ></script>
 
-	<script type="text/javascript" src="js/model.js"              ></script>
-	<script type="text/javascript" src="js/views/login.js"        ></script>
-	<script type="text/javascript" src="js/views/page.js"         ></script>
-	<script type="text/javascript" src="js/views/admin.js"        ></script>
-	<script type="text/javascript" src="js/views/owner.js"        ></script>
-	<script type="text/javascript" src="js/views/navbar.js"       ></script>
-	<script type="text/javascript" src="js/views/store-list.js"   ></script>
-	<script type="text/javascript" src="js/views/store-details.js"></script>
-	<script type="text/javascript" src="js/views/add-store.js"    ></script>
-	<script type="text/javascript" src="js/views/add-brand.js"    ></script>
-	<script type="text/javascript" src="js/views/add-category.js" ></script>
-	<script type="text/javascript" src="js/views/add-product.js"  ></script>
-    <script type="text/javascript" src="js/views/add-stack.js"    ></script>
-    <script type="text/javascript" src="js/router.js"             ></script>
+	<script type="text/javascript" src="js/model.js"                      ></script>
+	<script type="text/javascript" src="js/views/login.js"                ></script>
+	<script type="text/javascript" src="js/views/page.js"                 ></script>
+	<script type="text/javascript" src="js/views/admin.js"                ></script>
+	<script type="text/javascript" src="js/views/owner.js"                ></script>
+	<script type="text/javascript" src="js/views/navbar.js"               ></script>
+	<script type="text/javascript" src="js/views/store-list.js"           ></script>
+	<script type="text/javascript" src="js/views/store-details.js"        ></script>
+	<script type="text/javascript" src="js/views/add-store.js"            ></script>
+	<script type="text/javascript" src="js/views/add-brand.js"            ></script>
+	<script type="text/javascript" src="js/views/add-category.js"         ></script>
+	<script type="text/javascript" src="js/views/add-product.js"          ></script>
+    <script type="text/javascript" src="js/views/add-stack.js"            ></script>
+    <script type="text/javascript" src="js/views/add-collaborators.js"    ></script>
+    <script type="text/javascript" src="js/router.js"                     ></script>
 
 </head>
 
@@ -185,6 +186,24 @@
 			</tbody>
 		</table>
 	</fieldset>
+    <fieldset>
+        <legend>Collaborators
+            <a href= "#add-collaborator"><span class="glyphicon glyphicon-plus" style="color: gray; margin-left:2%;"></span></a></legend>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var tag in collaborators) { %>
+            <tr class="tbody">
+                <td><span class="name"><%= collaborators[tag] %></span></td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </fieldset>
 </script>
 
 <!-- Add Store Template -->
@@ -272,6 +291,18 @@
             <input class = "form-control" id = "product-quantity">
         </div>
         <a id="btn-productStack-add" class="btn btn-primary">Add</a>
+    </form>
+</script>
+
+<!-- Add Collaborators Template -->
+<script type="text/template" id="add-collaborator-template">
+    <form>
+        <legend>Add Collaborator</legend>
+        <div class="form-group">
+            <label>Name:</label>
+            <input class = "form-control" id = "collaborator-name">
+        </div>
+        <a id = "btn-collaborator-add" class="btn btn-primary">Add</a>
     </form>
 </script>
 

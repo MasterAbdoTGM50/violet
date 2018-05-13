@@ -27,6 +27,7 @@ var AppRouter = Backbone.Router.extend({
     addCategoryView: null,
     addProductView: null,
     addProductStackView: null,
+    addCollaboratorView:null,
 
     routes: {
 
@@ -43,7 +44,8 @@ var AppRouter = Backbone.Router.extend({
         "add-brand": "addBrand",
         "add-category": "addCategory",
         "add-product": "addProduct",
-        "add-productStack": "addProductStack"
+        "add-productStack": "addProductStack",
+        "add-collaborator": "addCollaborator"
 
     },
 
@@ -197,5 +199,15 @@ var AppRouter = Backbone.Router.extend({
             this.cntntView = this.addProductStackView;
             this.render();
         }
+    },
+
+    addCollaborator: function() {
+        if(!this.loggedIn) { this.go("login"); }
+        else {console.log(this.storeID);
+            if(this.addCollaboratorView == null) { this.addCollaboratorView = new AddCollaboratorView({ el: $("#page"), router: this, StoreId : this.storeID }); }
+            this.cntntView = this.addCollaboratorView;
+            this.render();
+        }
     }
+
 });
