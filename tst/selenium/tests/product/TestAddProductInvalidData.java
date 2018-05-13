@@ -23,7 +23,9 @@ public class TestAddProductInvalidData extends WebDriverTestCase {
     public void addProductInvalidData(String name, String description) {
         userAction.login("Abdo", "Temsah");
         userAction.addProduct(name, description);
-        Assert.assertEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
+
+        /*TODO/Mourad: Redirect to Error Page*/
+        Assert.assertNotEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
     }
 
 }

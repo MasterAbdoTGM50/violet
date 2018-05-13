@@ -18,7 +18,9 @@ public class TestAddCategoryInvalidData extends WebDriverTestCase{
     public void addCategoryInvalidData(String name) {
         userAction.login("Abdo", "Temsah");
         userAction.addCategory(name);
-        Assert.assertEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
+
+        /*TODO/Mourad: Redirect to Error Page*/
+        Assert.assertNotEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
     }
 
 }

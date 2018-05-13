@@ -18,7 +18,9 @@ public class TestAddBrandInvalidData extends WebDriverTestCase {
     public void addBrandInvalidData(String name) {
         userAction.login("Abdo", "Temsah");
         userAction.addBrand(name);
-        Assert.assertEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
+
+        /*TODO/Mourad: Redirect to Error Page*/
+        Assert.assertNotEquals(driver.getCurrentUrl(), Lib.Pages.ADMIN);
     }
 
 }
