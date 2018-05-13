@@ -14,6 +14,8 @@ var AppRouter = Backbone.Router.extend({
     brandLst: null,
     categoryLst: null,
 
+    storeID: null,
+
     loginView: null,
     pageView: null,
     adminView: null,
@@ -24,6 +26,7 @@ var AppRouter = Backbone.Router.extend({
     addBrandView: null,
     addCategoryView: null,
     addProductView: null,
+    addProductStackView: null,
 
     routes: {
 
@@ -39,7 +42,8 @@ var AppRouter = Backbone.Router.extend({
         "add-store": "addStore",
         "add-brand": "addBrand",
         "add-category": "addCategory",
-        "add-product": "addProduct"
+        "add-product": "addProduct",
+        "add-productStack": "addProductStack"
 
     },
 
@@ -137,6 +141,8 @@ var AppRouter = Backbone.Router.extend({
             if(this.storeView == null) { this.storeView = new StoreDetailsView({ el: $("#page") }); }
             this.cntntView = this.storeView;
 
+            this.storeID = id;
+
             this.storeView.model = this.storeLst.get(id);
 
             this.render();
@@ -177,6 +183,19 @@ var AppRouter = Backbone.Router.extend({
             this.cntntView = this.addProductView;
             this.render();
         }
-    }
+    },
 
+    addProductStack: function() {
+        if(!this.loggedIn) { this.go("login"); }
+        else {
+            if(this.productLst == null) { this.productLst = new ProductCollection(); }
+
+            this.productLst.fetch();
+
+            if(this.addProductStackView == null) { this.addProductStackView = new AddProductStackView({ el: $("#page"), router: this, productLst: this.productLst, StoreId : this.storeID}); }
+
+            this.cntntView = this.addProductStackView;
+            this.render();
+        }
+    }
 });

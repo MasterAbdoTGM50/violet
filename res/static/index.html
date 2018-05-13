@@ -27,7 +27,8 @@
 	<script type="text/javascript" src="js/views/add-brand.js"    ></script>
 	<script type="text/javascript" src="js/views/add-category.js" ></script>
 	<script type="text/javascript" src="js/views/add-product.js"  ></script>
-	<script type="text/javascript" src="js/router.js"             ></script>
+    <script type="text/javascript" src="js/views/add-stack.js"    ></script>
+    <script type="text/javascript" src="js/router.js"             ></script>
 
 </head>
 
@@ -163,7 +164,7 @@
 	</fieldset>
 	<fieldset>
 		<legend>Store Product
-			<a data-toggle="modal" data-target="#AddProduct"><span class="glyphicon glyphicon-plus" style="color: white; margin-left:2%;"></span></a>
+            <a href= "#add-productStack"><span class="glyphicon glyphicon-plus" style="color: gray; margin-left:2%;"></span></a>
 		</legend>
 		<table class="table">
 			<thead>
@@ -254,12 +255,36 @@
 	</form>
 </script>
 
+<!-- Add Product Stack Template -->
+<script type="text/template" id="add-productStack-template">
+    <form>
+        <legend>Add Product</legend>
+        <div class="form-group">
+            <label>Name:</label>
+            <select id="product-stack-list" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label>Price:</label>
+            <input class = "form-control" id = "product-price">
+        </div>
+        <div class="form-group">
+            <label>Quantity:</label>
+            <input class = "form-control" id = "product-quantity">
+        </div>
+        <a id="btn-productStack-add" class="btn btn-primary">Add</a>
+    </form>
+</script>
+
 <script type="text/template" id="brand-dropdown-template">
 	<option value="<%= name %>"><%= name %></option>
 </script>
 
 <script type="text/template" id="category-dropdown-template">
 	<option value="<%= name %>"><%= name %></option>
+</script>
+
+<script type="text/template" id="product-dropdown-template">
+    <option value="<%= name %>"><%= name %></option>
 </script>
 
 </body>
