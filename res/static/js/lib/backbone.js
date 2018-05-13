@@ -739,18 +739,18 @@
   // Mix in each Underscore method as a proxy to `Model#attributes`.
   addUnderscoreMethods(Model, modelMethods, 'attributes');
 
-  // Backbone.Collection
+  // Backbone.collection
   // -------------------
 
-  // If models tend to represent a single row of data, a Backbone Collection is
+  // If models tend to represent a single row of data, a Backbone collection is
   // more analogous to a table full of data ... or a small slice or page of that
   // table, or a collection of rows that belong together for a particular reason
   // -- all of the messages in this particular folder, all of the documents
   // belonging to this particular author, and so on. Collections maintain
   // indexes of their models, both in order, and for lookup by `id`.
 
-  // Create a new **Collection**, perhaps to contain a specific type of `model`.
-  // If a `comparator` is specified, the Collection will maintain
+  // Create a new **collection**, perhaps to contain a specific type of `model`.
+  // If a `comparator` is specified, the collection will maintain
   // its models in sort order, as they're added and removed.
   var Collection = Backbone.Collection = function(models, options) {
     options || (options = {});
@@ -761,7 +761,7 @@
     if (models) this.reset(models, _.extend({silent: true}, options));
   };
 
-  // Default options for `Collection#set`.
+  // Default options for `collection#set`.
   var setOptions = {add: true, remove: true, merge: true};
   var addOptions = {add: true, remove: false};
 
@@ -776,7 +776,7 @@
     for (i = 0; i < tail.length; i++) array[i + length + at] = tail[i];
   };
 
-  // Define the Collection's inheritable methods.
+  // Define the collection's inheritable methods.
   _.extend(Collection.prototype, Events, {
 
     // The default model for a collection is just a **Backbone.Model**.
@@ -787,7 +787,7 @@
     // initialization logic.
     initialize: function(){},
 
-    // The JSON representation of a Collection is an array of the
+    // The JSON representation of a collection is an array of the
     // models' attributes.
     toJSON: function(options) {
       return this.map(function(model) { return model.toJSON(options); });
@@ -1189,7 +1189,7 @@
 
   });
 
-  // Underscore methods that we want to implement on the Collection.
+  // Underscore methods that we want to implement on the collection.
   // 90% of the core usefulness of Backbone Collections is actually implemented
   // right here:
   var collectionMethods = {forEach: 3, each: 3, map: 3, collect: 3, reduce: 0,
@@ -1201,7 +1201,7 @@
       isEmpty: 1, chain: 1, sample: 3, partition: 3, groupBy: 3, countBy: 3,
       sortBy: 3, indexBy: 3, findIndex: 3, findLastIndex: 3};
 
-  // Mix in each Underscore method as a proxy to `Collection#models`.
+  // Mix in each Underscore method as a proxy to `collection#models`.
   addUnderscoreMethods(Collection, collectionMethods, 'models');
 
   // Backbone.View
